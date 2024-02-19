@@ -30,12 +30,8 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: appTheme,
       navigatorKey: navigatorKey,
-<<<<<<< HEAD
-      home: const LoginScreen(),
-=======
       onGenerateRoute: AppRoutes.generateRoute,
-      // home: const LoginScreen(),
->>>>>>> c89e712 (auth part)
+
     );
   }
 }

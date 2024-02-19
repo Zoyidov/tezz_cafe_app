@@ -1,98 +1,94 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageRepository {
-  static StorageRepository? _storageRepository;
-  static SharedPreferences? _preferences;
+  static late SharedPreferences _prefs;
 
-  StorageRepository._();
+  static Future<void> init() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
 
-  static Future<StorageRepository> getInstance() async {
-    if (_storageRepository == null) {
-      var st = StorageRepository._();
-      _storageRepository = st;
-      await _storageRepository!._init();
+  // Create (Save) methods
+
+  static Future<void> putString(String key, String value) async {
+    await _prefs.setString(key, value);
+  }
+
+  static Future<void> putInt(String key, int value) async {
+    await _prefs.setInt(key, value);
+  }
+
+  static Future<void> putDouble(String key, double value) async {
+    await _prefs.setDouble(key, value);
+  }
+
+  static Future<void> putBool(String key, bool value) async {
+    await _prefs.setBool(key, value);
+  }
+
+  static Future<void> putObject(String key, Object value) async {
+    final jsonString = json.encode(value);
+    await _prefs.setString(key, jsonString);
+  }
+
+  // Read methods
+
+  static String? getString(String key) {
+    return _prefs.getString(key);
+  }
+
+  static int? getInt(String key) {
+    return _prefs.getInt(key);
+  }
+
+  static double? getDouble(String key) {
+    return _prefs.getDouble(key);
+  }
+
+  static bool? getBool(String key) {
+    return _prefs.getBool(key);
+  }
+
+  static dynamic getObject(String key) {
+    final jsonString = _prefs.getString(key);
+    if (jsonString != null) {
+      return json.decode(jsonString);
     }
-    return _storageRepository!;
+    return null;
   }
 
-  _init() async {
-    _preferences = await SharedPreferences.getInstance();
+  // Update (Modify) methods
+
+  static Future<void> updateString(String key, String value) async {
+    await _prefs.setString(key, value);
   }
 
-  static Future<bool>? putString(String key, String value) {
-    debugPrint('writing $value');
-    if (_preferences == null) return null;
-    return _preferences!.setString(key, value);
+  static Future<void> updateInt(String key, int value) async {
+    await _prefs.setInt(key, value);
   }
 
-  static Future<bool>? putList(String key, List<String> value) {
-    debugPrint('writing $value');
-    if (_preferences == null) return null;
-    return _preferences!.setStringList(key, value);
+  static Future<void> updateDouble(String key, double value) async {
+    await _prefs.setDouble(key, value);
   }
 
-  static String getString(String key, {String defValue = ''}) {
-    if (_preferences == null) return defValue;
-    return _preferences!.getString(key) ?? defValue;
+  static Future<void> updateBool(String key, bool value) async {
+    await _prefs.setBool(key, value);
   }
 
-  static Future<bool>? deleteString(String key) {
-    debugPrint("Deleting...");
-    if (_preferences == null) return null;
-    return _preferences!.remove(key);
+  static Future<void> updateObject(String key, Object value) async {
+    final jsonString = json.encode(value);
+    await _prefs.setString(key, jsonString);
   }
 
-  static double getDouble(String key, {double defValue = 0.0}) {
-    if (_preferences == null) return defValue;
-    return _preferences!.getDouble(key) ?? defValue;
+  // Delete methods
+
+  static Future<void> delete(String key) async {
+    await _prefs.remove(key);
   }
 
-  static List<String> getList(String key, {List<String> defValue = const []}) {
-    if (_preferences == null) return List.empty(growable: true);
-    return _preferences!.getStringList(key) ?? List.empty(growable: true);
+  // Clear all preferences
+
+  static Future<void> clearAll() async {
+    await _prefs.clear();
   }
-
-  static Future<bool>? putDouble(String key, double value) {
-    if (_preferences == null) return null;
-    return _preferences!.setDouble(key, value);
-  }
-
-  static Future<bool>? deleteDouble(String key) {
-    if (_preferences == null) return null;
-    return _preferences!.remove(key);
-  }
-
-  static bool getBool(String key, {bool defValue = false}) {
-    if (_preferences == null) return defValue;
-    return _preferences!.getBool(key) ?? defValue;
-  }
-
-  static Future<bool>? putBool(String key, bool value) {
-    debugPrint('writing $value');
-    if (_preferences == null) return null;
-    return _preferences!.setBool(key, value);
-  }
-
-  static Future<bool>? deleteBool(String key) {
-    if (_preferences == null) return null;
-    return _preferences!.remove(key);
-  }
-
-  static int getInt(String key, {int defValue = 0}) {
-    if (_preferences == null) return defValue;
-    return _preferences!.getInt(key) ?? defValue;
-  }
-
-  static Future<bool>? putInt(String key, int value) {
-    if (_preferences == null) return null;
-    return _preferences!.setInt(key, value);
-  }
-
-  static Future<bool>? deleteInt(String key) {
-    if (_preferences == null) return null;
-    return _preferences!.remove(key);
-  }
-
-
 }
