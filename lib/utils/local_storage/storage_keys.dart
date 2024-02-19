@@ -6,6 +6,10 @@ class StorageKeys {
   static const String rememberMe = 'rememberMe';
   static const String rememberUsername = 'rememberUsername';
   static const String rememberPassword = 'rememberPassword';
-  static const String waiterId = 'waiterId';
-  static const String cafeId = 'cafeId';
+  static const String restaurant = 'restaurant';
+  static const String waiter = 'waiter';
+  static const String waiterObject = 'waiterObject';
+
+
+
 }
