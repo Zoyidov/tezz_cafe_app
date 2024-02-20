@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:logger/logger.dart';
 import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
 
+class DioSettings {
+  static final Dio _dio = Dio();
 
-class DioOptions {
   static BaseOptions getBaseOptions() {
     return BaseOptions(
       baseUrl: ApiConstants.baseUrl, // Replace with your API base URL
@@ -13,10 +15,10 @@ class DioOptions {
   }
 
   static Dio getDio() {
-    final Dio dio = Dio(getBaseOptions());
-
+    // final Dio dio = Dio(getBaseOptions());
+    _dio.options = getBaseOptions();
     // Add an interceptor to log requests and responses
-    dio.interceptors.add(
+    _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
           // options.headers.addAll({'Authorization': ApiConstants.token});
@@ -43,6 +45,22 @@ class DioOptions {
       ),
     );
 
-    return dio;
+    return _dio;
+  }
+
+  static CacheOptions getOptions() {
+    final options = CacheOptions(
+      // A default store is required for interceptor.
+      store: MemCacheStore(),
+      // Returns a cached response on error but for statuses 401 & 403.
+      // Also allows to return a cached response on network errors (e.g. offline usage).
+      // Defaults to [null].
+      hitCacheOnErrorExcept: [401, 403],
+      // Overrides any HTTP directive to delete entry past this duration.
+      // Useful only when origin server has no cache config or custom behaviour is desired.
+      // Defaults to [null].
+      maxStale: const Duration(hours: 1),
+    );
+    return options;
   }
 }

@@ -26,8 +26,8 @@ class _ClientsScreenState extends State<ClientsScreen> {
           onPressed: () async{
             // context.pushNamed(RouteNames.menu);
             // context.read<TabCubit>().changeMessageState(true);
-            print(context.read<TableBloc>().state.tables);
-            // print(StorageRepository.getString(StorageKeys.token));
+            // print(context.read<TableBloc>().state.tables);
+            print(StorageRepository.getString(StorageKeys.waiter));
             // StorageRepository.delete(StorageKeys.isAuth);
             // context.pushAndRemoveUntil(const LoginScreen());
           },

@@ -1,6 +1,8 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:tezz_cafe_app/business_logic/category/category_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/clients_orders_detail/widgets/order_item.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/menu.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
@@ -28,6 +30,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
+          context.read<CategoryBloc>().add(FetchCategoriesEvent());
           Navigator.push(context, MaterialPageRoute(builder: (context) => const MenuScreen()));
         },
         child: const Icon(Icons.add,color: Colors.white,),
