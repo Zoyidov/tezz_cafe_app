@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/order_detail_screen/order_detail_screen.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
-import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
-
+import '../../../utils/local_storage/storage_repository.dart';
 
 class NewOrderScreen extends StatelessWidget {
   const NewOrderScreen({super.key});
@@ -12,6 +11,12 @@ class NewOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // StorageRepository.delete(StorageKeys.isAuth);
+          print(StorageRepository.getString(StorageKeys.restaurant));
+        },
+      ),
       appBar: AppBar(
         actions: [
           IconButton(onPressed: (){
@@ -26,21 +31,21 @@ class NewOrderScreen extends StatelessWidget {
         ),
       ),
       body: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              final stolNumber = index ;
-              return NotificationContainer(
-                type: 'Yangi buyurtma',
-                place: 'STOL-$stolNumber',
-                time: formatDate(DateTime.now(), [HH, ':', nn]),
-                status: 'Ko\'rish',
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderDetailScreen()));
-                },
-              );
+        shrinkWrap: true,
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          final stolNumber = index;
+          return NotificationContainer(
+            type: 'Yangi buyurtma',
+            place: 'STOL-$stolNumber',
+            time: formatDate(DateTime.now(), [HH, ':', nn]),
+            status: 'Ko\'rish',
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderDetailScreen()));
             },
-          ),
+          );
+        },
+      ),
     );
   }
 }
