@@ -8,6 +8,7 @@ class TableService {
 
   TableService(this.dio);
 
+  /// Get tables
   Future<List<TableModel>> getTablesByRestaurantId(String restaurantId) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
@@ -17,6 +18,24 @@ class TableService {
         return data.map((json) => TableModel.fromJson(json)).toList();
       } else {
         throw 'Failed to get tables: ${response.statusCode} ${response.data}';
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+
+  /// Activate table
+  Future<void> activateTable(String tableId) async {
+    try {
+      final Map<String, dynamic> requestBody = {
+        'table': tableId,
+      };
+      final response = await dio.post('/waiters/tables', data: requestBody);
+
+      if (response.statusCode == 200) {
+      } else {
+        throw 'Failed to activate table: ${response.statusCode} ${response.data}';
       }
     } catch (e) {
       rethrow;
