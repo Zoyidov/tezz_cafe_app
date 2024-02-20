@@ -16,6 +16,8 @@ class ZoneRepository {
       return Right(zones);
     } on DioException catch (e) {
       return Left(handleDioError(e));
+    } on FormatException catch (e) {
+      return Left(Failure(e.toString()));
     } catch (e) {
       return Left(Failure(e.toString()));
     }
