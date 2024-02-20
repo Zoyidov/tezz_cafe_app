@@ -33,8 +33,8 @@ class StorageRepository {
 
   // Read methods
 
-  static String? getString(String key) {
-    return _prefs.getString(key);
+  static String getString(String key,[String defaultValue = '']) {
+    return _prefs.getString(key) ?? defaultValue;
   }
 
   static int? getInt(String key) {

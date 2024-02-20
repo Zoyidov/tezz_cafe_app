@@ -2,6 +2,7 @@ import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/cubit/tab_cubit.dart';
+import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/auth/login.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/client_pageview.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/clients_appbar.dart';
@@ -25,7 +26,8 @@ class _ClientsScreenState extends State<ClientsScreen> {
           onPressed: () async{
             // context.pushNamed(RouteNames.menu);
             // context.read<TabCubit>().changeMessageState(true);
-            print(StorageRepository.getString(StorageKeys.token));
+            print(context.read<TableBloc>().state.tables);
+            // print(StorageRepository.getString(StorageKeys.token));
             // StorageRepository.delete(StorageKeys.isAuth);
             // context.pushAndRemoveUntil(const LoginScreen());
           },
