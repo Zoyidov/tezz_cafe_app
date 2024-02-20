@@ -4,6 +4,7 @@ import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notificat
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/order_detail_screen/order_detail_screen.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
 import '../../../utils/local_storage/storage_repository.dart';
+
 class NewOrderScreen extends StatelessWidget {
   const NewOrderScreen({super.key});
 
@@ -17,6 +18,12 @@ class NewOrderScreen extends StatelessWidget {
         },
       ),
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+            print(StorageRepository.getString(StorageKeys.waiter));
+            print(StorageRepository.getString(StorageKeys.restaurant));
+          }, icon: const Icon(Icons.logout_outlined,color: Colors.red,))
+        ],
         scrolledUnderElevation: 0,
         title: const Text(
           "Faol Buyurtma",
