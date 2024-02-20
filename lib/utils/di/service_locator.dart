@@ -18,7 +18,7 @@ Future<void> setupLocator() async {
   getIt.registerSingleton(ZoneService(DioOptions.getDio()));
   getIt.registerSingleton(ZoneRepository(getIt<ZoneService>()));
   getIt.registerSingleton(TableService(DioOptions.getDio()));
-  getIt.registerSingleton(TableRepository(getIt<TableService>()));
+  getIt.registerSingleton(TableRepository(getIt<TableService>(), DioOptions.getDio()));
 }
 
 void tearDownLocator() {
