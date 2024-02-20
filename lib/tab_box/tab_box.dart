@@ -18,7 +18,7 @@ class TabBoxState extends State<TabBox> {
   List<Widget> pages = [
     const CallScreen(),
     const NewOrderScreen(),
-    const ClientsScreen(),
+    const FlipCardNavigation(),
   ];
 
   @override
@@ -32,7 +32,7 @@ class TabBoxState extends State<TabBox> {
               CallScreen(),
               NewOrderScreen(),
               // state.isActive ? const MessageNoActive() : const ClientsScreen(),
-              ClientsScreen(),
+              FlipCardNavigation(),
             ],
           );
         },
