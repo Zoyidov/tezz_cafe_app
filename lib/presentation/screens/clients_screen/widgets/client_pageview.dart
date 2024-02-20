@@ -12,6 +12,9 @@ class ClientsPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TableBloc, TableState>(
       builder: (context, state) {
+        if (state.status.isFailure) {
+          return Center(child: Text('Xatolik yuz berdi: ${state.failure?.message ?? ''}', textAlign: TextAlign.center));
+        }
         return PageView.builder(
           physics: const NeverScrollableScrollPhysics(),
           controller: context.read<TableBloc>().pageController,

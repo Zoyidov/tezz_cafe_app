@@ -22,26 +22,24 @@ class _ClientsScreenState extends State<ClientsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primaryColor,
-          onPressed: () async{
+          backgroundColor: AppColors.primaryColor,
+          onPressed: () async {
             // context.pushNamed(RouteNames.menu);
             // context.read<TabCubit>().changeMessageState(true);
             // print(context.read<TableBloc>().state.tables);
-            print(StorageRepository.getString(StorageKeys.waiter));
+            // print(StorageRepository.getString(StorageKeys.restaurant));
+            // print(context.read<TableBloc>().state.tables.map((e) => e.activeOrders).toList());
+            // print(context.read<TableBloc>().state.tables.map((e) => e.activeOrders).toList());
+
             // StorageRepository.delete(StorageKeys.isAuth);
             // context.pushAndRemoveUntil(const LoginScreen());
           },
-          child: const Icon(Icons.add,color: Colors.white,)),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          )),
       appBar: const ClientsAppBar(),
       body: const ClientsPageView(),
     );
   }
 }
-
-
-
-
-
-
-
-

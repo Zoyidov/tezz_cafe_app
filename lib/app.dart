@@ -17,8 +17,8 @@ class App extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (context) => TabCubit()),
       BlocProvider(create: (context) => AuthBloc()),
-      BlocProvider(create: (context) => ZoneBloc()..add(GetAllZonesEvent())),
-      BlocProvider(create: (context) => TableBloc()..add(GetAllTablesEvent())),
+      BlocProvider(create: (context) => ZoneBloc()),
+      BlocProvider(create: (context) => TableBloc()),
       BlocProvider(create: (context) => CategoryBloc()),
       BlocProvider(create: (context) => ProductBloc()),
     ], child: const MainApp());
