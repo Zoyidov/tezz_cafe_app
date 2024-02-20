@@ -31,9 +31,6 @@ Future<void> setupLocator() async {
   // Product
   getIt.registerSingleton(ProductService(DioSettings.getDio()));
   getIt.registerSingleton(ProductRepository(getIt<ProductService>()));
-  getIt.registerSingleton(TableService(DioOptions.getDio()));
-  getIt.registerSingleton(TableRepository(getIt<TableService>(), DioOptions.getDio()));
-
 }
 
 void tearDownLocator() => getIt.reset();
