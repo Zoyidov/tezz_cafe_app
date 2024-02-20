@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/auth/auth_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/cubit/tab_cubit.dart';
+import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/auth/login.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
@@ -17,6 +18,7 @@ class App extends StatelessWidget {
       BlocProvider(create: (context) => TabCubit()),
       BlocProvider(create: (context) => AuthBloc()),
       BlocProvider(create: (context) => ZoneBloc()..add(GetAllZonesEvent())),
+      BlocProvider(create: (context) => TableBloc()..add(GetAllTablesEvent())),
     ], child: const MainApp());
   }
 }
