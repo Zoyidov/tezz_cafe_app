@@ -7,3 +7,9 @@ class FetchProductsEvent extends ProductEvent {
 
   FetchProductsEvent({required this.categoryId});
 }
+
+class SetProductCountEvent extends ProductEvent {}
+
+class IncrementProductCountEvent extends ProductEvent {}
+
+class DecrementProductCountEvent extends ProductEvent {}

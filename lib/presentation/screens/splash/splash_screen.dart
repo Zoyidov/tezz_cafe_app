@@ -1,5 +1,8 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/auth/login.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
@@ -24,9 +27,15 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       final bool? isAuth = StorageRepository.getBool(StorageKeys.isAuth);
       if (isAuth == null || !isAuth) {
+        //      BlocProvider(create: (context) => ZoneBloc()..add(GetAllZonesEvent())),
+        //       BlocProvider(create: (context) => TableBloc()..add(GetAllTablesEvent())),
+        context.read<ZoneBloc>().add(GetAllZonesEvent());
+        context.read<TableBloc>().add(GetAllTablesEvent());
         context.pushAndRemoveUntil(const LoginScreen());
         return;
       }
+      context.read<ZoneBloc>().add(GetAllZonesEvent());
+      context.read<TableBloc>().add(GetAllTablesEvent());
       context.pushAndRemoveUntil(const TabBox());
     });
   }

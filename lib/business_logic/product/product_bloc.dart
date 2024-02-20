@@ -19,6 +19,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   ProductBloc() : super(const ProductState()) {
     on<FetchProductsEvent>(_onFetchProductsEvent);
+    on<SetProductCountEvent>(_onSetProductCountEvent);
+    on<IncrementProductCountEvent>(_onIncrementProductCountEvent);
+    on<DecrementProductCountEvent>(_onDecrementProductCountEvent);
   }
 
   FutureOr<void> _onFetchProductsEvent(FetchProductsEvent event, Emitter<ProductState> emit) async {
@@ -29,5 +32,16 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
       (r) => emit(state.copyWith(products: r, status: FormzSubmissionStatus.success)),
     );
+  }
+
+  FutureOr<void> _onSetProductCountEvent(SetProductCountEvent event, Emitter<ProductState> emit) async => emit(state.copyWith(count: 1));
+
+  FutureOr<void> _onIncrementProductCountEvent(IncrementProductCountEvent event, Emitter<ProductState> emit) async => emit(state.copyWith(count: state.count + 1));
+
+  FutureOr<void> _onDecrementProductCountEvent(DecrementProductCountEvent event, Emitter<ProductState> emit) async {
+    if (state.count == 1) {
+      return;
+    }
+    emit(state.copyWith(count: state.count - 1));
   }
 }

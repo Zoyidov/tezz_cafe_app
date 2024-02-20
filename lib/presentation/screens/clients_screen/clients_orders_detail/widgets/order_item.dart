@@ -1,6 +1,7 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/circle_icon.dart';
 import 'package:date_format/date_format.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
@@ -9,9 +10,10 @@ import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({
-    super.key,
-  });
+  const OrderItem({super.key, required this.product, required this.activeOrder});
+
+  final Product? product;
+  final ActiveOrder? activeOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +40,12 @@ class OrderItem extends StatelessWidget {
                     const Text('Chaqiruv', style: AppFontStyle.description),
                     const Gap(8),
                     Text(
-                      '/ ${formatDate(DateTime.now(), [HH, ':', nn])}',
+                      '/ ${formatDate(activeOrder?.createdAt ?? DateTime.now(), [HH, ':', nn])}',
                       style: context.bodySmall?.copyWith(color: AppColors.grey400),
                     ),
                   ],
                 ),
-                IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.clear), color: AppColors.grey500),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.clear), color: AppColors.grey500),
               ],
             ),
           ),
@@ -68,9 +69,8 @@ class OrderItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'G’ijduvon shashlik Ajoyib shashlik',
-                      style: AppFontStyle.description2
-                          .copyWith(fontWeight: FontWeight.w600, color: AppColors.black),
+                      product?.product??'',
+                      style: AppFontStyle.description2.copyWith(fontWeight: FontWeight.w600, color: AppColors.black),
                     ),
                     const Gap(8),
                     Text(
