@@ -37,6 +37,8 @@ dependencies:
   blurhash_ffi: ^1.2.4
   hive: ^2.2.3
   dio_cache_interceptor: ^3.5.0
+  flip_card: ^0.7.0
+  awesome_dialog: ^3.0.2
 
 
 

@@ -11,12 +11,6 @@ class NewOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // StorageRepository.delete(StorageKeys.isAuth);
-          print(StorageRepository.getString(StorageKeys.restaurant));
-        },
-      ),
       appBar: AppBar(
         actions: [
           IconButton(onPressed: (){
