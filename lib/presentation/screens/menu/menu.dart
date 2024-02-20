@@ -16,6 +16,7 @@ class MenuScreen extends StatelessWidget {
         title: const Text('Menu',
             style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
         actions: const [PlaceActionWidget()],
+        scrolledUnderElevation: 0,
       ),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
@@ -33,7 +34,7 @@ class MenuScreen extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                   child: Image.network(
-                    "https://picsum.photos/seed/picsum/200/300",
+                    "https://nutrilak.com/sites/default/files/inline-images/beshbarmak1.jpg",
                     fit: BoxFit.cover,
                     width: double.infinity,
                     cacheHeight: 1080,

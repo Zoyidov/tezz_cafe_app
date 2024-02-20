@@ -6,6 +6,7 @@ import 'package:formz/formz.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/business_logic/auth/auth_bloc.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
+import 'package:tezz_cafe_app/utils/failures/failures.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
 import 'package:tezz_cafe_app/utils/route/ruotes.dart';
@@ -22,7 +23,19 @@ class LoginScreen extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state.status.isFailure) {
-          Navigator.pop(context);
+          if (state.failure is NoInternetFailure){
+            toastification.show(
+              context: context,
+              type: ToastificationType.error,
+              style: ToastificationStyle.fillColored,
+              title: const Text('Xatolik'),
+              autoCloseDuration: const Duration(seconds: 5),
+              alignment: Alignment.bottomCenter,
+              description: Text(state.failure?.message ?? 'Xatolik'),
+            );
+            return;
+          }
+          context.pop();
           toastification.show(
             context: context,
             type: ToastificationType.error,

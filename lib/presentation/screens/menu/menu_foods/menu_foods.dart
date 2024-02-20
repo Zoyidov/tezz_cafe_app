@@ -19,6 +19,7 @@ class MenuFoodsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("BashBarmoq",style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
         actions: const [PlaceActionWidget()],
+        scrolledUnderElevation: 0,
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(12),
@@ -41,7 +42,7 @@ class MenuFoodsScreen extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                   child: Image.network(
-                      "https://picsum.photos/seed/picsum/200/300",
+                      "https://nutrilak.com/sites/default/files/inline-images/beshbarmak1.jpg",
                       fit: BoxFit.cover,
                       height: 170,
                       width: double.infinity,
