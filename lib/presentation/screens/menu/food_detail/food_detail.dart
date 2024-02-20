@@ -30,7 +30,7 @@ class FoodDetailScreen extends StatelessWidget {
               width: 336,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              child: Image.network("https://picsum.photos/seed/picsum/200/300",
+              child: Image.network("https://nutrilak.com/sites/default/files/inline-images/beshbarmak1.jpg",
                   fit: BoxFit.cover,
                   height: 170,
                   width: double.infinity,
@@ -119,10 +119,9 @@ class FoodDetailScreen extends StatelessWidget {
         ]),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.only(left: 12.0,right: 12.0,bottom: 20),
         child: FilledButton(
           style: FilledButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 20),
             backgroundColor: AppColors.primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),

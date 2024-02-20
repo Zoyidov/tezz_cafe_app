@@ -23,6 +23,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(currencyFormat.format(1234000), style: AppFontStyle.description2))
         ],
+        scrolledUnderElevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primaryColor,
@@ -43,9 +44,9 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                 return const OrderItem();
               },
               separatorBuilder: (context, index) => const Gap(16),
-              itemCount: 2,
+              itemCount: 3,
             ),
-            const Gap(24),
+            const Gap(10),
             SizedBox(
               width: context.width / 2,
               child: FilledButton(
@@ -56,12 +57,10 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                   ),
                   backgroundColor: AppColors.red,
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text("Stolni yopish"),
-                ),
+                child: Text("Stolni yopish"),
               ),
-            )
+            ),
+            const Gap(30),
           ],
         ),
       ),
