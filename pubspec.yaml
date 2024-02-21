@@ -39,6 +39,7 @@ dependencies:
   dio_cache_interceptor: ^3.5.0
   flip_card: ^0.7.0
   awesome_dialog: ^3.0.2
+  lottie: ^2.2.0
 
 
 

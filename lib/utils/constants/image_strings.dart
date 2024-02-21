@@ -19,4 +19,7 @@ class AppImages {
   static const String foodImage = "assets/images/food.png";
   static const String appIcon = "assets/images/photo_2024-02-06_00-44-22.jpg";
 
+
+  static const String noOrder = "assets/images/no_order.json";
+
 }
