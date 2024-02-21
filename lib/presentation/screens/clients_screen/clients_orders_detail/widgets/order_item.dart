@@ -69,12 +69,12 @@ class OrderItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      product?.product??'',
+                      product!.product,
                       style: AppFontStyle.description2.copyWith(fontWeight: FontWeight.w600, color: AppColors.black),
                     ),
                     const Gap(8),
                     Text(
-                      currencyFormat.format(56000),
+                      currencyFormat.format(product!.price),
                       style: AppFontStyle.mIn12.copyWith(color: AppColors.grey400),
                     ),
                     const Gap(4),
@@ -82,11 +82,11 @@ class OrderItem extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '3 ta : ',
+                          "${product!.quantity.toString()} ta: ",
                           style: AppFontStyle.description2
                               .copyWith(fontWeight: FontWeight.w600, color: AppColors.primaryColor),
                         ),
-                        Text(currencyFormat.format(double.parse("168000")),
+                        Text(currencyFormat.format(double.parse(product!.price.toString()) * product!.quantity),
                             style: AppFontStyle.description2
                                 .copyWith(fontWeight: FontWeight.w600, color: AppColors.grey500)),
                       ],

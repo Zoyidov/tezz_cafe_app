@@ -4,8 +4,10 @@ import 'package:tezz_cafe_app/utils/constants/colors.dart';
 
 class PlaceActionWidget extends StatelessWidget {
   const PlaceActionWidget({
-    super.key,
+    super.key, required this.actionText,
   });
+
+  final String actionText ;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class PlaceActionWidget extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(color: AppColors.seryFon, borderRadius: BorderRadius.circular(4)),
         child: Text(
-          'Stol-1',
+          actionText,
           style: context.titleMedium
               ?.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.w600, height: 1.25),
         ),

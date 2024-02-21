@@ -1,8 +1,10 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/business_logic/category/category_bloc.dart';
+import 'package:tezz_cafe_app/data/product/models/product_model.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/clients_orders_detail/widgets/order_item.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/menu.dart';
@@ -31,7 +33,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
           context.read<CategoryBloc>().add(FetchCategoriesEvent());
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const MenuScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(actionText: table.name,)));
         },
         child: const Icon(
           Icons.add,
@@ -57,7 +59,19 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
             SizedBox(
               width: context.width / 2,
               child: FilledButton(
-                onPressed: () {},
+                onPressed: () {
+                  AwesomeDialog(
+                    context: context,
+                    dialogType: DialogType.warning,
+                    animType: AnimType.bottomSlide,
+                    title: "Stolni yopish",
+                    desc: '${table.name} ni yopmoqchimisiz?',
+                    btnCancelOnPress: () {},
+                    btnOkOnPress: () {},
+                    btnOkText: 'Yopish',
+                    btnCancelText: 'Bekor qilish',
+                  ).show();
+                },
                 style: FilledButton.styleFrom(
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16)),

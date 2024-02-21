@@ -16,9 +16,10 @@ import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
 class MenuFoodsScreen extends StatelessWidget {
   const MenuFoodsScreen({
-    super.key, required this.category,
+    super.key, required this.category, required this.actionText,
   });
   final CategoryModel category;
+  final String actionText;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class MenuFoodsScreen extends StatelessWidget {
       appBar: AppBar(
         title:
              Text(category.name, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
-        actions: const [PlaceActionWidget()],
+        actions: [PlaceActionWidget(actionText: actionText,)],
         scrolledUnderElevation: 0,
       ),
       body: BlocBuilder<ProductBloc, ProductState>(
@@ -56,7 +57,7 @@ class MenuFoodsScreen extends StatelessWidget {
               final product = state.products[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  FoodDetailScreen(product: product)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  FoodDetailScreen(product: product, actionText: actionText,)));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,7 +65,8 @@ class MenuFoodsScreen extends StatelessWidget {
                     Container(
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                      child: Image.network("${ApiConstants.baseUrl}/${product.photo}",
+                      child: Image.network(
+                          product.photo,
                           fit: BoxFit.cover,
                           height: 170,
                           width: double.infinity,
