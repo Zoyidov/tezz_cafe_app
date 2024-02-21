@@ -34,14 +34,13 @@ class _ClientsScreenState extends State<ClientsScreen> {
 }
 
 class FlipCardNavigation extends StatelessWidget {
-  const FlipCardNavigation({Key? key}) : super(key: key);
+  const FlipCardNavigation({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
         child: FlipCard(
-          direction: FlipDirection.HORIZONTAL,
           front: ClientsScreen(),
           back: InActiveTablesScreen(),
         ),

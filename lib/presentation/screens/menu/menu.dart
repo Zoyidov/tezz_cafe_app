@@ -14,14 +14,16 @@ import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 
 class MenuScreen extends StatelessWidget {
-  const MenuScreen({super.key});
+  const MenuScreen({super.key, required this.actionText});
+
+  final String actionText;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Menu', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
-        actions: const [PlaceActionWidget()],
+        actions: [PlaceActionWidget(actionText: actionText,)],
         scrolledUnderElevation: 0,
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
@@ -41,7 +43,7 @@ class MenuScreen extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   context.read<ProductBloc>().add(FetchProductsEvent(categoryId: menuItem.id));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  MenuFoodsScreen(category: menuItem)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  MenuFoodsScreen(category: menuItem, actionText: actionText,)));
                   // context.pushNamed(RouteNames.category, arguments: menuItem);
                   // context.read<ProductBloc>().add(GetProductByMenuId(menuItem.id.toString()));
                 },
@@ -52,7 +54,7 @@ class MenuScreen extends StatelessWidget {
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                       child: Image.network(
-                        "${ApiConstants.baseUrl}/${menuItem.photo}",
+                        menuItem.photo,
                         fit: BoxFit.cover,
                         width: double.infinity,
                         cacheHeight: 1080,

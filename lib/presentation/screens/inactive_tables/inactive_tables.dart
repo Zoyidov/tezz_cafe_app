@@ -22,7 +22,7 @@ class _InActiveTablesScreenState extends State<InActiveTablesScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: ClientsAppBar(),
+      appBar: ClientsAppBar(isActive: true,),
       body: InActiveClientsPageView(),
     );
   }

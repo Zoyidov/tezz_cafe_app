@@ -5,16 +5,16 @@ import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
 import 'package:tezz_cafe_app/data/product/models/product_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
-import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/font_style.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
 class FoodDetailScreen extends StatelessWidget {
-  const FoodDetailScreen({super.key, required this.product});
+  const FoodDetailScreen({super.key, required this.product, required this.actionText});
 
   final ProductModel product;
+  final String actionText;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class FoodDetailScreen extends StatelessWidget {
           appBar: AppBar(
             title:
             Text(product.name, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
-            actions: const [PlaceActionWidget()],
+            actions:  [PlaceActionWidget(actionText: actionText,)],
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(12),
@@ -36,7 +36,7 @@ class FoodDetailScreen extends StatelessWidget {
                   width: 336,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                  child: Image.network("${ApiConstants.baseUrl}/${product.photo}",
+                  child: Image.network(product.photo,
                       fit: BoxFit.cover,
                       height: 170,
                       width: double.infinity,
