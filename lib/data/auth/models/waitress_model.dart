@@ -14,7 +14,7 @@ class WaitressModel with _$WaitressModel {
     @JsonKey(name: "lastName")
     required String lastName,
     @JsonKey(name: "avatar")
-    required String avatar,
+     String? avatar ,
     @JsonKey(name: "phone")
     required String phone,
     @JsonKey(name: "role")

@@ -59,14 +59,14 @@ class LoginScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print(StorageRepository.getString(StorageKeys.token));
-            print(StorageRepository.getString(StorageKeys.waiter));
-            print(StorageRepository.getString(StorageKeys.restaurant));
-            print(StorageRepository.getBool(StorageKeys.isAuth));
-          },
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     print(StorageRepository.getString(StorageKeys.token));
+        //     print(StorageRepository.getString(StorageKeys.waiter));
+        //     print(StorageRepository.getString(StorageKeys.restaurant));
+        //     print(StorageRepository.getBool(StorageKeys.isAuth));
+        //   },
+        // ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
