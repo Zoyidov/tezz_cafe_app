@@ -21,7 +21,7 @@ class InActiveTablesScreen extends StatefulWidget {
 class _InActiveTablesScreenState extends State<InActiveTablesScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  const Scaffold(
       appBar: ClientsAppBar(isActive: true,),
       body: InActiveClientsPageView(),
     );

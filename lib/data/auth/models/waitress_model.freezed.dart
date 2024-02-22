@@ -27,7 +27,7 @@ mixin _$WaitressModel {
   @JsonKey(name: "lastName")
   String get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: "avatar")
-  String get avatar => throw _privateConstructorUsedError;
+  String? get avatar => throw _privateConstructorUsedError;
   @JsonKey(name: "phone")
   String get phone => throw _privateConstructorUsedError;
   @JsonKey(name: "role")
@@ -57,7 +57,7 @@ abstract class $WaitressModelCopyWith<$Res> {
       {@JsonKey(name: "_id") String id,
       @JsonKey(name: "firstName") String firstName,
       @JsonKey(name: "lastName") String lastName,
-      @JsonKey(name: "avatar") String avatar,
+      @JsonKey(name: "avatar") String? avatar,
       @JsonKey(name: "phone") String phone,
       @JsonKey(name: "role") String role,
       @JsonKey(name: "restaurant") String restaurant,
@@ -82,7 +82,7 @@ class _$WaitressModelCopyWithImpl<$Res, $Val extends WaitressModel>
     Object? id = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? avatar = null,
+    Object? avatar = freezed,
     Object? phone = null,
     Object? role = null,
     Object? restaurant = null,
@@ -103,10 +103,10 @@ class _$WaitressModelCopyWithImpl<$Res, $Val extends WaitressModel>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: null == avatar
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -147,7 +147,7 @@ abstract class _$$WaitressModelImplCopyWith<$Res>
       {@JsonKey(name: "_id") String id,
       @JsonKey(name: "firstName") String firstName,
       @JsonKey(name: "lastName") String lastName,
-      @JsonKey(name: "avatar") String avatar,
+      @JsonKey(name: "avatar") String? avatar,
       @JsonKey(name: "phone") String phone,
       @JsonKey(name: "role") String role,
       @JsonKey(name: "restaurant") String restaurant,
@@ -170,7 +170,7 @@ class __$$WaitressModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? avatar = null,
+    Object? avatar = freezed,
     Object? phone = null,
     Object? role = null,
     Object? restaurant = null,
@@ -191,10 +191,10 @@ class __$$WaitressModelImplCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: null == avatar
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -230,7 +230,7 @@ class _$WaitressModelImpl implements _WaitressModel {
       {@JsonKey(name: "_id") required this.id,
       @JsonKey(name: "firstName") required this.firstName,
       @JsonKey(name: "lastName") required this.lastName,
-      @JsonKey(name: "avatar") required this.avatar,
+      @JsonKey(name: "avatar") this.avatar,
       @JsonKey(name: "phone") required this.phone,
       @JsonKey(name: "role") required this.role,
       @JsonKey(name: "restaurant") required this.restaurant,
@@ -252,7 +252,7 @@ class _$WaitressModelImpl implements _WaitressModel {
   final String lastName;
   @override
   @JsonKey(name: "avatar")
-  final String avatar;
+  final String? avatar;
   @override
   @JsonKey(name: "phone")
   final String phone;
@@ -324,7 +324,7 @@ abstract class _WaitressModel implements WaitressModel {
           {@JsonKey(name: "_id") required final String id,
           @JsonKey(name: "firstName") required final String firstName,
           @JsonKey(name: "lastName") required final String lastName,
-          @JsonKey(name: "avatar") required final String avatar,
+          @JsonKey(name: "avatar") final String? avatar,
           @JsonKey(name: "phone") required final String phone,
           @JsonKey(name: "role") required final String role,
           @JsonKey(name: "restaurant") required final String restaurant,
@@ -347,7 +347,7 @@ abstract class _WaitressModel implements WaitressModel {
   String get lastName;
   @override
   @JsonKey(name: "avatar")
-  String get avatar;
+  String? get avatar;
   @override
   @JsonKey(name: "phone")
   String get phone;

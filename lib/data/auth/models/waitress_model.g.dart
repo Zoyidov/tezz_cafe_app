@@ -11,7 +11,7 @@ _$WaitressModelImpl _$$WaitressModelImplFromJson(Map<String, dynamic> json) =>
       id: json['_id'] as String,
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
-      avatar: json['avatar'] as String,
+      avatar: json['avatar'] as String?,
       phone: json['phone'] as String,
       role: json['role'] as String,
       restaurant: json['restaurant'] as String,
