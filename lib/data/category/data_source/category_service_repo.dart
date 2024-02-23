@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:tezz_cafe_app/data/category/models/category_model.dart';
-import 'package:tezz_cafe_app/utils/di/dio_options.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
 

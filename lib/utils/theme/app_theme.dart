@@ -19,7 +19,6 @@ final appTheme = ThemeData(
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8.0),
-        borderSide: const BorderSide(color: Colors.black),
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(

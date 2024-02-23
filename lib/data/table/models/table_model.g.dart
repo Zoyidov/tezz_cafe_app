@@ -10,17 +10,26 @@ _$TableModelImpl _$$TableModelImplFromJson(Map<String, dynamic> json) =>
     _$TableModelImpl(
       id: json['_id'] as String,
       name: json['name'] as String,
-      typeOfTable: json['typeOfTable'] as String,
-      waiter: json['waiter'] as String?,
-      activeOrders: (json['activeOrders'] as List<dynamic>)
-          .map((e) => ActiveOrder.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      archiveOrders: json['archiveOrders'] as List<dynamic>,
-      totalOrders: json['totalOrders'] as List<dynamic>,
-      activePrice: json['activePrice'] as int,
-      activeItems: json['activeItems'] as int,
-      totalPrice: json['totalPrice'] as int,
-      totalItems: json['totalItems'] as int,
+      typeOfTable:
+          TypeOfTable.fromJson(json['typeOfTable'] as Map<String, dynamic>),
+      occupied: json['occupied'] as bool,
+      setWaiterByAdmin: json['setWaiterByAdmin'] as bool,
+      waiter: json['waiter'] == null
+          ? null
+          : Waiter.fromJson(json['waiter'] as Map<String, dynamic>),
+      call: json['call'] as String,
+      callId: json['callId'],
+      callTime: json['callTime'],
+      hasActiveOrder: json['hasActiveOrder'] as bool,
+      restaurant: json['restaurant'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      v: json['__v'] as int,
+      qrCode: json['qrCode'] as String,
+      totalOrders: json['totalOrders'],
+      activeOrders: json['activeOrders'] == null
+          ? null
+          : ActiveOrders.fromJson(json['activeOrders'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TableModelImplToJson(_$TableModelImpl instance) =>
@@ -28,32 +37,38 @@ Map<String, dynamic> _$$TableModelImplToJson(_$TableModelImpl instance) =>
       '_id': instance.id,
       'name': instance.name,
       'typeOfTable': instance.typeOfTable,
+      'occupied': instance.occupied,
+      'setWaiterByAdmin': instance.setWaiterByAdmin,
       'waiter': instance.waiter,
-      'activeOrders': instance.activeOrders,
-      'archiveOrders': instance.archiveOrders,
+      'call': instance.call,
+      'callId': instance.callId,
+      'callTime': instance.callTime,
+      'hasActiveOrder': instance.hasActiveOrder,
+      'restaurant': instance.restaurant,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
+      '__v': instance.v,
+      'qrCode': instance.qrCode,
       'totalOrders': instance.totalOrders,
-      'activePrice': instance.activePrice,
-      'activeItems': instance.activeItems,
-      'totalPrice': instance.totalPrice,
-      'totalItems': instance.totalItems,
+      'activeOrders': instance.activeOrders,
     };
 
-_$ActiveOrderImpl _$$ActiveOrderImplFromJson(Map<String, dynamic> json) =>
-    _$ActiveOrderImpl(
+_$ActiveOrdersImpl _$$ActiveOrdersImplFromJson(Map<String, dynamic> json) =>
+    _$ActiveOrdersImpl(
       id: json['_id'] as String,
       table: json['table'] as String,
       waiter: json['waiter'] as String,
       totalPrice: json['totalPrice'] as int,
       restaurant: json['restaurant'] as String,
       products: (json['products'] as List<dynamic>)
-          .map((e) => Product.fromJson(e as Map<String, dynamic>))
+          .map((e) => ProductElement.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       v: json['__v'] as int,
     );
 
-Map<String, dynamic> _$$ActiveOrderImplToJson(_$ActiveOrderImpl instance) =>
+Map<String, dynamic> _$$ActiveOrdersImplToJson(_$ActiveOrdersImpl instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'table': instance.table,
@@ -66,18 +81,99 @@ Map<String, dynamic> _$$ActiveOrderImplToJson(_$ActiveOrderImpl instance) =>
       '__v': instance.v,
     };
 
-_$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
-    _$ProductImpl(
-      product: json['product'] as String,
+_$ProductElementImpl _$$ProductElementImplFromJson(Map<String, dynamic> json) =>
+    _$ProductElementImpl(
+      product: ProductProduct.fromJson(json['product'] as Map<String, dynamic>),
       quantity: json['quantity'] as int,
       price: json['price'] as int,
       id: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
+Map<String, dynamic> _$$ProductElementImplToJson(
+        _$ProductElementImpl instance) =>
     <String, dynamic>{
       'product': instance.product,
       'quantity': instance.quantity,
       'price': instance.price,
       '_id': instance.id,
+    };
+
+_$ProductProductImpl _$$ProductProductImplFromJson(Map<String, dynamic> json) =>
+    _$ProductProductImpl(
+      id: json['_id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String,
+      photo: json['photo'],
+      price: json['price'] as int,
+      oldPrice: json['oldPrice'] as int,
+      sale: json['sale'],
+      available: json['available'] as bool,
+      category: json['category'] as String,
+      unit: json['unit'] as String,
+      restaurant: json['restaurant'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      v: json['__v'] as int,
+    );
+
+Map<String, dynamic> _$$ProductProductImplToJson(
+        _$ProductProductImpl instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'description': instance.description,
+      'photo': instance.photo,
+      'price': instance.price,
+      'oldPrice': instance.oldPrice,
+      'sale': instance.sale,
+      'available': instance.available,
+      'category': instance.category,
+      'unit': instance.unit,
+      'restaurant': instance.restaurant,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
+      '__v': instance.v,
+    };
+
+_$TypeOfTableImpl _$$TypeOfTableImplFromJson(Map<String, dynamic> json) =>
+    _$TypeOfTableImpl(
+      id: json['_id'] as String,
+      name: json['name'] as String,
+      restaurant: json['restaurant'] as String,
+      v: json['__v'] as int,
+    );
+
+Map<String, dynamic> _$$TypeOfTableImplToJson(_$TypeOfTableImpl instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'restaurant': instance.restaurant,
+      '__v': instance.v,
+    };
+
+_$WaiterImpl _$$WaiterImplFromJson(Map<String, dynamic> json) => _$WaiterImpl(
+      id: json['_id'] as String,
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'] as String,
+      avatar: json['avatar'] as String?,
+      phone: json['phone'] as String,
+      role: json['role'] as String,
+      restaurant: json['restaurant'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      v: json['__v'] as int,
+    );
+
+Map<String, dynamic> _$$WaiterImplToJson(_$WaiterImpl instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'avatar': instance.avatar,
+      'phone': instance.phone,
+      'role': instance.role,
+      'restaurant': instance.restaurant,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
+      '__v': instance.v,
     };

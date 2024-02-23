@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:tezz_cafe_app/data/orders/models/orders_model.dart';
+import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
+import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
 
 class OrderService {
   final Dio dio;
 
   OrderService(this.dio);
-
 
   /// Get orders
 
@@ -23,30 +24,22 @@ class OrderService {
     }
   }
 
-
-
   /// Create an order
   Future<void> createOrder(String tableId, String productId, int quantity) async {
     try {
-      final Map<String, dynamic> requestBody = {
-        'table': tableId,
-        'products': [
-          {
-            'product': productId,
-            'quantity': quantity,
-          }
-        ],
-      };
-
-      final response = await dio.post('/orders', data: requestBody);
+      final token = StorageRepository.getString(StorageKeys.token);
+      final response = await dio.post(
+        '/orders',
+        data: {"table": tableId, "product": productId, "quantity": quantity},
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
 
       if (response.statusCode == 201) {
-      } else {
-        throw 'Failed to create order: ${response.statusCode} ${response.data}';
+        return;
       }
+      throw 'Failed to create order: ${response.statusCode} ${response.data}';
     } catch (e) {
       rethrow;
     }
   }
-
 }

@@ -26,14 +26,14 @@ mixin _$ProductModel {
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: "description")
   String get description => throw _privateConstructorUsedError;
-  @JsonKey(name: "photo")
-  String get photo => throw _privateConstructorUsedError;
+  @JsonKey(name: "photo", defaultValue: '')
+  String? get photo => throw _privateConstructorUsedError;
   @JsonKey(name: "price")
   int get price => throw _privateConstructorUsedError;
   @JsonKey(name: "oldPrice")
   int get oldPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: "sale")
-  bool get sale => throw _privateConstructorUsedError;
+  @JsonKey(name: "sale", defaultValue: false)
+  bool? get sale => throw _privateConstructorUsedError;
   @JsonKey(name: "available")
   bool get available => throw _privateConstructorUsedError;
   @JsonKey(name: "category")
@@ -67,10 +67,10 @@ abstract class $ProductModelCopyWith<$Res> {
       {@JsonKey(name: "_id") String id,
       @JsonKey(name: "name") String name,
       @JsonKey(name: "description") String description,
-      @JsonKey(name: "photo") String photo,
+      @JsonKey(name: "photo", defaultValue: '') String? photo,
       @JsonKey(name: "price") int price,
       @JsonKey(name: "oldPrice") int oldPrice,
-      @JsonKey(name: "sale") bool sale,
+      @JsonKey(name: "sale", defaultValue: false) bool? sale,
       @JsonKey(name: "available") bool available,
       @JsonKey(name: "category") String category,
       @JsonKey(name: "unit") String unit,
@@ -97,10 +97,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? id = null,
     Object? name = null,
     Object? description = null,
-    Object? photo = null,
+    Object? photo = freezed,
     Object? price = null,
     Object? oldPrice = null,
-    Object? sale = null,
+    Object? sale = freezed,
     Object? available = null,
     Object? category = null,
     Object? unit = null,
@@ -123,10 +123,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      photo: null == photo
+      photo: freezed == photo
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -135,10 +135,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.oldPrice
           : oldPrice // ignore: cast_nullable_to_non_nullable
               as int,
-      sale: null == sale
+      sale: freezed == sale
           ? _value.sale
           : sale // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       available: null == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
@@ -187,10 +187,10 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       {@JsonKey(name: "_id") String id,
       @JsonKey(name: "name") String name,
       @JsonKey(name: "description") String description,
-      @JsonKey(name: "photo") String photo,
+      @JsonKey(name: "photo", defaultValue: '') String? photo,
       @JsonKey(name: "price") int price,
       @JsonKey(name: "oldPrice") int oldPrice,
-      @JsonKey(name: "sale") bool sale,
+      @JsonKey(name: "sale", defaultValue: false) bool? sale,
       @JsonKey(name: "available") bool available,
       @JsonKey(name: "category") String category,
       @JsonKey(name: "unit") String unit,
@@ -215,10 +215,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? description = null,
-    Object? photo = null,
+    Object? photo = freezed,
     Object? price = null,
     Object? oldPrice = null,
-    Object? sale = null,
+    Object? sale = freezed,
     Object? available = null,
     Object? category = null,
     Object? unit = null,
@@ -241,10 +241,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      photo: null == photo
+      photo: freezed == photo
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -253,10 +253,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.oldPrice
           : oldPrice // ignore: cast_nullable_to_non_nullable
               as int,
-      sale: null == sale
+      sale: freezed == sale
           ? _value.sale
           : sale // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       available: null == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
@@ -300,10 +300,10 @@ class _$ProductModelImpl implements _ProductModel {
       {@JsonKey(name: "_id") required this.id,
       @JsonKey(name: "name") required this.name,
       @JsonKey(name: "description") required this.description,
-      @JsonKey(name: "photo") required this.photo,
+      @JsonKey(name: "photo", defaultValue: '') this.photo,
       @JsonKey(name: "price") required this.price,
       @JsonKey(name: "oldPrice") required this.oldPrice,
-      @JsonKey(name: "sale") required this.sale,
+      @JsonKey(name: "sale", defaultValue: false) this.sale,
       @JsonKey(name: "available") required this.available,
       @JsonKey(name: "category") required this.category,
       @JsonKey(name: "unit") required this.unit,
@@ -326,8 +326,8 @@ class _$ProductModelImpl implements _ProductModel {
   @JsonKey(name: "description")
   final String description;
   @override
-  @JsonKey(name: "photo")
-  final String photo;
+  @JsonKey(name: "photo", defaultValue: '')
+  final String? photo;
   @override
   @JsonKey(name: "price")
   final int price;
@@ -335,8 +335,8 @@ class _$ProductModelImpl implements _ProductModel {
   @JsonKey(name: "oldPrice")
   final int oldPrice;
   @override
-  @JsonKey(name: "sale")
-  final bool sale;
+  @JsonKey(name: "sale", defaultValue: false)
+  final bool? sale;
   @override
   @JsonKey(name: "available")
   final bool available;
@@ -436,10 +436,10 @@ abstract class _ProductModel implements ProductModel {
           {@JsonKey(name: "_id") required final String id,
           @JsonKey(name: "name") required final String name,
           @JsonKey(name: "description") required final String description,
-          @JsonKey(name: "photo") required final String photo,
+          @JsonKey(name: "photo", defaultValue: '') final String? photo,
           @JsonKey(name: "price") required final int price,
           @JsonKey(name: "oldPrice") required final int oldPrice,
-          @JsonKey(name: "sale") required final bool sale,
+          @JsonKey(name: "sale", defaultValue: false) final bool? sale,
           @JsonKey(name: "available") required final bool available,
           @JsonKey(name: "category") required final String category,
           @JsonKey(name: "unit") required final String unit,
@@ -463,8 +463,8 @@ abstract class _ProductModel implements ProductModel {
   @JsonKey(name: "description")
   String get description;
   @override
-  @JsonKey(name: "photo")
-  String get photo;
+  @JsonKey(name: "photo", defaultValue: '')
+  String? get photo;
   @override
   @JsonKey(name: "price")
   int get price;
@@ -472,8 +472,8 @@ abstract class _ProductModel implements ProductModel {
   @JsonKey(name: "oldPrice")
   int get oldPrice;
   @override
-  @JsonKey(name: "sale")
-  bool get sale;
+  @JsonKey(name: "sale", defaultValue: false)
+  bool? get sale;
   @override
   @JsonKey(name: "available")
   bool get available;

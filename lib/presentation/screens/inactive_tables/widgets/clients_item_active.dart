@@ -1,5 +1,4 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
-import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
@@ -33,7 +32,7 @@ class ClientListItemActive extends StatelessWidget {
               children: [
                 ClientIcon(table: table),
                 Text(
-                  formatDate(table.createdAt, [HH, ':', nn]),
+                  table.activeOrders.toString(),
                   // '12:00',
                   style: context.bodySmall?.copyWith(color: AppColors.grey400),
                 ),
@@ -41,7 +40,7 @@ class ClientListItemActive extends StatelessWidget {
             ),
             const Gap(20),
             Text(
-              currencyFormat.format(table.activeOrders?.totalPrice ?? 0),
+              currencyFormat.format(0),
               textAlign: TextAlign.right,
               style: context.titleMedium?.copyWith(color: AppColors.black),
             )

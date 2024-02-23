@@ -6,41 +6,44 @@ import 'package:gap/gap.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
 import 'package:tezz_cafe_app/data/category/models/category_model.dart';
+import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/food_detail/food_detail.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
-import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/font_style.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
 class MenuFoodsScreen extends StatelessWidget {
-  const MenuFoodsScreen({
-    super.key, required this.category, required this.actionText,
-  });
+  const MenuFoodsScreen({super.key, required this.category, required this.table});
+
   final CategoryModel category;
-  final String actionText;
+  final TableModel table;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title:
-             Text(category.name, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
-        actions: [PlaceActionWidget(actionText: actionText,)],
+            Text(category.name, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
+        actions: [
+          PlaceActionWidget(
+            actionText: table.name,
+          )
+        ],
         scrolledUnderElevation: 0,
       ),
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
-          if (state.status.isInProgress) {
-            return const CustomProductShimmer();
-          }
-          if (state.status.isFailure) {
-            return Center(
-                child: Text("Xatolik yuz berdi: ${state.failure?.message ?? ''}",
-                    textAlign: TextAlign.center, style: context.titleLarge));
-          }
-          if (state.products.isEmpty) {
+          // if (state.status.isInProgress) {
+          //   return const CustomProductShimmer();
+          // }
+          // if (state.status.isFailure) {
+          //   return Center(
+          //       child: Text("Xatolik yuz berdi: ${state.failure?.message ?? ''}",
+          //           textAlign: TextAlign.center, style: context.titleLarge));
+          // }
+          if (category.products.isEmpty) {
             return Center(
                 child: Text("Mahsulotlar mavjud emas", textAlign: TextAlign.center, style: context.titleLarge));
           }
@@ -52,12 +55,14 @@ class MenuFoodsScreen extends StatelessWidget {
               mainAxisSpacing: 20,
               childAspectRatio: 162 / 232,
             ),
-            itemCount: state.products.length,
+            itemCount: category.products.length,
             itemBuilder: (context, index) {
-              final product = state.products[index];
+              final product = category.products[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  FoodDetailScreen(product: product, actionText: actionText,)));
+                  context.read<ProductBloc>().add(SetProductCountEvent());
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FoodDetailScreen(product: product, table: table)));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,8 +70,7 @@ class MenuFoodsScreen extends StatelessWidget {
                     Container(
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                      child: Image.network(
-                          product.photo,
+                      child: Image.network(product.photo ?? "",
                           fit: BoxFit.cover,
                           height: 170,
                           width: double.infinity,

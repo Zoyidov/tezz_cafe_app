@@ -17,6 +17,7 @@ class ZoneBloc extends Bloc<ZoneEvent, ZoneState> {
   ZoneBloc() : super(const ZoneState()) {
     on<GetAllZonesEvent>(_onGetAllZonesEvent);
     on<ChangeSelectedZoneEvent>(_onChangeSelectedZoneEvent);
+    on<ChangeSelectedNoActiveZoneEvent>(_onChangeSelectedNoActiveZoneEvent);
   }
 
   FutureOr<void> _onGetAllZonesEvent(GetAllZonesEvent event, Emitter<ZoneState> emit) async {
@@ -26,7 +27,14 @@ class ZoneBloc extends Bloc<ZoneEvent, ZoneState> {
       (l) => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
       (r) {
         final selectedZones = List<bool>.generate(r.length, (index) => (index == 0));
-        emit(state.copyWith(status: FormzSubmissionStatus.success, zones: r,selectedZones: selectedZones));
+        final selectedZonesNoActive = List<bool>.generate(r.length, (index) => (index == 0));
+
+        emit(state.copyWith(
+          status: FormzSubmissionStatus.success,
+          zones: r,
+          selectedZones: selectedZones,
+          selectedZonesNoActive: selectedZonesNoActive,
+        ));
       },
     );
   }
@@ -34,5 +42,10 @@ class ZoneBloc extends Bloc<ZoneEvent, ZoneState> {
   FutureOr<void> _onChangeSelectedZoneEvent(ChangeSelectedZoneEvent event, Emitter<ZoneState> emit) {
     final selectedZones = List<bool>.generate(state.zones.length, (index) => (index == event.index));
     emit(state.copyWith(selectedZones: selectedZones));
+  }
+
+  FutureOr<void> _onChangeSelectedNoActiveZoneEvent(ChangeSelectedNoActiveZoneEvent event, Emitter<ZoneState> emit) {
+    final selectedZones = List<bool>.generate(state.zones.length, (index) => (index == event.index));
+    emit(state.copyWith(selectedZonesNoActive: selectedZones));
   }
 }

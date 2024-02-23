@@ -1,5 +1,6 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:tezz_cafe_app/presentation/screens/auth/login.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/order_detail_screen/order_detail_screen.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
@@ -13,10 +14,20 @@ class NewOrderScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: (){
-            print(StorageRepository.getString(StorageKeys.waiter));
-            print(StorageRepository.getString(StorageKeys.restaurant));
-          }, icon: const Icon(Icons.logout_outlined,color: Colors.red,))
+          IconButton(
+              onPressed: () {
+                StorageRepository.clearAll();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                        (route) => false);
+              },
+              icon: const Icon(
+                Icons.logout_outlined,
+                color: Colors.red,
+              ))
         ],
         scrolledUnderElevation: 0,
         title: const Text(
@@ -38,6 +49,12 @@ class NewOrderScreen extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderDetailScreen()));
             },
           );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print(StorageRepository.getString(StorageKeys.restaurant));
+          print(StorageRepository.getString(StorageKeys.token));
         },
       ),
     );

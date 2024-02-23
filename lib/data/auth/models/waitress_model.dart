@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'waitress_model.freezed.dart';
 part 'waitress_model.g.dart';

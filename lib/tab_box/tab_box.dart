@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tezz_cafe_app/business_logic/cubit/tab_cubit.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/call_screen.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/clients_screen.dart';
+import 'package:tezz_cafe_app/presentation/screens/inactive_tables/inactive_tables.dart';
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/new_order_screen.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 
@@ -32,7 +33,8 @@ class TabBoxState extends State<TabBox> {
               CallScreen(),
               NewOrderScreen(),
               // state.isActive ? const MessageNoActive() : const ClientsScreen(),
-              FlipCardNavigation(),
+              ClientsScreen(),
+              InActiveTablesScreen()
             ],
           );
         },
@@ -40,6 +42,7 @@ class TabBoxState extends State<TabBox> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: context.watch<TabCubit>().state.index,
         onTap: context.read<TabCubit>().changeTab,
+        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
             activeIcon: SvgPicture.asset(AppImages.Schaqiruv),
@@ -55,6 +58,11 @@ class TabBoxState extends State<TabBox> {
             activeIcon: SvgPicture.asset(AppImages.clientsFill),
             icon: SvgPicture.asset(AppImages.clients),
             label: "Mijozlar",
+          ),
+          BottomNavigationBarItem(
+            activeIcon: SvgPicture.asset(AppImages.clientsFill),
+            icon: SvgPicture.asset(AppImages.clients),
+            label: "Bo`sh Stollar",
           ),
         ],
       ),

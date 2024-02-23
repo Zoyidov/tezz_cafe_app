@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:flutter/material.dart';
 import 'package:tezz_cafe_app/data/auth/repository/auth_repository.dart';
 import 'package:tezz_cafe_app/utils/device/device_utility.dart';
 import 'package:tezz_cafe_app/utils/di/service_locator.dart';
@@ -18,7 +17,7 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final MaskTextInputFormatter formatter = MaskTextInputFormatter(
-      mask: '+998 (##) ###-##-##', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.lazy);
+      mask: '+998 (##) ###-##-##', filter: {"#": RegExp(r'[0-9]')});
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -62,6 +61,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
 String formatPhoneNumber(String phoneNumber) {
   final regex = RegExp(r'(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})');
-  final matches = regex.allMatches(phoneNumber).map((e) => "${e[1]}${e[2]}${e[3]}${e[4]}").join('');
+  final matches = regex.allMatches(phoneNumber).map((e) => "${e[1]}${e[2]}${e[3]}${e[4]}").join();
   return '+$matches';
 }

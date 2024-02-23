@@ -1,7 +1,9 @@
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TabCubit extends Cubit<TabState> {
   TabCubit() : super(TabState());
+  final FlipCardController flipCardController = FlipCardController();
 
   void changeTab(int tabIndex) {
     emit(state.copyWith(index: tabIndex));
