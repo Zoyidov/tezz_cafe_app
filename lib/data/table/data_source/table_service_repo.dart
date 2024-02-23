@@ -9,10 +9,12 @@ class TableService {
   TableService(this.dio);
 
   /// Get tables
-  Future<List<TableModel>> getTablesByRestaurantId(String restaurantId) async {
+  Future<List<TableModel>> getTablesByRestaurantId(String restaurantId, bool occupied) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
-      final response = await dio.get('/tables?restaurant=$restaurantId',options: Options(headers: {'Authorization': 'Bearer $token'}));
+      final response = await dio.get('/tables',
+          queryParameters: {"restaurant": restaurantId, 'occupied': occupied},
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         return data.map((json) => TableModel.fromJson(json)).toList();
@@ -23,7 +25,6 @@ class TableService {
       rethrow;
     }
   }
-
 
   /// Activate table
   Future<void> activateTable(String tableId) async {
@@ -41,5 +42,4 @@ class TableService {
       rethrow;
     }
   }
-
 }

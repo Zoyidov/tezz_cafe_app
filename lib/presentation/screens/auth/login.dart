@@ -1,15 +1,14 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/business_logic/auth/auth_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/no_active_table/no_active_table_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
-import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
-import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
-import 'package:tezz_cafe_app/utils/route/ruotes.dart';
 import 'package:tezz_cafe_app/utils/validators/validators.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -54,6 +53,9 @@ class LoginScreen extends StatelessWidget {
           );
         }
         if (state.status.isSuccess) {
+          context.read<ZoneBloc>().add(GetAllZonesEvent());
+          context.read<TableBloc>().add(GetAllTablesEvent());
+          context.read<NoActiveTableBloc>().add(FetchNoActiveTables());
           context.pushAndRemoveUntil(const TabBox());
         }
       },
@@ -133,7 +135,7 @@ class PhoneNumberFormField extends StatelessWidget {
       controller: context.read<AuthBloc>().phoneController,
       decoration: const InputDecoration(
         prefixIcon: PrefixIcon(icon: Icons.phone),
-        prefixIconConstraints: BoxConstraints(minWidth: 0, minHeight: 0),
+        prefixIconConstraints: BoxConstraints(),
         hintText: "Phone number",
       ),
       validator: MultiValidator([
@@ -157,7 +159,7 @@ class PasswordFormField extends StatelessWidget {
           controller: context.read<AuthBloc>().passwordController,
           decoration: InputDecoration(
             prefixIcon: const PrefixIcon(icon: Icons.lock),
-            prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
+            prefixIconConstraints: const BoxConstraints(),
             hintText: "*********",
             suffixIcon: IconButton(
                 onPressed: () => context.read<AuthBloc>().add(ChangePasswordVisibility()),

@@ -1,7 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:tezz_cafe_app/data/auth/models/waitress_model.dart';
-import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
 class AuthService {
   final Dio dio;

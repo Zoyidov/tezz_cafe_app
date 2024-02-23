@@ -9,3 +9,10 @@ class ChangeSelectedZoneEvent extends ZoneEvent {
 
   ChangeSelectedZoneEvent(this.index);
 }
+
+class ChangeSelectedNoActiveZoneEvent extends ZoneEvent {
+  final int index;
+
+  ChangeSelectedNoActiveZoneEvent(this.index);
+}
+

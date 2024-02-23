@@ -28,7 +28,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
         actions: [
           Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(currencyFormat.format(table.totalPrice), style: AppFontStyle.description2))
+              child: Text(currencyFormat.format(table.activeOrders?.totalPrice ?? 0), style: AppFontStyle.description2))
         ],
         scrolledUnderElevation: 0,
       ),
@@ -36,65 +36,68 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
           context.read<CategoryBloc>().add(FetchCategoriesEvent());
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(actionText: table.name,)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(table: table)));
         },
         child: const Icon(
           Icons.add,
           color: Colors.white,
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                final order = table.activeOrders.firstOrNull?.products[index];
-                return OrderItem(activeOrder: table.activeOrders.firstOrNull!, product: order);
-              },
-              separatorBuilder: (context, index) => const Gap(16),
-              itemCount: table.activeOrders.firstOrNull?.products.length ?? 0,
-            ),
-            const Gap(10),
-            table.activeOrders.firstOrNull?.products.isEmpty ?? false ?
-              SizedBox(
-                width: context.width / 2,
-                child: FilledButton(
-                  onPressed: () {
-                    AwesomeDialog(
-                      context: context,
-                      dialogType: DialogType.warning,
-                      animType: AnimType.bottomSlide,
-                      title: "Stolni yopish",
-                      desc: '${table.name} ni yopmoqchimisiz?',
-                      btnCancelOnPress: () {},
-                      btnOkOnPress: () {},
-                      btnOkText: 'Yopish',
-                      btnCancelText: 'Bekor qilish',
-                    ).show();
-                  },
-                  style: FilledButton.styleFrom(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
-                    ),
-                    backgroundColor: AppColors.red,
+      body: table.activeOrders != null
+          ? SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final product = table.activeOrders!.products[index];
+                      return OrderItem(product: product);
+                    },
+                    separatorBuilder: (context, index) => const Gap(16),
+                    itemCount: table.activeOrders?.products.length ?? 0,
                   ),
-                  child: const Text("Stolni yopish"),
-                ),
-              ):
-            Center(child: Column(
+                  const Gap(10),
+                  SizedBox(
+                    width: context.width / 2,
+                    child: FilledButton(
+                      onPressed: () {
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.warning,
+                          animType: AnimType.bottomSlide,
+                          title: "Stolni yopish",
+                          desc: '${table.name} ni yopmoqchimisiz?',
+                          btnCancelOnPress: () {},
+                          btnOkOnPress: () {},
+                          btnOkText: 'Yopish',
+                          btnCancelText: 'Bekor qilish',
+                        ).show();
+                      },
+                      style: FilledButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        backgroundColor: AppColors.red,
+                      ),
+                      child: const Text("Stolni yopish"),
+                    ),
+                  ),
+                  const Gap(30),
+                ],
+              ),
+            )
+          : Center(
+              child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Lottie.asset(AppImages.noOrder),
                 Text(" ${table.name} da Hozircha Buyurtma Mavjud Emas", style: AppFontStyle.description2),
               ],
             )),
-            const Gap(30),
-          ],
-        ),
-      ),
     );
   }
 }

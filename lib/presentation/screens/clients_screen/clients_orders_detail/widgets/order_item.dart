@@ -10,10 +10,12 @@ import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key, required this.product, required this.activeOrder});
+  const OrderItem({super.key, required this.product});
 
-  final Product? product;
-  final ActiveOrder? activeOrder;
+  final ProductElement product;
+
+  // final ProductProduct? product;
+  // final ActiveOrders? activeOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class OrderItem extends StatelessWidget {
                     const Text('Chaqiruv', style: AppFontStyle.description),
                     const Gap(8),
                     Text(
-                      '/ ${formatDate(activeOrder?.createdAt ?? DateTime.now(), [HH, ':', nn])}',
+                      '/ ${formatDate(product.product.createdAt, [HH, ':', nn])}',
                       style: context.bodySmall?.copyWith(color: AppColors.grey400),
                     ),
                   ],
@@ -52,14 +54,23 @@ class OrderItem extends StatelessWidget {
           const Gap(12),
           Row(
             children: [
+              // todo image product
               Container(
                 height: 80,
                 width: 80,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                child: Image.asset(
-                  AppImages.food1,
+                child: Image.network(
+                  product.product.photo??'',
                   fit: BoxFit.cover,
+                  cacheHeight: 1080,
+                  cacheWidth: 1920,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      AppImages.imageNotFound,
+                      fit: BoxFit.cover,
+                    );
+                  },
                 ),
               ),
               const Gap(12),
@@ -69,12 +80,12 @@ class OrderItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      product!.product,
+                      product.product.name,
                       style: AppFontStyle.description2.copyWith(fontWeight: FontWeight.w600, color: AppColors.black),
                     ),
                     const Gap(8),
                     Text(
-                      currencyFormat.format(product!.price),
+                      currencyFormat.format(product.product.price),
                       style: AppFontStyle.mIn12.copyWith(color: AppColors.grey400),
                     ),
                     const Gap(4),
@@ -82,11 +93,11 @@ class OrderItem extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "${product!.quantity.toString()} ta: ",
+                          "${product.quantity} ta: ",
                           style: AppFontStyle.description2
                               .copyWith(fontWeight: FontWeight.w600, color: AppColors.primaryColor),
                         ),
-                        Text(currencyFormat.format(double.parse(product!.price.toString()) * product!.quantity),
+                        Text(currencyFormat.format(product.price),
                             style: AppFontStyle.description2
                                 .copyWith(fontWeight: FontWeight.w600, color: AppColors.grey500)),
                       ],

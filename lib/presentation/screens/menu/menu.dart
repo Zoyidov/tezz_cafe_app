@@ -6,22 +6,24 @@ import 'package:gap/gap.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tezz_cafe_app/business_logic/category/category_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
+import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/menu_foods/menu_foods.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 
 class MenuScreen extends StatelessWidget {
-  const MenuScreen({super.key, required this.actionText});
+  const MenuScreen({super.key, required this.table});
 
-  final String actionText;
+  // final String actionText;
+  final TableModel table;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Menu', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
-        actions: [PlaceActionWidget(actionText: actionText,)],
+        actions: [PlaceActionWidget(actionText: table.name,)],
         scrolledUnderElevation: 0,
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
@@ -40,8 +42,8 @@ class MenuScreen extends StatelessWidget {
               final menuItem = state.categories[index];
               return GestureDetector(
                 onTap: () {
-                  context.read<ProductBloc>().add(FetchProductsEvent(categoryId: menuItem.id));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  MenuFoodsScreen(category: menuItem, actionText: actionText,)));
+                  // context.read<ProductBloc>().add(FetchProductsEvent(categoryId: menuItem.id));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  MenuFoodsScreen(category: menuItem, table: table,)));
                   // context.pushNamed(RouteNames.category, arguments: menuItem);
                   // context.read<ProductBloc>().add(GetProductByMenuId(menuItem.id.toString()));
                 },
@@ -52,7 +54,7 @@ class MenuScreen extends StatelessWidget {
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                       child: Image.network(
-                        menuItem.photo,
+                        menuItem.photo??'',
                         fit: BoxFit.cover,
                         width: double.infinity,
                         cacheHeight: 1080,

@@ -1,6 +1,4 @@
-import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'zone_model.freezed.dart';
 part 'zone_model.g.dart';

@@ -10,9 +10,9 @@ class TableRepository {
 
   TableRepository(this._tableService);
 
-  Future<Either<Failure, List<TableModel>>> getTablesByRestaurantId(String restaurantId) async {
+  Future<Either<Failure, List<TableModel>>> getTablesByRestaurantId(String restaurantId,bool occupied) async {
     try {
-      final tables = await _tableService.getTablesByRestaurantId(restaurantId);
+      final tables = await _tableService.getTablesByRestaurantId(restaurantId,occupied);
       return Right(tables);
     } on DioException catch (e) {
       return Left(handleDioError(e));
