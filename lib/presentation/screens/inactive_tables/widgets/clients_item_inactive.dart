@@ -1,6 +1,10 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_event.dart';
+import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_state.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/client_icon.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
@@ -12,34 +16,42 @@ class ClientListItemInActive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        AwesomeDialog(
-          context: context,
-          dialogType: DialogType.question,
-          animType: AnimType.bottomSlide,
-          title: "Stolni Faol qilish",
-          desc: '${table.name} ni Faol qilmoqchimisiz?',
-          btnCancelOnPress: () {},
-          btnOkOnPress: () {},
-          btnOkText: 'Faol qilish',
-          btnCancelText: 'Bekor qilish',
-        ).show();
+    return BlocBuilder<ActivateTableBloc, ActivateTableState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () {
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.question,
+              animType: AnimType.bottomSlide,
+              title: 'Aktivlashtirish',
+              desc: '${table.name} ni aktivlashtirmoqchimisiz?',
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {
+                context
+                    .read<ActivateTableBloc>()
+                    .add(ActivateTable(table.id));
+              },
+              btnOkText: 'Aktivlashtirish',
+              btnCancelText: 'Bekor qilish',
+            ).show();
+          },
+          child: Container(
+            padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: AppColors.textFieldColor,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ClientIcon(table: table, isActive: false),
+                const Gap(20),
+              ],
+            ),
+          ),
+        );
       },
-      child: Container(
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: AppColors.textFieldColor,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ClientIcon(table: table, isActive: false),
-            const Gap(20),
-          ],
-        ),
-      ),
     );
   }
 }
