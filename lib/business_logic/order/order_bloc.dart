@@ -15,12 +15,22 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   OrderBloc() : super(const OrderState()) {
     on<CreateOrderEvent>(_onCreateOrderEvent);
+    on<GetOrdersByTableId>(_getOrdersByTableId);
   }
 
   FutureOr<void> _onCreateOrderEvent(CreateOrderEvent event, Emitter<OrderState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final order = await _orderRepository.createOrder(event.tableId, event.productId, event.quantity);
     order.fold(
+      (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
+      (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
+    );
+  }
+
+  FutureOr<void> _getOrdersByTableId(GetOrdersByTableId event, Emitter<OrderState> emit) async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    final orders = await _orderRepository.getOrdersByTableId(event.tableId);
+    orders.fold(
       (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
       (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
     );

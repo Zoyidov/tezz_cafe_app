@@ -9,3 +9,8 @@ class CreateOrderEvent extends OrderEvent {
 
   CreateOrderEvent({required this.tableId, required this.productId, required this.quantity});
 }
+
+class GetOrdersByTableId extends OrderEvent {
+  final String tableId;
+  GetOrdersByTableId({required this.tableId});
+}
