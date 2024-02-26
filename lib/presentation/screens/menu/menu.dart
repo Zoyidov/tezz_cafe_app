@@ -9,6 +9,7 @@ import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/menu_foods/menu_foods.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
+import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 
@@ -54,7 +55,7 @@ class MenuScreen extends StatelessWidget {
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                       child: Image.network(
-                        menuItem.photo??'',
+                        ApiConstants.imageBaseUrl + menuItem.photo??'',
                         fit: BoxFit.cover,
                         width: double.infinity,
                         cacheHeight: 1080,

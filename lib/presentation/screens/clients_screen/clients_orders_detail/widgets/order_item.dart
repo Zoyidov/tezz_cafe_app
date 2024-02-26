@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/circle_icon.dart';
 import 'package:date_format/date_format.dart';
+import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/font_style.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
@@ -61,7 +62,7 @@ class OrderItem extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: Image.network(
-                  product.product.photo??'',
+                  ApiConstants.imageBaseUrl +product.product.photo??'',
                   fit: BoxFit.cover,
                   cacheHeight: 1080,
                   cacheWidth: 1920,

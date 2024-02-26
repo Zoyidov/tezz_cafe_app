@@ -10,6 +10,7 @@ import 'package:tezz_cafe_app/data/product/models/product_model.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
+import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/font_style.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
@@ -79,7 +80,7 @@ class FoodDetailScreen extends StatelessWidget {
                     width: 336,
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    child: Image.network(product.photo ?? '',
+                    child: Image.network(ApiConstants.imageBaseUrl + product.photo ?? '',
                         fit: BoxFit.cover,
                         height: 170,
                         width: double.infinity,
