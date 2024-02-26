@@ -1,6 +1,4 @@
-import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'waiter_coming_model.freezed.dart';
 part 'waiter_coming_model.g.dart';
