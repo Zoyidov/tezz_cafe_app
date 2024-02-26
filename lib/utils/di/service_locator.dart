@@ -11,6 +11,8 @@ import 'package:tezz_cafe_app/data/product/data_source/product_service_repo.dart
 import 'package:tezz_cafe_app/data/product/repository/product_repository.dart';
 import 'package:tezz_cafe_app/data/table/data_source/table_service_repo.dart';
 import 'package:tezz_cafe_app/data/table/repository/table_repository.dart';
+import 'package:tezz_cafe_app/data/waitress/data_source/waitress_data_source.dart';
+import 'package:tezz_cafe_app/data/waitress/repository/waitress_repository.dart';
 import 'package:tezz_cafe_app/data/zone/data_source/zone_service_repo.dart';
 import 'package:tezz_cafe_app/data/zone/repository/zone_repository.dart';
 import 'package:tezz_cafe_app/utils/di/dio_options.dart';
@@ -36,6 +38,9 @@ Future<void> setupLocator() async {
   // Order
   getIt.registerSingleton(OrderService(DioSettings.getDio()));
   getIt.registerSingleton(OrderRepository(getIt<OrderService>()));
+  // Waitress
+  getIt.registerSingleton(WaitressDataSource());
+  getIt.registerSingleton(WaitressRepository(getIt<WaitressDataSource>()));
 }
 
 void tearDownLocator() => getIt.reset();
