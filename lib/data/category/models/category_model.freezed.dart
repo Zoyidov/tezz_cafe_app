@@ -32,8 +32,6 @@ mixin _$CategoryModel {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: "updatedAt")
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  @JsonKey(name: "__v")
-  int get v => throw _privateConstructorUsedError;
   @JsonKey(name: "products")
   List<Product> get products => throw _privateConstructorUsedError;
   @JsonKey(name: "id")
@@ -58,7 +56,6 @@ abstract class $CategoryModelCopyWith<$Res> {
       @JsonKey(name: "restaurant") String restaurant,
       @JsonKey(name: "createdAt") DateTime createdAt,
       @JsonKey(name: "updatedAt") DateTime updatedAt,
-      @JsonKey(name: "__v") int v,
       @JsonKey(name: "products") List<Product> products,
       @JsonKey(name: "id") String categoryModelId});
 }
@@ -82,7 +79,6 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
     Object? restaurant = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? v = null,
     Object? products = null,
     Object? categoryModelId = null,
   }) {
@@ -111,10 +107,6 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      v: null == v
-          ? _value.v
-          : v // ignore: cast_nullable_to_non_nullable
-              as int,
       products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
@@ -142,7 +134,6 @@ abstract class _$$CategoryModelImplCopyWith<$Res>
       @JsonKey(name: "restaurant") String restaurant,
       @JsonKey(name: "createdAt") DateTime createdAt,
       @JsonKey(name: "updatedAt") DateTime updatedAt,
-      @JsonKey(name: "__v") int v,
       @JsonKey(name: "products") List<Product> products,
       @JsonKey(name: "id") String categoryModelId});
 }
@@ -164,7 +155,6 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
     Object? restaurant = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? v = null,
     Object? products = null,
     Object? categoryModelId = null,
   }) {
@@ -193,10 +183,6 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      v: null == v
-          ? _value.v
-          : v // ignore: cast_nullable_to_non_nullable
-              as int,
       products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
@@ -219,7 +205,6 @@ class _$CategoryModelImpl implements _CategoryModel {
       @JsonKey(name: "restaurant") required this.restaurant,
       @JsonKey(name: "createdAt") required this.createdAt,
       @JsonKey(name: "updatedAt") required this.updatedAt,
-      @JsonKey(name: "__v") required this.v,
       @JsonKey(name: "products") required final List<Product> products,
       @JsonKey(name: "id") required this.categoryModelId})
       : _products = products;
@@ -245,9 +230,6 @@ class _$CategoryModelImpl implements _CategoryModel {
   @override
   @JsonKey(name: "updatedAt")
   final DateTime updatedAt;
-  @override
-  @JsonKey(name: "__v")
-  final int v;
   final List<Product> _products;
   @override
   @JsonKey(name: "products")
@@ -263,7 +245,7 @@ class _$CategoryModelImpl implements _CategoryModel {
 
   @override
   String toString() {
-    return 'CategoryModel(id: $id, name: $name, photo: $photo, restaurant: $restaurant, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, products: $products, categoryModelId: $categoryModelId)';
+    return 'CategoryModel(id: $id, name: $name, photo: $photo, restaurant: $restaurant, createdAt: $createdAt, updatedAt: $updatedAt, products: $products, categoryModelId: $categoryModelId)';
   }
 
   @override
@@ -280,7 +262,6 @@ class _$CategoryModelImpl implements _CategoryModel {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.v, v) || other.v == v) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
             (identical(other.categoryModelId, categoryModelId) ||
                 other.categoryModelId == categoryModelId));
@@ -296,7 +277,6 @@ class _$CategoryModelImpl implements _CategoryModel {
       restaurant,
       createdAt,
       updatedAt,
-      v,
       const DeepCollectionEquality().hash(_products),
       categoryModelId);
 
@@ -322,7 +302,6 @@ abstract class _CategoryModel implements CategoryModel {
           @JsonKey(name: "restaurant") required final String restaurant,
           @JsonKey(name: "createdAt") required final DateTime createdAt,
           @JsonKey(name: "updatedAt") required final DateTime updatedAt,
-          @JsonKey(name: "__v") required final int v,
           @JsonKey(name: "products") required final List<Product> products,
           @JsonKey(name: "id") required final String categoryModelId}) =
       _$CategoryModelImpl;
@@ -348,9 +327,6 @@ abstract class _CategoryModel implements CategoryModel {
   @override
   @JsonKey(name: "updatedAt")
   DateTime get updatedAt;
-  @override
-  @JsonKey(name: "__v")
-  int get v;
   @override
   @JsonKey(name: "products")
   List<Product> get products;
@@ -384,7 +360,7 @@ mixin _$Product {
   @JsonKey(name: "sale")
   dynamic get sale => throw _privateConstructorUsedError;
   @JsonKey(name: "available")
-  bool get available => throw _privateConstructorUsedError;
+  bool? get available => throw _privateConstructorUsedError;
   @JsonKey(name: "category")
   String get category => throw _privateConstructorUsedError;
   @JsonKey(name: "unit")
@@ -395,8 +371,6 @@ mixin _$Product {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: "updatedAt")
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  @JsonKey(name: "__v")
-  int get v => throw _privateConstructorUsedError;
   @JsonKey(name: "id")
   String get productId => throw _privateConstructorUsedError;
 
@@ -418,13 +392,12 @@ abstract class $ProductCopyWith<$Res> {
       @JsonKey(name: "price") int price,
       @JsonKey(name: "oldPrice") int oldPrice,
       @JsonKey(name: "sale") dynamic sale,
-      @JsonKey(name: "available") bool available,
+      @JsonKey(name: "available") bool? available,
       @JsonKey(name: "category") String category,
       @JsonKey(name: "unit") String unit,
       @JsonKey(name: "restaurant") String restaurant,
       @JsonKey(name: "createdAt") DateTime createdAt,
       @JsonKey(name: "updatedAt") DateTime updatedAt,
-      @JsonKey(name: "__v") int v,
       @JsonKey(name: "id") String productId});
 }
 
@@ -448,13 +421,12 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? price = null,
     Object? oldPrice = null,
     Object? sale = freezed,
-    Object? available = null,
+    Object? available = freezed,
     Object? category = null,
     Object? unit = null,
     Object? restaurant = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? v = null,
     Object? productId = null,
   }) {
     return _then(_value.copyWith(
@@ -486,10 +458,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.sale
           : sale // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      available: null == available
+      available: freezed == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -510,10 +482,6 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      v: null == v
-          ? _value.v
-          : v // ignore: cast_nullable_to_non_nullable
-              as int,
       productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
@@ -537,13 +505,12 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       @JsonKey(name: "price") int price,
       @JsonKey(name: "oldPrice") int oldPrice,
       @JsonKey(name: "sale") dynamic sale,
-      @JsonKey(name: "available") bool available,
+      @JsonKey(name: "available") bool? available,
       @JsonKey(name: "category") String category,
       @JsonKey(name: "unit") String unit,
       @JsonKey(name: "restaurant") String restaurant,
       @JsonKey(name: "createdAt") DateTime createdAt,
       @JsonKey(name: "updatedAt") DateTime updatedAt,
-      @JsonKey(name: "__v") int v,
       @JsonKey(name: "id") String productId});
 }
 
@@ -565,13 +532,12 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? price = null,
     Object? oldPrice = null,
     Object? sale = freezed,
-    Object? available = null,
+    Object? available = freezed,
     Object? category = null,
     Object? unit = null,
     Object? restaurant = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? v = null,
     Object? productId = null,
   }) {
     return _then(_$ProductImpl(
@@ -603,10 +569,10 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.sale
           : sale // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      available: null == available
+      available: freezed == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -627,10 +593,6 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      v: null == v
-          ? _value.v
-          : v // ignore: cast_nullable_to_non_nullable
-              as int,
       productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
@@ -650,13 +612,12 @@ class _$ProductImpl implements _Product {
       @JsonKey(name: "price") required this.price,
       @JsonKey(name: "oldPrice") required this.oldPrice,
       @JsonKey(name: "sale") required this.sale,
-      @JsonKey(name: "available") required this.available,
+      @JsonKey(name: "available") this.available,
       @JsonKey(name: "category") required this.category,
       @JsonKey(name: "unit") required this.unit,
       @JsonKey(name: "restaurant") required this.restaurant,
       @JsonKey(name: "createdAt") required this.createdAt,
       @JsonKey(name: "updatedAt") required this.updatedAt,
-      @JsonKey(name: "__v") required this.v,
       @JsonKey(name: "id") required this.productId});
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
@@ -685,7 +646,7 @@ class _$ProductImpl implements _Product {
   final dynamic sale;
   @override
   @JsonKey(name: "available")
-  final bool available;
+  final bool? available;
   @override
   @JsonKey(name: "category")
   final String category;
@@ -702,15 +663,12 @@ class _$ProductImpl implements _Product {
   @JsonKey(name: "updatedAt")
   final DateTime updatedAt;
   @override
-  @JsonKey(name: "__v")
-  final int v;
-  @override
   @JsonKey(name: "id")
   final String productId;
 
   @override
   String toString() {
-    return 'Product(id: $id, name: $name, description: $description, photo: $photo, price: $price, oldPrice: $oldPrice, sale: $sale, available: $available, category: $category, unit: $unit, restaurant: $restaurant, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, productId: $productId)';
+    return 'Product(id: $id, name: $name, description: $description, photo: $photo, price: $price, oldPrice: $oldPrice, sale: $sale, available: $available, category: $category, unit: $unit, restaurant: $restaurant, createdAt: $createdAt, updatedAt: $updatedAt, productId: $productId)';
   }
 
   @override
@@ -738,7 +696,6 @@ class _$ProductImpl implements _Product {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.v, v) || other.v == v) &&
             (identical(other.productId, productId) ||
                 other.productId == productId));
   }
@@ -760,7 +717,6 @@ class _$ProductImpl implements _Product {
       restaurant,
       createdAt,
       updatedAt,
-      v,
       productId);
 
   @JsonKey(ignore: true)
@@ -786,13 +742,12 @@ abstract class _Product implements Product {
       @JsonKey(name: "price") required final int price,
       @JsonKey(name: "oldPrice") required final int oldPrice,
       @JsonKey(name: "sale") required final dynamic sale,
-      @JsonKey(name: "available") required final bool available,
+      @JsonKey(name: "available") final bool? available,
       @JsonKey(name: "category") required final String category,
       @JsonKey(name: "unit") required final String unit,
       @JsonKey(name: "restaurant") required final String restaurant,
       @JsonKey(name: "createdAt") required final DateTime createdAt,
       @JsonKey(name: "updatedAt") required final DateTime updatedAt,
-      @JsonKey(name: "__v") required final int v,
       @JsonKey(name: "id") required final String productId}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
@@ -820,7 +775,7 @@ abstract class _Product implements Product {
   dynamic get sale;
   @override
   @JsonKey(name: "available")
-  bool get available;
+  bool? get available;
   @override
   @JsonKey(name: "category")
   String get category;
@@ -836,9 +791,6 @@ abstract class _Product implements Product {
   @override
   @JsonKey(name: "updatedAt")
   DateTime get updatedAt;
-  @override
-  @JsonKey(name: "__v")
-  int get v;
   @override
   @JsonKey(name: "id")
   String get productId;

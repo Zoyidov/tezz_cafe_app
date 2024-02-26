@@ -14,7 +14,6 @@ _$CategoryModelImpl _$$CategoryModelImplFromJson(Map<String, dynamic> json) =>
       restaurant: json['restaurant'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      v: json['__v'] as int,
       products: (json['products'] as List<dynamic>)
           .map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -29,7 +28,6 @@ Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
       'restaurant': instance.restaurant,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
-      '__v': instance.v,
       'products': instance.products,
       'id': instance.categoryModelId,
     };
@@ -43,13 +41,12 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       price: json['price'] as int,
       oldPrice: json['oldPrice'] as int,
       sale: json['sale'],
-      available: json['available'] as bool,
+      available: json['available'] as bool?,
       category: json['category'] as String,
       unit: json['unit'] as String,
       restaurant: json['restaurant'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      v: json['__v'] as int,
       productId: json['id'] as String,
     );
 
@@ -68,6 +65,5 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'restaurant': instance.restaurant,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
-      '__v': instance.v,
       'id': instance.productId,
     };
