@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:tezz_cafe_app/data/waiters_coming/model/waiter_coming_model.dart';
+import 'package:tezz_cafe_app/utils/di/dio_options.dart';
 
 class WaiterComingService {
-  final Dio dio;
+  final Dio dio = DioSettings.getDio();
 
-  WaiterComingService(this.dio);
+  WaiterComingService();
 
   Future<List<WaiterComingModel>> fetchWaiterComing() async {
     try {
@@ -19,6 +20,8 @@ class WaiterComingService {
       throw Exception('Failed to fetch waiter coming models: $e');
     }
   }
+
+
 
   Future<void> updateWaiterComing(String id) async {
     try {
