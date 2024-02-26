@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/no_active_table/no_active_table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/waiters/waiters_call_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/auth/login.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
@@ -37,6 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
       context.read<ZoneBloc>().add(GetAllZonesEvent());
       context.read<TableBloc>().add(GetAllTablesEvent());
       context.read<NoActiveTableBloc>().add(FetchNoActiveTables());
+      context.read<WaitersCallBloc>().add(FetchCallsEvent());
       context.pushAndRemoveUntil(const TabBox());
     });
   }
