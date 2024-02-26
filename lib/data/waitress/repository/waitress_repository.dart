@@ -24,6 +24,7 @@ class WaitressRepository {
     }
   }
 
+  /// Update call back status from waitress server
   Future<Either<Failure, void>> updateCallBack(String tableId) async {
     try {
       await dataSource.updateCallBack(tableId);
@@ -37,6 +38,7 @@ class WaitressRepository {
     }
   }
 
+  /// Delete call back status from waitress server
   Future<Either<Failure, void>> deleteCallBack(String tableId) async {
     try {
       await dataSource.deleteCallBack(tableId);
