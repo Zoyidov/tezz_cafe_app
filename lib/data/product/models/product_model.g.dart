@@ -15,7 +15,7 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
       price: json['price'] as int,
       oldPrice: json['oldPrice'] as int,
       sale: json['sale'] as bool? ?? false,
-      available: json['available'] as bool,
+      available: json['available'] as bool?,
       category: json['category'] as String,
       unit: json['unit'] as String,
       restaurant: json['restaurant'] as String,

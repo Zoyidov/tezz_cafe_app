@@ -35,7 +35,7 @@ mixin _$ProductModel {
   @JsonKey(name: "sale", defaultValue: false)
   bool? get sale => throw _privateConstructorUsedError;
   @JsonKey(name: "available")
-  bool get available => throw _privateConstructorUsedError;
+  bool? get available => throw _privateConstructorUsedError;
   @JsonKey(name: "category")
   String get category => throw _privateConstructorUsedError;
   @JsonKey(name: "unit")
@@ -71,7 +71,7 @@ abstract class $ProductModelCopyWith<$Res> {
       @JsonKey(name: "price") int price,
       @JsonKey(name: "oldPrice") int oldPrice,
       @JsonKey(name: "sale", defaultValue: false) bool? sale,
-      @JsonKey(name: "available") bool available,
+      @JsonKey(name: "available") bool? available,
       @JsonKey(name: "category") String category,
       @JsonKey(name: "unit") String unit,
       @JsonKey(name: "restaurant") String restaurant,
@@ -101,7 +101,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? price = null,
     Object? oldPrice = null,
     Object? sale = freezed,
-    Object? available = null,
+    Object? available = freezed,
     Object? category = null,
     Object? unit = null,
     Object? restaurant = null,
@@ -139,10 +139,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.sale
           : sale // ignore: cast_nullable_to_non_nullable
               as bool?,
-      available: null == available
+      available: freezed == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -191,7 +191,7 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       @JsonKey(name: "price") int price,
       @JsonKey(name: "oldPrice") int oldPrice,
       @JsonKey(name: "sale", defaultValue: false) bool? sale,
-      @JsonKey(name: "available") bool available,
+      @JsonKey(name: "available") bool? available,
       @JsonKey(name: "category") String category,
       @JsonKey(name: "unit") String unit,
       @JsonKey(name: "restaurant") String restaurant,
@@ -219,7 +219,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? price = null,
     Object? oldPrice = null,
     Object? sale = freezed,
-    Object? available = null,
+    Object? available = freezed,
     Object? category = null,
     Object? unit = null,
     Object? restaurant = null,
@@ -257,10 +257,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.sale
           : sale // ignore: cast_nullable_to_non_nullable
               as bool?,
-      available: null == available
+      available: freezed == available
           ? _value.available
           : available // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -304,7 +304,7 @@ class _$ProductModelImpl implements _ProductModel {
       @JsonKey(name: "price") required this.price,
       @JsonKey(name: "oldPrice") required this.oldPrice,
       @JsonKey(name: "sale", defaultValue: false) this.sale,
-      @JsonKey(name: "available") required this.available,
+      @JsonKey(name: "available") this.available,
       @JsonKey(name: "category") required this.category,
       @JsonKey(name: "unit") required this.unit,
       @JsonKey(name: "restaurant") required this.restaurant,
@@ -339,7 +339,7 @@ class _$ProductModelImpl implements _ProductModel {
   final bool? sale;
   @override
   @JsonKey(name: "available")
-  final bool available;
+  final bool? available;
   @override
   @JsonKey(name: "category")
   final String category;
@@ -440,7 +440,7 @@ abstract class _ProductModel implements ProductModel {
           @JsonKey(name: "price") required final int price,
           @JsonKey(name: "oldPrice") required final int oldPrice,
           @JsonKey(name: "sale", defaultValue: false) final bool? sale,
-          @JsonKey(name: "available") required final bool available,
+          @JsonKey(name: "available") final bool? available,
           @JsonKey(name: "category") required final String category,
           @JsonKey(name: "unit") required final String unit,
           @JsonKey(name: "restaurant") required final String restaurant,
@@ -476,7 +476,7 @@ abstract class _ProductModel implements ProductModel {
   bool? get sale;
   @override
   @JsonKey(name: "available")
-  bool get available;
+  bool? get available;
   @override
   @JsonKey(name: "category")
   String get category;

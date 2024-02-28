@@ -6,34 +6,6 @@ part of 'orders_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OrdersModelImpl _$$OrdersModelImplFromJson(Map<String, dynamic> json) =>
-    _$OrdersModelImpl(
-      id: json['_id'] as String,
-      table: json['table'] as String,
-      waiter: json['waiter'] as String,
-      totalPrice: json['totalPrice'] as int,
-      restaurant: json['restaurant'] as String,
-      products: (json['products'] as List<dynamic>)
-          .map((e) => ProductElement.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
-      v: json['__v'] as int,
-    );
-
-Map<String, dynamic> _$$OrdersModelImplToJson(_$OrdersModelImpl instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'table': instance.table,
-      'waiter': instance.waiter,
-      'totalPrice': instance.totalPrice,
-      'restaurant': instance.restaurant,
-      'products': instance.products,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
-      '__v': instance.v,
-    };
-
 _$ProductElementImpl _$$ProductElementImplFromJson(Map<String, dynamic> json) =>
     _$ProductElementImpl(
       product: ProductProduct.fromJson(json['product'] as Map<String, dynamic>),

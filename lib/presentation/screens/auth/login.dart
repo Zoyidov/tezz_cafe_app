@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/business_logic/auth/auth_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/no_active_table/no_active_table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/waiters/waiters_call_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
@@ -55,7 +57,9 @@ class LoginScreen extends StatelessWidget {
         if (state.status.isSuccess) {
           context.read<ZoneBloc>().add(GetAllZonesEvent());
           context.read<TableBloc>().add(GetAllTablesEvent());
+          context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
           context.read<NoActiveTableBloc>().add(FetchNoActiveTables());
+          context.read<WaitersCallBloc>().add(FetchCallsEvent());
           context.pushAndRemoveUntil(const TabBox());
         }
       },

@@ -20,7 +20,7 @@ import 'package:toastification/toastification.dart';
 class FoodDetailScreen extends StatelessWidget {
   const FoodDetailScreen({super.key, required this.product, required this.table});
 
-  final Product product;
+  final ProductModel product;
   final TableModel table;
 
   @override
@@ -80,7 +80,7 @@ class FoodDetailScreen extends StatelessWidget {
                     width: 336,
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    child: Image.network(ApiConstants.imageBaseUrl + product.photo ?? '',
+                    child: Image.network(ApiConstants.imageBaseUrl + (product.photo ?? ''),
                         fit: BoxFit.cover,
                         height: 170,
                         width: double.infinity,

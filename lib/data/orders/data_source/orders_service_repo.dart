@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:tezz_cafe_app/data/orders/models/orders_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/waitress_order/order_waitress_model.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
 
@@ -10,12 +10,12 @@ class OrderService {
 
   /// Get orders
 
-  Future<List<OrdersModel>> getOrdersByTableId(String tableId) async {
+  Future<List<Orders>> getOrdersByTableId(String tableId) async {
     try {
       final response = await dio.get('/orders?table=$tableId');
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
-        return data.map((json) => OrdersModel.fromJson(json)).toList();
+        return data.map((json) => Orders.fromJson(json)).toList();
       } else {
         throw 'Failed to get orders: ${response.statusCode} ${response.data}';
       }
