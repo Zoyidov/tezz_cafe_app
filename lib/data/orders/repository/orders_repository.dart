@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:tezz_cafe_app/data/orders/data_source/orders_service_repo.dart';
-import 'package:tezz_cafe_app/data/orders/models/orders_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/waitress_order/order_waitress_model.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
 import '../../../utils/di/handle_error.dart';
@@ -11,7 +11,7 @@ class OrderRepository {
 
   OrderRepository(this._orderService);
 
-  Future<Either<Failure, List<OrdersModel>>> getOrdersByTableId(String tableId) async {
+  Future<Either<Failure, List<Orders>>> getOrdersByTableId(String tableId) async {
     try {
       final orders = await _orderService.getOrdersByTableId(tableId);
       return Right(orders);

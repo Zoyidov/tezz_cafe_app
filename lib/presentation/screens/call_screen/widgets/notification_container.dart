@@ -11,7 +11,16 @@ class NotificationContainer extends StatelessWidget {
   final double padding;
   final VoidCallback? onTap;
 
-  const NotificationContainer({super.key, required this.type, required this.place, required this.time, required this.status, this.onTap, this.size = 40, this.padding = 20,});
+  const NotificationContainer({
+    super.key,
+    required this.type,
+    required this.place,
+    required this.time,
+    required this.status,
+    this.onTap,
+    this.size = 40,
+    this.padding = 20,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +35,7 @@ class NotificationContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,11 +82,10 @@ class NotificationContainer extends StatelessWidget {
               ),
             ),
             onPressed: onTap,
-            child: Center(
-                child: Text(
-                  status,
-                  style: const TextStyle(fontSize: 18, color: Colors.white),
-                )),
+            child:  Text(
+                    status,
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
           )
         ],
       ),

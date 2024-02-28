@@ -1,7 +1,6 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 import 'package:gap/gap.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
@@ -71,7 +70,7 @@ class MenuFoodsScreen extends StatelessWidget {
                     Container(
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                      child: Image.network(ApiConstants.imageBaseUrl + product.photo ?? "",
+                      child: Image.network(ApiConstants.imageBaseUrl + (product.photo ??""),
                           fit: BoxFit.cover,
                           height: 170,
                           width: double.infinity,

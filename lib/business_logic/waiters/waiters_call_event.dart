@@ -6,11 +6,13 @@ class FetchCallsEvent extends WaitersCallEvent {}
 
 class UpdateCallBack extends WaitersCallEvent {
   final String tableId;
-  UpdateCallBack({required this.tableId});
+  final int index;
+
+  UpdateCallBack({required this.tableId, required this.index});
 }
 
 class DeleteCallBack extends WaitersCallEvent {
   final String tableId;
+
   DeleteCallBack({required this.tableId});
 }
-

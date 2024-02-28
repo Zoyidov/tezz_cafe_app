@@ -3,31 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'orders_model.freezed.dart';
 part 'orders_model.g.dart';
 
-@freezed
-class OrdersModel with _$OrdersModel {
-  const factory OrdersModel({
-    @JsonKey(name: "_id")
-    required String id,
-    @JsonKey(name: "table")
-    required String table,
-    @JsonKey(name: "waiter")
-    required String waiter,
-    @JsonKey(name: "totalPrice")
-    required int totalPrice,
-    @JsonKey(name: "restaurant")
-    required String restaurant,
-    @JsonKey(name: "products")
-    required List<ProductElement> products,
-    @JsonKey(name: "createdAt")
-    required DateTime createdAt,
-    @JsonKey(name: "updatedAt")
-    required DateTime updatedAt,
-    @JsonKey(name: "__v")
-    required int v,
-  }) = _OrdersModel;
-
-  factory OrdersModel.fromJson(Map<String, dynamic> json) => _$OrdersModelFromJson(json);
-}
 
 @freezed
 class ProductElement with _$ProductElement {

@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/approved_order/approved_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/auth/auth_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/category/category_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/cubit/tab_cubit.dart';
+import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/no_active_table/no_active_table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/order/order_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
@@ -13,8 +15,6 @@ import 'package:tezz_cafe_app/business_logic/waiters/waiters_call_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
 import 'package:tezz_cafe_app/data/activate_table/data_source/activate_serice_repo.dart';
 import 'package:tezz_cafe_app/data/activate_table/repository/activate_table_repository.dart';
-import 'package:tezz_cafe_app/data/waitress/data_source/waitress_data_source.dart';
-import 'package:tezz_cafe_app/data/waitress/repository/waitress_repository.dart';
 import 'package:tezz_cafe_app/utils/route/ruotes.dart';
 import 'package:tezz_cafe_app/utils/theme/app_theme.dart';
 
@@ -28,9 +28,11 @@ class App extends StatelessWidget {
       BlocProvider(create: (context) => AuthBloc()),
       BlocProvider(create: (context) => ZoneBloc()),
       BlocProvider(create: (context) => TableBloc()),
+      BlocProvider(create: (context) => ApprovedBloc()),
       BlocProvider(create: (context) => NoActiveTableBloc()),
       BlocProvider(create: (context) => ProductBloc()),
       BlocProvider(create: (context) => CategoryBloc()),
+      BlocProvider(create: (context) => NewOrdersBloc()),
       BlocProvider(create: (context) => OrderBloc()),
       BlocProvider(create: (context) => WaitersCallBloc()),
       BlocProvider(create: (context) => ActivateTableBloc(ActivateTableRepository(ActivateTableService(Dio())))),

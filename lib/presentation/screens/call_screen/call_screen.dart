@@ -1,8 +1,12 @@
+import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+// import 'package:tezz_cafe_app/business_logic/update_callback/update_call_back_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/recieved_container.dart';
+import 'package:tezz_cafe_app/utils/constants/colors.dart';
+import 'package:toastification/toastification.dart';
 import '../../../business_logic/waiters/waiters_call_bloc.dart';
 
 class CallScreen extends StatefulWidget {
@@ -14,61 +18,95 @@ class CallScreen extends StatefulWidget {
 }
 
 class _CallScreenState extends State<CallScreen> {
-  List<bool> showRecievedContainers = List.generate(10, (_) => false);
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-        title: const Text(
-          "Bosh sahifa",
-          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
-        ),
-      ),
-      body: BlocBuilder<WaitersCallBloc, WaitersCallState>(
-        builder: (context, state) {
-          if (state.status.isInProgress) {
-            return const Center(child: CircularProgressIndicator());
-          }  else if (state.status.isFailure) {
-            return Center(
-              child: Text('Failed to fetch calls: ${state.failure?.message}'),
-            );
-          } return ListView.builder(
-            itemCount: state.calls.length,
-            itemBuilder: (context, index) {
-              if (index < state.calls.length) {
-                final call = state.calls[index];
-                return showRecievedContainers[index]
-                    ? RecievedContainer(
-                  type: 'Chaqiruv',
-                  place: call.name,
-                  status: 'Boryapman',
-                  onTap: () {
-                    setState(() {
-                      context.read<WaitersCallBloc>().add(DeleteCallBack(tableId: call.id));
-                    });
-                  },
-                )
-                    : NotificationContainer(
-                  type: 'Chaqiruv',
-                  place: call.name,
-                  time: "10:00",
-                  status: 'Boryapman',
-                  onTap: () {
-                    setState(() {
-                      context.read<WaitersCallBloc>().add(UpdateCallBack(tableId: call.id));
-                      showRecievedContainers[index] = !showRecievedContainers[index];
-                    });
-                  },
-                );
-              } else {
-                return const Center(child: Text("Not found"));
-              }
-            },
+    return BlocListener<WaitersCallBloc, WaitersCallState>(
+      listener: (context, state) {
+        if (state.updateStatus.isFailure) {
+          toastification.show(
+            context: context,
+            type: ToastificationType.error,
+            style: ToastificationStyle.fillColored,
+            title: const Text('Xatolik'),
+            autoCloseDuration: const Duration(seconds: 5),
+            alignment: Alignment.bottomCenter,
           );
-        },
+        }
+        if (state.updateStatus.isInProgress) {
+          showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (context) => Center(child: CircularProgressIndicator(color: AppColors.primaryColor)),
+          );
+        }
+        if (state.updateStatus.isSuccess) {
+          context.pop();
+          // context.read<WaitersCallBloc>().add(FetchCallsEvent());
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          title: const Text(
+            "Bosh sahifa",
+            style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
+          ),
+        ),
+        body: BlocBuilder<WaitersCallBloc, WaitersCallState>(
+          builder: (context, state) {
+            if (state.status.isInProgress) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state.status.isFailure) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Failed to fetch calls: ${state.failure?.message}', textAlign: TextAlign.center),
+                    ElevatedButton(onPressed: () {
+                      context.read<WaitersCallBloc>().add(FetchCallsEvent());
+                    }, child: const Text('Retry'))
+
+                  ],
+                ),
+              );
+            }
+            return ListView.builder(
+              itemCount: state.calls.length,
+              itemBuilder: (context, index) {
+                if (index < state.calls.length) {
+                  final call = state.calls[index];
+                  return state.showRecievedContainers[index]
+                      ? RecievedContainer(
+                    type: 'Chaqiruv',
+                    place: call.name,
+                    status: 'Boryapman',
+                    onTap: () {
+                      setState(() {
+                        context.read<WaitersCallBloc>().add(DeleteCallBack(tableId: call.id));
+                      });
+                    },
+                  )
+                      : NotificationContainer(
+                    type: 'Chaqiruv',
+                    place: call.name,
+                    time: "10:00",
+                    status: 'Boryapman',
+                    onTap: () {
+                      setState(() {
+                        context.read<WaitersCallBloc>().add(UpdateCallBack(tableId: call.id, index: index));
+                        state.showRecievedContainers[index] = state.showRecievedContainers[index];
+                      });
+                    },
+                  );
+                } else {
+                  return const Center(child: Text("Not found"));
+                }
+              },
+            );
+          },
+        ),
       ),
     );
   }
