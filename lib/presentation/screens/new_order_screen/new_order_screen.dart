@@ -77,12 +77,12 @@ class NewOrderScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print(StorageRepository.getString(StorageKeys.restaurant));
-          print(StorageRepository.getString(StorageKeys.token));
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     print(StorageRepository.getString(StorageKeys.restaurant));
+      //     print(StorageRepository.getString(StorageKeys.token));
+      //   },
+      // ),
     );
   }
 }
