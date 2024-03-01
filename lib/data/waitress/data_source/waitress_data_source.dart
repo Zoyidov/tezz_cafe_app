@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:tezz_cafe_app/data/waitress/models/call_model.dart';
 import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
-import 'package:tezz_cafe_app/data/waitress/models/waitress_order/order_waitress_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/waitress_order/table_orders.dart';
 import 'package:tezz_cafe_app/utils/di/dio_options.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
@@ -66,13 +66,13 @@ class WaitressDataSource {
   }
 
   // /waiters/tables/orders?table=65d653b1c4485f20bdf5d917
-  Future<OrderWaitressModel> getWaitressOrder(String tableId) async {
+  Future<TableOrders> getWaitressOrder(String tableId) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
       final response = await dio.get('/waiters/tables/orders?table=$tableId',
           options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
-        return OrderWaitressModel.fromJson(response.data);
+        return TableOrders.fromJson(response.data);
       }
       throw 'Failed to get orders ${response.statusCode} ${response.data}';
     } catch (e) {

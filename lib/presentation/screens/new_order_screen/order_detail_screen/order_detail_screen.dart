@@ -28,7 +28,7 @@ class OrderDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: BlocBuilder<ApprovedBloc, ApprovedState>(
               builder: (context, state) {
-                final price = state.order?.totalOrders.totalPrice ?? 0;
+                final price = state.order?.totalOrders?.totalPrice ?? 0;
                 return Text(
                   currencyFormat.format(price),
                   style: AppFontStyle.description2,
@@ -40,6 +40,9 @@ class OrderDetailScreen extends StatelessWidget {
       ),
       body: BlocBuilder<ApprovedBloc, ApprovedState>(
         builder: (context, state) {
+          if (state.status.isInProgress) {
+            return const Center(child: CircularProgressIndicator());
+          }
           if (state.status.isFailure) {
             return Center(
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -56,7 +59,7 @@ class OrderDetailScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   itemBuilder: (context, index) {
-                    final product = state.order?.totalOrders.products[index];
+                    final product = state.order?.totalOrders?.products[index];
                     return OrderContainer(
                       time: formatDate(product?.product.createdAt ??DateTime.now(), [ HH, ':', nn]),
                       foodName: product?.product.name ?? "",
@@ -67,7 +70,26 @@ class OrderDetailScreen extends StatelessWidget {
                       onTap: () {},
                     );
                   },
-                  itemCount: state.order?.totalOrders.products.length ?? 0,
+                  itemCount: state.order?.totalOrders?.products.length ?? 0,
+                  shrinkWrap: true,
+                ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  itemBuilder: (context, index) {
+                    final product = state.order?.activeOrders?.products[index];
+                    return OrderContainer(
+                      time: formatDate(product?.product.createdAt ??DateTime.now(), [ HH, ':', nn]),
+                      foodName: product?.product.name ?? "",
+                      price: currencyFormat.format(product?.product.price ?? 0),
+                      count: "${product?.quantity.toString()} ta : ",
+                      countPrice: currencyFormat.format(product?.price ?? 0),
+                      image: product?.product.photo ?? "",
+                      onTap: () {},
+                      isActive: true,
+                    );
+                  },
+                  itemCount: state.order?.activeOrders?.products.length ?? 0,
                   shrinkWrap: true,
                 ),
               ],

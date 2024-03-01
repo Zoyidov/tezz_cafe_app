@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:tezz_cafe_app/data/waitress/models/waitress_order/order_waitress_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/waitress_order/table_orders.dart';
 
 part 'table_model.freezed.dart';
 part 'table_model.g.dart';

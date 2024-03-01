@@ -24,19 +24,19 @@ class LoginScreen extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state.status.isFailure) {
-          if (state.failure is NoInternetFailure){
-            toastification.show(
-              context: context,
-              type: ToastificationType.error,
-              style: ToastificationStyle.fillColored,
-              title: const Text('Xatolik'),
-              autoCloseDuration: const Duration(seconds: 5),
-              alignment: Alignment.bottomCenter,
-              description: Text(state.failure?.message ?? 'Xatolik'),
-            );
-            return;
-          }
-          context.pop();
+          // if (state.failure is NoInternetFailure){
+          //   toastification.show(
+          //     context: context,
+          //     type: ToastificationType.error,
+          //     style: ToastificationStyle.fillColored,
+          //     title: const Text('Xatolik'),
+          //     autoCloseDuration: const Duration(seconds: 5),
+          //     alignment: Alignment.bottomCenter,
+          //     description: Text(state.failure?.message ?? 'Xatolik'),
+          //   );
+          //   return;
+          // }
+          // context.pop();
           toastification.show(
             context: context,
             type: ToastificationType.error,
@@ -47,13 +47,13 @@ class LoginScreen extends StatelessWidget {
             description: Text(state.failure?.message ?? 'Xatolik'),
           );
         }
-        if (state.status.isInProgress) {
-          showDialog(
-            barrierDismissible: true,
-            context: context,
-            builder: (context) => Center(child: CircularProgressIndicator(color: AppColors.primaryColor)),
-          );
-        }
+        // if (state.status.isInProgress) {
+        //   showDialog(
+        //     barrierDismissible: true,
+        //     context: context,
+        //     builder: (context) => Center(child: CircularProgressIndicator(color: AppColors.primaryColor)),
+        //   );
+        // }
         if (state.status.isSuccess) {
           context.read<ZoneBloc>().add(GetAllZonesEvent());
           context.read<TableBloc>().add(GetAllTablesEvent());
@@ -82,12 +82,16 @@ class LoginScreen extends StatelessWidget {
               const Gap(30),
               const LoginForm(),
               const Gap(24),
-              FilledButton(
-                  onPressed: () {
-                    context.read<AuthBloc>().add(LoginEvent());
-                  },
-                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TabBox())),
-                  child: const Text('Kirish'))
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  return state.status.isInProgress ? const Center(child: CircularProgressIndicator()) : FilledButton(
+                      onPressed: () {
+                        context.read<AuthBloc>().add(LoginEvent());
+                      },
+                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TabBox())),
+                      child: const Text('Kirish'));
+                },
+              )
             ],
           ),
         ),

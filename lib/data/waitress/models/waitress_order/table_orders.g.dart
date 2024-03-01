@@ -1,21 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'order_waitress_model.dart';
+part of 'table_orders.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OrderWaitressModelImpl _$$OrderWaitressModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$OrderWaitressModelImpl(
-      totalOrders: Orders.fromJson(json['totalOrders'] as Map<String, dynamic>),
-      activeOrders:
-          Orders.fromJson(json['activeOrders'] as Map<String, dynamic>),
+_$TableOrdersImpl _$$TableOrdersImplFromJson(Map<String, dynamic> json) =>
+    _$TableOrdersImpl(
+      totalOrders: json['totalOrders'] == null
+          ? null
+          : Orders.fromJson(json['totalOrders'] as Map<String, dynamic>),
+      activeOrders: json['activeOrders'] == null
+          ? null
+          : Orders.fromJson(json['activeOrders'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$OrderWaitressModelImplToJson(
-        _$OrderWaitressModelImpl instance) =>
+Map<String, dynamic> _$$TableOrdersImplToJson(_$TableOrdersImpl instance) =>
     <String, dynamic>{
       'totalOrders': instance.totalOrders,
       'activeOrders': instance.activeOrders,
@@ -46,6 +47,23 @@ Map<String, dynamic> _$$OrdersImplToJson(_$OrdersImpl instance) =>
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       '__v': instance.v,
+    };
+
+_$ProductElementImpl _$$ProductElementImplFromJson(Map<String, dynamic> json) =>
+    _$ProductElementImpl(
+      product: ProductProduct.fromJson(json['product'] as Map<String, dynamic>),
+      quantity: json['quantity'] as int,
+      price: json['price'] as int,
+      id: json['_id'] as String,
+    );
+
+Map<String, dynamic> _$$ProductElementImplToJson(
+        _$ProductElementImpl instance) =>
+    <String, dynamic>{
+      'product': instance.product,
+      'quantity': instance.quantity,
+      'price': instance.price,
+      '_id': instance.id,
     };
 
 _$ProductProductImpl _$$ProductProductImplFromJson(Map<String, dynamic> json) =>
