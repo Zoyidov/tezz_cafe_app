@@ -77,29 +77,31 @@ class _CallScreenState extends State<CallScreen> {
               itemBuilder: (context, index) {
                 if (index < state.calls.length) {
                   final call = state.calls[index];
-                  return state.showRecievedContainers[index]
+                  return call.call == "accepted"
                       ? RecievedContainer(
-                    type: 'Chaqiruv',
-                    place: call.name,
+                    type: "Chaqiruv",
+                    place: call.name ?? "Xatolik yuz berdi",
                     status: 'Boryapman',
                     onTap: () {
                       setState(() {
-                        context.read<WaitersCallBloc>().add(DeleteCallBack(tableId: call.id));
+                        context.read<WaitersCallBloc>().add(DeleteCallBack(tableId: call.id??""));
                       });
                     },
                   )
-                      : NotificationContainer(
+                      : call.call == "calling" ?
+                  NotificationContainer(
                     type: 'Chaqiruv',
-                    place: call.name,
-                    time: "10:00",
+                    place: call.name ?? "Xatolik yuz berdi",
+                    time: call.createdAt.toString().substring(11, 16),
                     status: 'Boryapman',
                     onTap: () {
                       setState(() {
-                        context.read<WaitersCallBloc>().add(UpdateCallBack(tableId: call.id, index: index));
+                        context.read<WaitersCallBloc>().add(UpdateCallBack(tableId: call.id?? "", index: index));
                         state.showRecievedContainers[index] = state.showRecievedContainers[index];
                       });
                     },
-                  );
+                  ):
+                  const Center(child: Text("Chaqiruv mavjud emas",style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)));
                 } else {
                   return const Center(child: Text("Not found"));
                 }
@@ -111,5 +113,3 @@ class _CallScreenState extends State<CallScreen> {
     );
   }
 }
-
-

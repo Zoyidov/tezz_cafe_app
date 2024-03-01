@@ -15,6 +15,7 @@ class ClientsPageView extends StatelessWidget {
         print(state.status);
         print(state.tables);
         if (state.status.isFailure) {
+          print('Error: ${state.failure?.message ?? ''}');
           return Center(child: Text('Xatolik yuz berdi: ${state.failure?.message ?? ''}', textAlign: TextAlign.center));
         }
 

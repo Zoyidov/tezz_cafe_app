@@ -8,24 +8,28 @@ part of 'call_model.dart';
 
 _$CallModelImpl _$$CallModelImplFromJson(Map<String, dynamic> json) =>
     _$CallModelImpl(
-      id: json['_id'] as String,
-      name: json['name'] as String,
-      typeOfTable: json['typeOfTable'] as String,
-      occupied: json['occupied'] as bool,
-      setWaiterByAdmin: json['setWaiterByAdmin'] as bool,
-      waiter: json['waiter'] as String,
-      call: json['call'] as String,
+      id: json['_id'] as String?,
+      name: json['name'] as String?,
+      typeOfTable: json['typeOfTable'] as String?,
+      occupied: json['occupied'] as bool?,
+      setWaiterByAdmin: json['setWaiterByAdmin'] as bool?,
+      waiter: json['waiter'] as String?,
+      call: json['call'] as String?,
       callId: json['callId'] as String?,
       callTime: json['callTime'] == null
           ? null
           : DateTime.parse(json['callTime'] as String),
-      hasActiveOrder: json['hasActiveOrder'] as bool,
-      restaurant: json['restaurant'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
-      v: json['__v'] as int,
-      qrCode: json['qrCode'] as String,
-      callModelId: json['id'] as String,
+      hasActiveOrder: json['hasActiveOrder'] as bool?,
+      restaurant: json['restaurant'] as String?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      v: json['__v'] as int?,
+      qrCode: json['qrCode'] as String?,
+      callModelId: json['id'] as String?,
     );
 
 Map<String, dynamic> _$$CallModelImplToJson(_$CallModelImpl instance) =>
@@ -41,8 +45,8 @@ Map<String, dynamic> _$$CallModelImplToJson(_$CallModelImpl instance) =>
       'callTime': instance.callTime?.toIso8601String(),
       'hasActiveOrder': instance.hasActiveOrder,
       'restaurant': instance.restaurant,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
       '__v': instance.v,
       'qrCode': instance.qrCode,
       'id': instance.callModelId,

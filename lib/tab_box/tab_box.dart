@@ -6,6 +6,7 @@ import 'package:tezz_cafe_app/presentation/screens/call_screen/call_screen.dart'
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/clients_screen.dart';
 import 'package:tezz_cafe_app/presentation/screens/inactive_tables/inactive_tables.dart';
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/new_order_screen.dart';
+import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 
 class TabBox extends StatefulWidget {
@@ -59,9 +60,9 @@ class TabBoxState extends State<TabBox> {
             icon: SvgPicture.asset(AppImages.clients),
             label: "Mijozlar",
           ),
-          BottomNavigationBarItem(
-            activeIcon: SvgPicture.asset(AppImages.clientsFill),
-            icon: SvgPicture.asset(AppImages.clients),
+           BottomNavigationBarItem(
+            activeIcon:  Icon(Icons.table_restaurant_rounded,color: AppColors.primaryColor,),
+            icon: const Icon(Icons.table_restaurant_outlined),
             label: "Bo`sh Stollar",
           ),
         ],
