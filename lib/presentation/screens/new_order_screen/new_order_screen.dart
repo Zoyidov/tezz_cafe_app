@@ -69,8 +69,13 @@ class NewOrderScreen extends StatelessWidget {
                 time: formatDate(table.createdAt, [HH, ':', nn]),
                 status: 'Ko\'rish',
                 onTap: () {
-                  context.read<ApprovedBloc>().add(FetchApprovedOrder( table.id));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  OrderDetailScreen(tableModelWaitress: table)));
+                  context.read<ApprovedBloc>().add(FetchApprovedOrder(table.id));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrderDetailScreen(tableModelWaitress: table),
+                      ),
+                    );
                 },
               );
             },
