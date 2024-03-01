@@ -22,50 +22,6 @@ Map<String, dynamic> _$$TableOrdersImplToJson(_$TableOrdersImpl instance) =>
       'activeOrders': instance.activeOrders,
     };
 
-_$OrdersImpl _$$OrdersImplFromJson(Map<String, dynamic> json) => _$OrdersImpl(
-      id: json['_id'] as String,
-      table: json['table'] as String,
-      waiter: json['waiter'] as String,
-      totalPrice: json['totalPrice'] as int,
-      restaurant: json['restaurant'] as String,
-      products: (json['products'] as List<dynamic>)
-          .map((e) => ProductElement.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
-      v: json['__v'] as int,
-    );
-
-Map<String, dynamic> _$$OrdersImplToJson(_$OrdersImpl instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'table': instance.table,
-      'waiter': instance.waiter,
-      'totalPrice': instance.totalPrice,
-      'restaurant': instance.restaurant,
-      'products': instance.products,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
-      '__v': instance.v,
-    };
-
-_$ProductElementImpl _$$ProductElementImplFromJson(Map<String, dynamic> json) =>
-    _$ProductElementImpl(
-      product: ProductProduct.fromJson(json['product'] as Map<String, dynamic>),
-      quantity: json['quantity'] as int,
-      price: json['price'] as int,
-      id: json['_id'] as String,
-    );
-
-Map<String, dynamic> _$$ProductElementImplToJson(
-        _$ProductElementImpl instance) =>
-    <String, dynamic>{
-      'product': instance.product,
-      'quantity': instance.quantity,
-      'price': instance.price,
-      '_id': instance.id,
-    };
-
 _$ProductProductImpl _$$ProductProductImplFromJson(Map<String, dynamic> json) =>
     _$ProductProductImpl(
       id: json['_id'] as String,
@@ -82,7 +38,6 @@ _$ProductProductImpl _$$ProductProductImplFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       v: json['__v'] as int,
-      productId: json['id'] as String,
     );
 
 Map<String, dynamic> _$$ProductProductImplToJson(
@@ -102,5 +57,4 @@ Map<String, dynamic> _$$ProductProductImplToJson(
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       '__v': instance.v,
-      'id': instance.productId,
     };

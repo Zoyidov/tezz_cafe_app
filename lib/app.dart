@@ -35,7 +35,7 @@ class App extends StatelessWidget {
       BlocProvider(create: (context) => NewOrdersBloc()),
       BlocProvider(create: (context) => OrderBloc()),
       BlocProvider(create: (context) => WaitersCallBloc()),
-      BlocProvider(create: (context) => ActivateTableBloc(ActivateTableRepository(ActivateTableService(Dio())))),
+      BlocProvider(create: (context) => ActivateTableBloc()),
     ], child: const MainApp());
   }
 }

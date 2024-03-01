@@ -8,6 +8,7 @@ import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
 import 'package:tezz_cafe_app/data/category/models/category_model.dart';
 import 'package:tezz_cafe_app/data/product/models/product_model.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
 import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
@@ -21,7 +22,7 @@ class FoodDetailScreen extends StatelessWidget {
   const FoodDetailScreen({super.key, required this.product, required this.table});
 
   final ProductModel product;
-  final TableModel table;
+  final TableModelWaitress table;
 
   @override
   Widget build(BuildContext context) {

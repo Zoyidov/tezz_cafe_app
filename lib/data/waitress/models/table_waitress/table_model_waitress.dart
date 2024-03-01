@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 
 part 'table_model_waitress.freezed.dart';
 part 'table_model_waitress.g.dart';
@@ -43,18 +44,4 @@ class TableModelWaitress with _$TableModelWaitress {
   factory TableModelWaitress.fromJson(Map<String, dynamic> json) => _$TableModelWaitressFromJson(json);
 }
 
-@freezed
-class TypeOfTable with _$TypeOfTable {
-  const factory TypeOfTable({
-    @JsonKey(name: "_id")
-    required String id,
-    @JsonKey(name: "name")
-    required String name,
-    @JsonKey(name: "restaurant")
-    required String restaurant,
-    @JsonKey(name: "__v")
-    required int v,
-  }) = _TypeOfTable;
 
-  factory TypeOfTable.fromJson(Map<String, dynamic> json) => _$TypeOfTableFromJson(json);
-}

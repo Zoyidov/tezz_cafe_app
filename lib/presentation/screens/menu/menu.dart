@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tezz_cafe_app/business_logic/category/category_bloc.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/menu_foods/menu_foods.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
 import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
@@ -16,7 +17,7 @@ class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key, required this.table});
 
   // final String actionText;
-  final TableModel table;
+  final TableModelWaitress table;
 
   @override
   Widget build(BuildContext context) {

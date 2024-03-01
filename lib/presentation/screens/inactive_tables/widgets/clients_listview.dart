@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/clients_item_active.dart';
 
 class ClientsListView extends StatelessWidget {
   const ClientsListView({super.key, required this.index, required this.tables});
 
   final int index;
-  final List<TableModel> tables;
+  final List<TableModelWaitress> tables;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(

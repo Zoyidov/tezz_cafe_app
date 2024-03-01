@@ -1,5 +1,4 @@
-import 'package:formz/formz.dart';
-import 'package:tezz_cafe_app/utils/failures/failures.dart';
+part of 'activate_table_bloc.dart';
 
 class ActivateTableState {
   final List<String> activate;

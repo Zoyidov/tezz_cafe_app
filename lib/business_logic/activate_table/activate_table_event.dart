@@ -1,10 +1,9 @@
-import 'package:equatable/equatable.dart';
+part of 'activate_table_bloc.dart';
 
-class ActivateTableEvent extends Equatable {
+abstract class ActivateTableEvent {}
+
+class ActiveTableEvent extends ActivateTableEvent {
   final String tableId;
 
-  const ActivateTableEvent(this.tableId);
-
-  @override
-  List<Object?> get props => [tableId];
+  ActiveTableEvent(this.tableId);
 }

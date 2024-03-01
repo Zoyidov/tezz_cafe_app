@@ -2,31 +2,27 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_event.dart';
-import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_state.dart';
-import 'package:tezz_cafe_app/business_logic/category/category_bloc.dart';
-import 'package:tezz_cafe_app/data/activate_table/data_source/activate_serice_repo.dart';
 import 'package:tezz_cafe_app/data/activate_table/repository/activate_table_repository.dart';
 import 'package:tezz_cafe_app/utils/di/service_locator.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
+part 'activate_table_event.dart';
 
+part 'activate_table_state.dart';
 
 class ActivateTableBloc extends Bloc<ActivateTableEvent, ActivateTableState> {
-  final ActivateTableRepository _activateTableRepository;
+  final ActivateTableRepository _activateTableRepository = getIt<ActivateTableRepository>();
 
-  ActivateTableBloc(this._activateTableRepository) : super(const ActivateTableState()) {
-    on<ActivateTableEvent>(_activateTable);
+  ActivateTableBloc() : super(const ActivateTableState()) {
+    on<ActiveTableEvent>(_activateTable);
   }
 
-  Future<void> _activateTable(ActivateTableEvent event, Emitter<ActivateTableState> emit) async {
+  Future<void> _activateTable(ActiveTableEvent event, Emitter<ActivateTableState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    try {
-      await _activateTableRepository.activateTable(event.tableId);
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
-    } catch (error) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: Failure(error.toString())));
-    }
+    final response = await _activateTableRepository.activateTable(event.tableId);
+    response.fold(
+      (l) => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
+      (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
+    );
   }
 }
-
