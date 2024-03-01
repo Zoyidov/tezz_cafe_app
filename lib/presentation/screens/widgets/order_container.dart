@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 
@@ -53,7 +55,7 @@ class OrderContainer extends StatelessWidget {
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                        text: "Chaqiruv",
+                        text: "Chaqiruv  ",
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.grey500),
                       ),
                       TextSpan(
@@ -83,13 +85,24 @@ class OrderContainer extends StatelessWidget {
                   color: AppColors.white,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
-                child: Image.asset(AppImages.foodImage),
-                //   CachedNetworkImage(
-                //     imageUrl: image,
-                //     fit: BoxFit.fill,
-                //     placeholder: (context, url) => Center(child: CupertinoActivityIndicator()),
-                //     errorWidget: (context, url, error) => Icon(Icons.error),
-                //   ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: Image.network(
+                    ApiConstants.imageBaseUrl + image,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    cacheHeight: 1080,
+                    cacheWidth: 1920,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        AppImages.imageNotFound,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height / 12,
+                      );
+                    },
+                  ),
+                )
               ),
               const Gap(12),
               Flexible(

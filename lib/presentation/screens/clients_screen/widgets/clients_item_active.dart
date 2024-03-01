@@ -34,7 +34,6 @@ class ClientListItemActive extends StatelessWidget {
                 ClientIcon(table: table),
                 Text(
                   formatDate(table.createdAt, [HH, ':', nn]),
-                  // '12:00',
                   style: context.bodySmall?.copyWith(color: AppColors.grey400),
                 ),
               ],

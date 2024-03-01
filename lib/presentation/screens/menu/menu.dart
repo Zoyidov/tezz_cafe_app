@@ -63,7 +63,7 @@ class MenuScreen extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) {
                           return Image.asset(
                             AppImages.imageNotFound,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                             width: double.infinity,
                             height: 170,
                           );

@@ -24,11 +24,13 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(table.name, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
+        title: Text(table.name,
+            style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
         actions: [
           Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(currencyFormat.format(table.activeOrders?.totalPrice ?? 0), style: AppFontStyle.description2))
+              child: Text(currencyFormat.format(table.activeOrders?.totalPrice ?? 0),
+                  style: AppFontStyle.description2))
         ],
         scrolledUnderElevation: 0,
       ),
@@ -36,7 +38,8 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
           context.read<CategoryBloc>().add(FetchCategoriesEvent());
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(table: table)));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MenuScreen(table: table)));
         },
         child: const Icon(
           Icons.add,
@@ -91,13 +94,13 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
             )
           : Center(
               child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Lottie.asset(AppImages.noOrder),
-                Text(" ${table.name} da Hozircha Buyurtma Mavjud Emas", style: AppFontStyle.description2),
-              ],
-            )),
+                children: [
+                  Lottie.asset(AppImages.noOrder),
+                  Text(" \"${table.name}\" da Hozircha Buyurtma Mavjud Emas",
+                      style: AppFontStyle.description2),
+                ],
+              ),
+            ),
     );
   }
 }
