@@ -1,18 +1,26 @@
-abstract class ActivateTableState {
-}
+import 'package:formz/formz.dart';
+import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
-class ActivateTableInitial extends ActivateTableState {}
+class ActivateTableState {
+  final List<String> activate;
+  final FormzSubmissionStatus status;
+  final Failure? failure;
 
-class ActivateTableLoading extends ActivateTableState {}
+  const ActivateTableState({
+    this.activate = const [],
+    this.status = FormzSubmissionStatus.initial,
+    this.failure,
+  });
 
-class ActivateTableSuccess extends ActivateTableState {
-  final String message;
-
-  ActivateTableSuccess(this.message);
-}
-
-class ActivateTableError extends ActivateTableState {
-  final String errorMessage;
-
-  ActivateTableError(this.errorMessage);
+  ActivateTableState copyWith({
+    List<String>? activate,
+    FormzSubmissionStatus? status,
+    Failure? failure,
+  }) {
+    return ActivateTableState(
+      activate: activate ?? this.activate,
+      status: status ?? this.status,
+      failure: failure ?? this.failure,
+    );
+  }
 }
