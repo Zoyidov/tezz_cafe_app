@@ -62,7 +62,7 @@ class OrderItem extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: Image.network(
-                  ApiConstants.imageBaseUrl + (product.product.photo ?? ""),
+                  ApiConstants.imageBaseUrl + (product.product.photo),
                   fit: BoxFit.cover,
                   cacheHeight: 1080,
                   cacheWidth: 1920,
