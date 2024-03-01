@@ -1,19 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tezz_cafe_app/data/orders/models/orders_model.dart';
 
-part 'order_waitress_model.freezed.dart';
-part 'order_waitress_model.g.dart';
+part 'table_orders.freezed.dart';
+part 'table_orders.g.dart';
 
 @freezed
-class OrderWaitressModel with _$OrderWaitressModel {
-  const factory OrderWaitressModel({
+class TableOrders with _$TableOrders {
+  const factory TableOrders({
     @JsonKey(name: "totalOrders")
-    required Orders totalOrders,
+     Orders? totalOrders,
     @JsonKey(name: "activeOrders")
-    required Orders activeOrders,
-  }) = _OrderWaitressModel;
+     Orders? activeOrders,
+  }) = _TableOrders;
 
-  factory OrderWaitressModel.fromJson(Map<String, dynamic> json) => _$OrderWaitressModelFromJson(json);
+  factory TableOrders.fromJson(Map<String, dynamic> json) => _$TableOrdersFromJson(json);
 }
 
 @freezed
@@ -42,7 +41,21 @@ class Orders with _$Orders {
   factory Orders.fromJson(Map<String, dynamic> json) => _$OrdersFromJson(json);
 }
 
+@freezed
+class ProductElement with _$ProductElement {
+  const factory ProductElement({
+    @JsonKey(name: "product")
+    required ProductProduct product,
+    @JsonKey(name: "quantity")
+    required int quantity,
+    @JsonKey(name: "price")
+    required int price,
+    @JsonKey(name: "_id")
+    required String id,
+  }) = _ProductElement;
 
+  factory ProductElement.fromJson(Map<String, dynamic> json) => _$ProductElementFromJson(json);
+}
 
 @freezed
 class ProductProduct with _$ProductProduct {

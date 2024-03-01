@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:tezz_cafe_app/data/waitress/models/waitress_order/order_waitress_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/waitress_order/table_orders.dart';
 
 part 'table_model.freezed.dart';
 part 'table_model.g.dart';
@@ -11,7 +11,7 @@ class TableModel with _$TableModel {
     @JsonKey(name: "_id") required String id,
     @JsonKey(name: "name") required String name,
     @JsonKey(name: "typeOfTable") required TypeOfTable typeOfTable,
-    @JsonKey(name: "occupied") required bool occupied,
+      @JsonKey(name: "occupied") required bool occupied,
     @JsonKey(name: "setWaiterByAdmin") required bool setWaiterByAdmin,
     @JsonKey(name: "waiter") required Waiter? waiter,
     @JsonKey(name: "call") required String call,

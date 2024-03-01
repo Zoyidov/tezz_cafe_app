@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'order_waitress_model.dart';
+part of 'table_orders.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,41 +14,41 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-OrderWaitressModel _$OrderWaitressModelFromJson(Map<String, dynamic> json) {
-  return _OrderWaitressModel.fromJson(json);
+TableOrders _$TableOrdersFromJson(Map<String, dynamic> json) {
+  return _TableOrders.fromJson(json);
 }
 
 /// @nodoc
-mixin _$OrderWaitressModel {
+mixin _$TableOrders {
   @JsonKey(name: "totalOrders")
-  Orders get totalOrders => throw _privateConstructorUsedError;
+  Orders? get totalOrders => throw _privateConstructorUsedError;
   @JsonKey(name: "activeOrders")
-  Orders get activeOrders => throw _privateConstructorUsedError;
+  Orders? get activeOrders => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $OrderWaitressModelCopyWith<OrderWaitressModel> get copyWith =>
+  $TableOrdersCopyWith<TableOrders> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OrderWaitressModelCopyWith<$Res> {
-  factory $OrderWaitressModelCopyWith(
-          OrderWaitressModel value, $Res Function(OrderWaitressModel) then) =
-      _$OrderWaitressModelCopyWithImpl<$Res, OrderWaitressModel>;
+abstract class $TableOrdersCopyWith<$Res> {
+  factory $TableOrdersCopyWith(
+          TableOrders value, $Res Function(TableOrders) then) =
+      _$TableOrdersCopyWithImpl<$Res, TableOrders>;
   @useResult
   $Res call(
-      {@JsonKey(name: "totalOrders") Orders totalOrders,
-      @JsonKey(name: "activeOrders") Orders activeOrders});
+      {@JsonKey(name: "totalOrders") Orders? totalOrders,
+      @JsonKey(name: "activeOrders") Orders? activeOrders});
 
-  $OrdersCopyWith<$Res> get totalOrders;
-  $OrdersCopyWith<$Res> get activeOrders;
+  $OrdersCopyWith<$Res>? get totalOrders;
+  $OrdersCopyWith<$Res>? get activeOrders;
 }
 
 /// @nodoc
-class _$OrderWaitressModelCopyWithImpl<$Res, $Val extends OrderWaitressModel>
-    implements $OrderWaitressModelCopyWith<$Res> {
-  _$OrderWaitressModelCopyWithImpl(this._value, this._then);
+class _$TableOrdersCopyWithImpl<$Res, $Val extends TableOrders>
+    implements $TableOrdersCopyWith<$Res> {
+  _$TableOrdersCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -58,110 +58,118 @@ class _$OrderWaitressModelCopyWithImpl<$Res, $Val extends OrderWaitressModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? totalOrders = null,
-    Object? activeOrders = null,
+    Object? totalOrders = freezed,
+    Object? activeOrders = freezed,
   }) {
     return _then(_value.copyWith(
-      totalOrders: null == totalOrders
+      totalOrders: freezed == totalOrders
           ? _value.totalOrders
           : totalOrders // ignore: cast_nullable_to_non_nullable
-              as Orders,
-      activeOrders: null == activeOrders
+              as Orders?,
+      activeOrders: freezed == activeOrders
           ? _value.activeOrders
           : activeOrders // ignore: cast_nullable_to_non_nullable
-              as Orders,
+              as Orders?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $OrdersCopyWith<$Res> get totalOrders {
-    return $OrdersCopyWith<$Res>(_value.totalOrders, (value) {
+  $OrdersCopyWith<$Res>? get totalOrders {
+    if (_value.totalOrders == null) {
+      return null;
+    }
+
+    return $OrdersCopyWith<$Res>(_value.totalOrders!, (value) {
       return _then(_value.copyWith(totalOrders: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $OrdersCopyWith<$Res> get activeOrders {
-    return $OrdersCopyWith<$Res>(_value.activeOrders, (value) {
+  $OrdersCopyWith<$Res>? get activeOrders {
+    if (_value.activeOrders == null) {
+      return null;
+    }
+
+    return $OrdersCopyWith<$Res>(_value.activeOrders!, (value) {
       return _then(_value.copyWith(activeOrders: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$OrderWaitressModelImplCopyWith<$Res>
-    implements $OrderWaitressModelCopyWith<$Res> {
-  factory _$$OrderWaitressModelImplCopyWith(_$OrderWaitressModelImpl value,
-          $Res Function(_$OrderWaitressModelImpl) then) =
-      __$$OrderWaitressModelImplCopyWithImpl<$Res>;
+abstract class _$$TableOrdersImplCopyWith<$Res>
+    implements $TableOrdersCopyWith<$Res> {
+  factory _$$TableOrdersImplCopyWith(
+          _$TableOrdersImpl value, $Res Function(_$TableOrdersImpl) then) =
+      __$$TableOrdersImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "totalOrders") Orders totalOrders,
-      @JsonKey(name: "activeOrders") Orders activeOrders});
+      {@JsonKey(name: "totalOrders") Orders? totalOrders,
+      @JsonKey(name: "activeOrders") Orders? activeOrders});
 
   @override
-  $OrdersCopyWith<$Res> get totalOrders;
+  $OrdersCopyWith<$Res>? get totalOrders;
   @override
-  $OrdersCopyWith<$Res> get activeOrders;
+  $OrdersCopyWith<$Res>? get activeOrders;
 }
 
 /// @nodoc
-class __$$OrderWaitressModelImplCopyWithImpl<$Res>
-    extends _$OrderWaitressModelCopyWithImpl<$Res, _$OrderWaitressModelImpl>
-    implements _$$OrderWaitressModelImplCopyWith<$Res> {
-  __$$OrderWaitressModelImplCopyWithImpl(_$OrderWaitressModelImpl _value,
-      $Res Function(_$OrderWaitressModelImpl) _then)
+class __$$TableOrdersImplCopyWithImpl<$Res>
+    extends _$TableOrdersCopyWithImpl<$Res, _$TableOrdersImpl>
+    implements _$$TableOrdersImplCopyWith<$Res> {
+  __$$TableOrdersImplCopyWithImpl(
+      _$TableOrdersImpl _value, $Res Function(_$TableOrdersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? totalOrders = null,
-    Object? activeOrders = null,
+    Object? totalOrders = freezed,
+    Object? activeOrders = freezed,
   }) {
-    return _then(_$OrderWaitressModelImpl(
-      totalOrders: null == totalOrders
+    return _then(_$TableOrdersImpl(
+      totalOrders: freezed == totalOrders
           ? _value.totalOrders
           : totalOrders // ignore: cast_nullable_to_non_nullable
-              as Orders,
-      activeOrders: null == activeOrders
+              as Orders?,
+      activeOrders: freezed == activeOrders
           ? _value.activeOrders
           : activeOrders // ignore: cast_nullable_to_non_nullable
-              as Orders,
+              as Orders?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$OrderWaitressModelImpl implements _OrderWaitressModel {
-  const _$OrderWaitressModelImpl(
-      {@JsonKey(name: "totalOrders") required this.totalOrders,
-      @JsonKey(name: "activeOrders") required this.activeOrders});
+class _$TableOrdersImpl implements _TableOrders {
+  const _$TableOrdersImpl(
+      {@JsonKey(name: "totalOrders") this.totalOrders,
+      @JsonKey(name: "activeOrders") this.activeOrders});
 
-  factory _$OrderWaitressModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OrderWaitressModelImplFromJson(json);
+  factory _$TableOrdersImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TableOrdersImplFromJson(json);
 
   @override
   @JsonKey(name: "totalOrders")
-  final Orders totalOrders;
+  final Orders? totalOrders;
   @override
   @JsonKey(name: "activeOrders")
-  final Orders activeOrders;
+  final Orders? activeOrders;
 
   @override
   String toString() {
-    return 'OrderWaitressModel(totalOrders: $totalOrders, activeOrders: $activeOrders)';
+    return 'TableOrders(totalOrders: $totalOrders, activeOrders: $activeOrders)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderWaitressModelImpl &&
+            other is _$TableOrdersImpl &&
             (identical(other.totalOrders, totalOrders) ||
                 other.totalOrders == totalOrders) &&
             (identical(other.activeOrders, activeOrders) ||
@@ -175,36 +183,35 @@ class _$OrderWaitressModelImpl implements _OrderWaitressModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderWaitressModelImplCopyWith<_$OrderWaitressModelImpl> get copyWith =>
-      __$$OrderWaitressModelImplCopyWithImpl<_$OrderWaitressModelImpl>(
-          this, _$identity);
+  _$$TableOrdersImplCopyWith<_$TableOrdersImpl> get copyWith =>
+      __$$TableOrdersImplCopyWithImpl<_$TableOrdersImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$OrderWaitressModelImplToJson(
+    return _$$TableOrdersImplToJson(
       this,
     );
   }
 }
 
-abstract class _OrderWaitressModel implements OrderWaitressModel {
-  const factory _OrderWaitressModel(
-          {@JsonKey(name: "totalOrders") required final Orders totalOrders,
-          @JsonKey(name: "activeOrders") required final Orders activeOrders}) =
-      _$OrderWaitressModelImpl;
+abstract class _TableOrders implements TableOrders {
+  const factory _TableOrders(
+          {@JsonKey(name: "totalOrders") final Orders? totalOrders,
+          @JsonKey(name: "activeOrders") final Orders? activeOrders}) =
+      _$TableOrdersImpl;
 
-  factory _OrderWaitressModel.fromJson(Map<String, dynamic> json) =
-      _$OrderWaitressModelImpl.fromJson;
+  factory _TableOrders.fromJson(Map<String, dynamic> json) =
+      _$TableOrdersImpl.fromJson;
 
   @override
   @JsonKey(name: "totalOrders")
-  Orders get totalOrders;
+  Orders? get totalOrders;
   @override
   @JsonKey(name: "activeOrders")
-  Orders get activeOrders;
+  Orders? get activeOrders;
   @override
   @JsonKey(ignore: true)
-  _$$OrderWaitressModelImplCopyWith<_$OrderWaitressModelImpl> get copyWith =>
+  _$$TableOrdersImplCopyWith<_$TableOrdersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -549,6 +556,233 @@ abstract class _Orders implements Orders {
   @override
   @JsonKey(ignore: true)
   _$$OrdersImplCopyWith<_$OrdersImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ProductElement _$ProductElementFromJson(Map<String, dynamic> json) {
+  return _ProductElement.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProductElement {
+  @JsonKey(name: "product")
+  ProductProduct get product => throw _privateConstructorUsedError;
+  @JsonKey(name: "quantity")
+  int get quantity => throw _privateConstructorUsedError;
+  @JsonKey(name: "price")
+  int get price => throw _privateConstructorUsedError;
+  @JsonKey(name: "_id")
+  String get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ProductElementCopyWith<ProductElement> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProductElementCopyWith<$Res> {
+  factory $ProductElementCopyWith(
+          ProductElement value, $Res Function(ProductElement) then) =
+      _$ProductElementCopyWithImpl<$Res, ProductElement>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "product") ProductProduct product,
+      @JsonKey(name: "quantity") int quantity,
+      @JsonKey(name: "price") int price,
+      @JsonKey(name: "_id") String id});
+
+  $ProductProductCopyWith<$Res> get product;
+}
+
+/// @nodoc
+class _$ProductElementCopyWithImpl<$Res, $Val extends ProductElement>
+    implements $ProductElementCopyWith<$Res> {
+  _$ProductElementCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? product = null,
+    Object? quantity = null,
+    Object? price = null,
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      product: null == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as ProductProduct,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductProductCopyWith<$Res> get product {
+    return $ProductProductCopyWith<$Res>(_value.product, (value) {
+      return _then(_value.copyWith(product: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ProductElementImplCopyWith<$Res>
+    implements $ProductElementCopyWith<$Res> {
+  factory _$$ProductElementImplCopyWith(_$ProductElementImpl value,
+          $Res Function(_$ProductElementImpl) then) =
+      __$$ProductElementImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "product") ProductProduct product,
+      @JsonKey(name: "quantity") int quantity,
+      @JsonKey(name: "price") int price,
+      @JsonKey(name: "_id") String id});
+
+  @override
+  $ProductProductCopyWith<$Res> get product;
+}
+
+/// @nodoc
+class __$$ProductElementImplCopyWithImpl<$Res>
+    extends _$ProductElementCopyWithImpl<$Res, _$ProductElementImpl>
+    implements _$$ProductElementImplCopyWith<$Res> {
+  __$$ProductElementImplCopyWithImpl(
+      _$ProductElementImpl _value, $Res Function(_$ProductElementImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? product = null,
+    Object? quantity = null,
+    Object? price = null,
+    Object? id = null,
+  }) {
+    return _then(_$ProductElementImpl(
+      product: null == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as ProductProduct,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ProductElementImpl implements _ProductElement {
+  const _$ProductElementImpl(
+      {@JsonKey(name: "product") required this.product,
+      @JsonKey(name: "quantity") required this.quantity,
+      @JsonKey(name: "price") required this.price,
+      @JsonKey(name: "_id") required this.id});
+
+  factory _$ProductElementImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductElementImplFromJson(json);
+
+  @override
+  @JsonKey(name: "product")
+  final ProductProduct product;
+  @override
+  @JsonKey(name: "quantity")
+  final int quantity;
+  @override
+  @JsonKey(name: "price")
+  final int price;
+  @override
+  @JsonKey(name: "_id")
+  final String id;
+
+  @override
+  String toString() {
+    return 'ProductElement(product: $product, quantity: $quantity, price: $price, id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProductElementImpl &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, product, quantity, price, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProductElementImplCopyWith<_$ProductElementImpl> get copyWith =>
+      __$$ProductElementImplCopyWithImpl<_$ProductElementImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ProductElementImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ProductElement implements ProductElement {
+  const factory _ProductElement(
+      {@JsonKey(name: "product") required final ProductProduct product,
+      @JsonKey(name: "quantity") required final int quantity,
+      @JsonKey(name: "price") required final int price,
+      @JsonKey(name: "_id") required final String id}) = _$ProductElementImpl;
+
+  factory _ProductElement.fromJson(Map<String, dynamic> json) =
+      _$ProductElementImpl.fromJson;
+
+  @override
+  @JsonKey(name: "product")
+  ProductProduct get product;
+  @override
+  @JsonKey(name: "quantity")
+  int get quantity;
+  @override
+  @JsonKey(name: "price")
+  int get price;
+  @override
+  @JsonKey(name: "_id")
+  String get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$ProductElementImplCopyWith<_$ProductElementImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

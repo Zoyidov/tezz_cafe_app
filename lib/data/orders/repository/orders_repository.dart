@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:tezz_cafe_app/data/orders/data_source/orders_service_repo.dart';
-import 'package:tezz_cafe_app/data/waitress/models/waitress_order/order_waitress_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/waitress_order/table_orders.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
 import '../../../utils/di/handle_error.dart';

@@ -1,7 +1,7 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:tezz_cafe_app/data/orders/models/orders_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/waitress_order/table_orders.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/circle_icon.dart';
 import 'package:date_format/date_format.dart';
 import 'package:tezz_cafe_app/utils/constants/api_constants.dart';

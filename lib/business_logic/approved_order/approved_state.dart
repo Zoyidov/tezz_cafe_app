@@ -3,7 +3,7 @@ part of 'approved_bloc.dart';
  class ApprovedState {
    final FormzSubmissionStatus status;
    final Failure? failure;
-   final OrderWaitressModel? order;
+   final TableOrders? order;
    const ApprovedState({
      this.status = FormzSubmissionStatus.initial,
      this.failure,
@@ -13,7 +13,7 @@ part of 'approved_bloc.dart';
    ApprovedState copyWith({
     FormzSubmissionStatus? status,
     Failure? failure,
-    OrderWaitressModel? order,
+    TableOrders? order,
   }) {
     return ApprovedState(
       status: status ?? this.status,

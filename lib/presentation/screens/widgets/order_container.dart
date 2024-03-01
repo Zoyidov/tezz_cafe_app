@@ -13,6 +13,7 @@ class OrderContainer extends StatelessWidget {
   final String countPrice;
   final String image;
   final VoidCallback? onTap;
+  final bool isActive;
 
   const OrderContainer({
     super.key,
@@ -23,6 +24,7 @@ class OrderContainer extends StatelessWidget {
     required this.countPrice,
     required this.image,
     this.onTap,
+    this.isActive = false,
   });
 
   @override
@@ -33,7 +35,7 @@ class OrderContainer extends StatelessWidget {
         vertical: 10,
       ),
       decoration: BoxDecoration(
-        color: AppColors.textFieldColor,
+        color: isActive ? const Color(0xFFF91506).withOpacity(0.1) : AppColors.textFieldColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -79,31 +81,30 @@ class OrderContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: MediaQuery.of(context).size.height / 12,
-                width: MediaQuery.of(context).size.height / 12,
-                decoration: const BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: Image.network(
-                    ApiConstants.imageBaseUrl + image,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    cacheHeight: 1080,
-                    cacheWidth: 1920,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.asset(
-                        AppImages.imageNotFound,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 12,
-                      );
-                    },
+                  height: MediaQuery.of(context).size.height / 12,
+                  width: MediaQuery.of(context).size.height / 12,
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                )
-              ),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    child: Image.network(
+                      ApiConstants.imageBaseUrl + image,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      cacheHeight: 1080,
+                      cacheWidth: 1920,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          AppImages.imageNotFound,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height / 12,
+                        );
+                      },
+                    ),
+                  )),
               const Gap(12),
               Flexible(
                 child: Column(
@@ -118,13 +119,13 @@ class OrderContainer extends StatelessWidget {
                     const Gap(4),
                     RichText(
                         text: TextSpan(children: [
-                          TextSpan(
-                              text: count,
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.primaryColor)),
-                          TextSpan(
-                              text: countPrice,
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.grey500)),
-                        ]))
+                      TextSpan(
+                          text: count,
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.primaryColor)),
+                      TextSpan(
+                          text: countPrice,
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.grey500)),
+                    ]))
                   ],
                 ),
               ),
