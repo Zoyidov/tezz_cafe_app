@@ -1,16 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-abstract class ActivateTableEvent extends Equatable {
-  const ActivateTableEvent();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class ActivateTable extends ActivateTableEvent {
+class ActivateTableEvent extends Equatable {
   final String tableId;
 
-  const ActivateTable(this.tableId);
+  const ActivateTableEvent(this.tableId);
 
   @override
   List<Object?> get props => [tableId];

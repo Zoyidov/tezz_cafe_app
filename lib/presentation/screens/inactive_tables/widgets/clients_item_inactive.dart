@@ -30,7 +30,7 @@ class ClientListItemInActive extends StatelessWidget {
               btnOkOnPress: () {
                 context
                     .read<ActivateTableBloc>()
-                    .add(ActivateTable(table.id));
+                    .add(ActivateTableEvent(table.id));
               },
               btnOkText: 'Aktivlashtirish',
               btnCancelText: 'Bekor qilish',

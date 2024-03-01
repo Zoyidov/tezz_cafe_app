@@ -1,23 +1,32 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_event.dart';
+import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_state.dart';
+import 'package:tezz_cafe_app/business_logic/category/category_bloc.dart';
+import 'package:tezz_cafe_app/data/activate_table/data_source/activate_serice_repo.dart';
 import 'package:tezz_cafe_app/data/activate_table/repository/activate_table_repository.dart';
-import 'activate_table_event.dart';
-import 'activate_table_state.dart';
+import 'package:tezz_cafe_app/utils/di/service_locator.dart';
+import 'package:tezz_cafe_app/utils/failures/failures.dart';
+
+
 
 class ActivateTableBloc extends Bloc<ActivateTableEvent, ActivateTableState> {
-  final ActivateTableRepository activateTableRepository;
+  final ActivateTableRepository _activateTableRepository;
 
-  ActivateTableBloc(this.activateTableRepository) : super(ActivateTableInitial());
+  ActivateTableBloc(this._activateTableRepository) : super(const ActivateTableState()) {
+    on<ActivateTableEvent>(_activateTable);
+  }
 
-  @override
-  Stream<ActivateTableState> mapEventToState(ActivateTableEvent event) async* {
-    if (event is ActivateTable) {
-      yield ActivateTableLoading();
-      try {
-        await activateTableRepository.activateTable(event.tableId);
-        yield  ActivateTableSuccess('Table activated successfully');
-      } catch (e) {
-        yield ActivateTableError('Failed to activate table: $e');
-      }
+  Future<void> _activateTable(ActivateTableEvent event, Emitter<ActivateTableState> emit) async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    try {
+      await _activateTableRepository.activateTable(event.tableId);
+      emit(state.copyWith(status: FormzSubmissionStatus.success));
+    } catch (error) {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: Failure(error.toString())));
     }
   }
 }
+

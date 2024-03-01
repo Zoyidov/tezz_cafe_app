@@ -7,7 +7,7 @@ class ActivateTableService {
 
   Future<void> activateTable(String tableId) async {
     try {
-      final response = await dio.post('/waiters/tables', data: {'table': tableId});
+      final response = await dio.post('/waiters/:id/tables', data: {'table': tableId});
       if (response.statusCode == 200) {
         return response.data;
       }
