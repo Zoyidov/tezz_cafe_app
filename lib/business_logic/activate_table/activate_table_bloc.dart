@@ -4,10 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_event.dart';
 import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_state.dart';
-import 'package:tezz_cafe_app/business_logic/category/category_bloc.dart';
-import 'package:tezz_cafe_app/data/activate_table/data_source/activate_serice_repo.dart';
 import 'package:tezz_cafe_app/data/activate_table/repository/activate_table_repository.dart';
-import 'package:tezz_cafe_app/utils/di/service_locator.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
 

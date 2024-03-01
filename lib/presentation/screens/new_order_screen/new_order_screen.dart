@@ -9,7 +9,6 @@ import 'package:tezz_cafe_app/data/waitress/data_source/waitress_data_source.dar
 import 'package:tezz_cafe_app/presentation/screens/auth/login.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/order_detail_screen/order_detail_screen.dart';
-import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
 import '../../../utils/local_storage/storage_repository.dart';
 
 class NewOrderScreen extends StatelessWidget {
@@ -18,11 +17,13 @@ class NewOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(onPressed: () async{
         final response = await WaitressDataSource().getWaitressOrder('65d653b1c4485f20bdf5d917');
         print(response);
       },),
       appBar: AppBar(
+        backgroundColor: Colors.white,
         actions: [
           IconButton(
               onPressed: () {

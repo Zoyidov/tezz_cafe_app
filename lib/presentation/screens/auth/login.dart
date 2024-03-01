@@ -10,7 +10,6 @@ import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/waiters/waiters_call_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
-import 'package:tezz_cafe_app/utils/failures/failures.dart';
 import 'package:tezz_cafe_app/utils/validators/validators.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:form_field_validator/form_field_validator.dart';
