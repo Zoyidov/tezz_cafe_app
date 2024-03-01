@@ -1,22 +1,24 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:tezz_cafe_app/data/table/models/table_model.dart';
+import 'package:tezz_cafe_app/business_logic/approved_order/approved_bloc.dart';
+import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/clients_orders_detail/clients_orders_detail.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/client_icon.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
-import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
+
 
 class ClientListItemActive extends StatelessWidget {
   const ClientListItemActive({super.key, required this.table});
 
-  final TableModel table;
+  final TableModelWaitress table;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () {context.read<ApprovedBloc>().add(FetchApprovedOrder(table.id));
         Navigator.push(context, MaterialPageRoute(builder: (context) => ClientsOrdersDetailScreen(table: table)));
       },
       child: Container(
@@ -39,11 +41,11 @@ class ClientListItemActive extends StatelessWidget {
               ],
             ),
             const Gap(20),
-            Text(
-              currencyFormat.format(table.activeOrders?.totalPrice ?? 0),
-              textAlign: TextAlign.right,
-              style: context.titleMedium?.copyWith(color: AppColors.black),
-            )
+            // Text(
+            //   currencyFormat.format(table.activeOrders?.totalPrice ?? 0),
+            //   textAlign: TextAlign.right,
+            //   style: context.titleMedium?.copyWith(color: AppColors.black),
+            // )
           ],
         ),
       ),

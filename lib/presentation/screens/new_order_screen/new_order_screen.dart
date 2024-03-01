@@ -5,10 +5,14 @@ import 'package:formz/formz.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tezz_cafe_app/business_logic/approved_order/approved_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
+import 'package:tezz_cafe_app/data/table/data_source/table_service_repo.dart';
 import 'package:tezz_cafe_app/data/waitress/data_source/waitress_data_source.dart';
 import 'package:tezz_cafe_app/presentation/screens/auth/login.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/order_detail_screen/order_detail_screen.dart';
+import 'package:tezz_cafe_app/utils/di/dio_options.dart';
+import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
+
 import '../../../utils/local_storage/storage_repository.dart';
 
 class NewOrderScreen extends StatelessWidget {
@@ -19,7 +23,7 @@ class NewOrderScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(onPressed: () async{
-        final response = await WaitressDataSource().getWaitressOrder('65d653b1c4485f20bdf5d917');
+        final response = await TableService(DioSettings.getDio()).getTablesByRestaurantId('65d652cec4485f20bdf5d897',true);
         print(response);
       },),
       appBar: AppBar(

@@ -1,7 +1,7 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:tezz_cafe_app/data/waitress/models/waitress_order/table_orders.dart';
+import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/circle_icon.dart';
 import 'package:date_format/date_format.dart';
 import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
@@ -11,9 +11,10 @@ import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key, required this.product});
+  const OrderItem({super.key, required this.product, this.isActive = false});
 
-  final ProductElement product;
+  final ProductElement? product;
+  final bool isActive;
 
   // final ProductProduct? product;
   // final ActiveOrders? activeOrder;
@@ -23,7 +24,7 @@ class OrderItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: AppColors.textFieldColor,
+        color: isActive?const Color(0xFFF91506).withOpacity(.1): AppColors.textFieldColor,
       ),
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -31,7 +32,7 @@ class OrderItem extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              border: BorderDirectional(bottom: BorderSide(color: AppColors.grey100)),
+              border: BorderDirectional(bottom: BorderSide(color: AppColors.textFieldColor)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,7 +44,7 @@ class OrderItem extends StatelessWidget {
                     const Text('Chaqiruv', style: AppFontStyle.description),
                     const Gap(8),
                     Text(
-                      '/ ${formatDate(product.product.createdAt ?? DateTime.now(), [HH, ':', nn])}',
+                      '/ ${formatDate(product?.product.createdAt ?? DateTime.now(), [HH, ':', nn])}',
                       style: context.bodySmall?.copyWith(color: AppColors.grey400),
                     ),
                   ],
@@ -62,7 +63,7 @@ class OrderItem extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: Image.network(
-                  ApiConstants.imageBaseUrl + (product.product.photo),
+                  ApiConstants.imageBaseUrl + (product?.product.photo ?? ""),
                   fit: BoxFit.cover,
                   cacheHeight: 1080,
                   cacheWidth: 1920,
@@ -81,12 +82,12 @@ class OrderItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      product.product.name??"",
+                      product?.product.name ?? "",
                       style: AppFontStyle.description2.copyWith(fontWeight: FontWeight.w600, color: AppColors.black),
                     ),
                     const Gap(8),
                     Text(
-                      currencyFormat.format(product.product.price),
+                      currencyFormat.format(product?.product.price ?? 0),
                       style: AppFontStyle.mIn12.copyWith(color: AppColors.grey400),
                     ),
                     const Gap(4),
@@ -94,11 +95,11 @@ class OrderItem extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "${product.quantity} ta: ",
+                          "${product?.quantity ?? 0} ta: ",
                           style: AppFontStyle.description2
                               .copyWith(fontWeight: FontWeight.w600, color: AppColors.primaryColor),
                         ),
-                        Text(currencyFormat.format(product.price),
+                        Text(currencyFormat.format(product?.price ?? 0),
                             style: AppFontStyle.description2
                                 .copyWith(fontWeight: FontWeight.w600, color: AppColors.grey500)),
                       ],

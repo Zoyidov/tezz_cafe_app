@@ -1,6 +1,8 @@
 // lib/di/service_locator.dart
 
 import 'package:get_it/get_it.dart';
+import 'package:tezz_cafe_app/data/activate_table/data_source/activate_serice_repo.dart';
+import 'package:tezz_cafe_app/data/activate_table/repository/activate_table_repository.dart';
 import 'package:tezz_cafe_app/data/auth/data_source/auth_service_repo.dart';
 import 'package:tezz_cafe_app/data/auth/repository/auth_repository.dart';
 import 'package:tezz_cafe_app/data/category/data_source/category_service_repo.dart';
@@ -41,6 +43,10 @@ Future<void> setupLocator() async {
   // Waitress
   getIt.registerSingleton(WaitressDataSource());
   getIt.registerSingleton(WaitressRepository(getIt<WaitressDataSource>()));
+
+//   ActivateTableService
+  getIt.registerSingleton(ActivateTableService(DioSettings.getDio()));
+  getIt.registerSingleton(ActivateTableRepository(getIt<ActivateTableService>()));
 }
 
 void tearDownLocator() => getIt.reset();

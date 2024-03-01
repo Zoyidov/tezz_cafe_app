@@ -35,9 +35,9 @@ mixin _$TableModel {
   @JsonKey(name: "call")
   String get call => throw _privateConstructorUsedError;
   @JsonKey(name: "callId")
-  dynamic get callId => throw _privateConstructorUsedError;
+  String? get callId => throw _privateConstructorUsedError;
   @JsonKey(name: "callTime")
-  dynamic get callTime => throw _privateConstructorUsedError;
+  DateTime? get callTime => throw _privateConstructorUsedError;
   @JsonKey(name: "hasActiveOrder")
   bool get hasActiveOrder => throw _privateConstructorUsedError;
   @JsonKey(name: "restaurant")
@@ -50,10 +50,10 @@ mixin _$TableModel {
   int get v => throw _privateConstructorUsedError;
   @JsonKey(name: "qrCode")
   String get qrCode => throw _privateConstructorUsedError;
-  @JsonKey(name: "totalOrders")
-  dynamic get totalOrders => throw _privateConstructorUsedError;
   @JsonKey(name: "activeOrders")
   Orders? get activeOrders => throw _privateConstructorUsedError;
+  @JsonKey(name: "totalOrders")
+  Orders? get totalOrders => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -75,20 +75,21 @@ abstract class $TableModelCopyWith<$Res> {
       @JsonKey(name: "setWaiterByAdmin") bool setWaiterByAdmin,
       @JsonKey(name: "waiter") Waiter? waiter,
       @JsonKey(name: "call") String call,
-      @JsonKey(name: "callId") dynamic callId,
-      @JsonKey(name: "callTime") dynamic callTime,
+      @JsonKey(name: "callId") String? callId,
+      @JsonKey(name: "callTime") DateTime? callTime,
       @JsonKey(name: "hasActiveOrder") bool hasActiveOrder,
       @JsonKey(name: "restaurant") String restaurant,
       @JsonKey(name: "createdAt") DateTime createdAt,
       @JsonKey(name: "updatedAt") DateTime updatedAt,
       @JsonKey(name: "__v") int v,
       @JsonKey(name: "qrCode") String qrCode,
-      @JsonKey(name: "totalOrders") dynamic totalOrders,
-      @JsonKey(name: "activeOrders") Orders? activeOrders});
+      @JsonKey(name: "activeOrders") Orders? activeOrders,
+      @JsonKey(name: "totalOrders") Orders? totalOrders});
 
   $TypeOfTableCopyWith<$Res> get typeOfTable;
   $WaiterCopyWith<$Res>? get waiter;
   $OrdersCopyWith<$Res>? get activeOrders;
+  $OrdersCopyWith<$Res>? get totalOrders;
 }
 
 /// @nodoc
@@ -119,8 +120,8 @@ class _$TableModelCopyWithImpl<$Res, $Val extends TableModel>
     Object? updatedAt = null,
     Object? v = null,
     Object? qrCode = null,
-    Object? totalOrders = freezed,
     Object? activeOrders = freezed,
+    Object? totalOrders = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -154,11 +155,11 @@ class _$TableModelCopyWithImpl<$Res, $Val extends TableModel>
       callId: freezed == callId
           ? _value.callId
           : callId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       callTime: freezed == callTime
           ? _value.callTime
           : callTime // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as DateTime?,
       hasActiveOrder: null == hasActiveOrder
           ? _value.hasActiveOrder
           : hasActiveOrder // ignore: cast_nullable_to_non_nullable
@@ -183,13 +184,13 @@ class _$TableModelCopyWithImpl<$Res, $Val extends TableModel>
           ? _value.qrCode
           : qrCode // ignore: cast_nullable_to_non_nullable
               as String,
-      totalOrders: freezed == totalOrders
-          ? _value.totalOrders
-          : totalOrders // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       activeOrders: freezed == activeOrders
           ? _value.activeOrders
           : activeOrders // ignore: cast_nullable_to_non_nullable
+              as Orders?,
+      totalOrders: freezed == totalOrders
+          ? _value.totalOrders
+          : totalOrders // ignore: cast_nullable_to_non_nullable
               as Orders?,
     ) as $Val);
   }
@@ -225,6 +226,18 @@ class _$TableModelCopyWithImpl<$Res, $Val extends TableModel>
       return _then(_value.copyWith(activeOrders: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrdersCopyWith<$Res>? get totalOrders {
+    if (_value.totalOrders == null) {
+      return null;
+    }
+
+    return $OrdersCopyWith<$Res>(_value.totalOrders!, (value) {
+      return _then(_value.copyWith(totalOrders: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -243,16 +256,16 @@ abstract class _$$TableModelImplCopyWith<$Res>
       @JsonKey(name: "setWaiterByAdmin") bool setWaiterByAdmin,
       @JsonKey(name: "waiter") Waiter? waiter,
       @JsonKey(name: "call") String call,
-      @JsonKey(name: "callId") dynamic callId,
-      @JsonKey(name: "callTime") dynamic callTime,
+      @JsonKey(name: "callId") String? callId,
+      @JsonKey(name: "callTime") DateTime? callTime,
       @JsonKey(name: "hasActiveOrder") bool hasActiveOrder,
       @JsonKey(name: "restaurant") String restaurant,
       @JsonKey(name: "createdAt") DateTime createdAt,
       @JsonKey(name: "updatedAt") DateTime updatedAt,
       @JsonKey(name: "__v") int v,
       @JsonKey(name: "qrCode") String qrCode,
-      @JsonKey(name: "totalOrders") dynamic totalOrders,
-      @JsonKey(name: "activeOrders") Orders? activeOrders});
+      @JsonKey(name: "activeOrders") Orders? activeOrders,
+      @JsonKey(name: "totalOrders") Orders? totalOrders});
 
   @override
   $TypeOfTableCopyWith<$Res> get typeOfTable;
@@ -260,6 +273,8 @@ abstract class _$$TableModelImplCopyWith<$Res>
   $WaiterCopyWith<$Res>? get waiter;
   @override
   $OrdersCopyWith<$Res>? get activeOrders;
+  @override
+  $OrdersCopyWith<$Res>? get totalOrders;
 }
 
 /// @nodoc
@@ -288,8 +303,8 @@ class __$$TableModelImplCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? v = null,
     Object? qrCode = null,
-    Object? totalOrders = freezed,
     Object? activeOrders = freezed,
+    Object? totalOrders = freezed,
   }) {
     return _then(_$TableModelImpl(
       id: null == id
@@ -323,11 +338,11 @@ class __$$TableModelImplCopyWithImpl<$Res>
       callId: freezed == callId
           ? _value.callId
           : callId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       callTime: freezed == callTime
           ? _value.callTime
           : callTime // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as DateTime?,
       hasActiveOrder: null == hasActiveOrder
           ? _value.hasActiveOrder
           : hasActiveOrder // ignore: cast_nullable_to_non_nullable
@@ -352,13 +367,13 @@ class __$$TableModelImplCopyWithImpl<$Res>
           ? _value.qrCode
           : qrCode // ignore: cast_nullable_to_non_nullable
               as String,
-      totalOrders: freezed == totalOrders
-          ? _value.totalOrders
-          : totalOrders // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       activeOrders: freezed == activeOrders
           ? _value.activeOrders
           : activeOrders // ignore: cast_nullable_to_non_nullable
+              as Orders?,
+      totalOrders: freezed == totalOrders
+          ? _value.totalOrders
+          : totalOrders // ignore: cast_nullable_to_non_nullable
               as Orders?,
     ));
   }
@@ -383,8 +398,8 @@ class _$TableModelImpl implements _TableModel {
       @JsonKey(name: "updatedAt") required this.updatedAt,
       @JsonKey(name: "__v") required this.v,
       @JsonKey(name: "qrCode") required this.qrCode,
-      @JsonKey(name: "totalOrders") required this.totalOrders,
-      @JsonKey(name: "activeOrders") required this.activeOrders});
+      @JsonKey(name: "activeOrders") required this.activeOrders,
+      @JsonKey(name: "totalOrders") required this.totalOrders});
 
   factory _$TableModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TableModelImplFromJson(json);
@@ -412,10 +427,10 @@ class _$TableModelImpl implements _TableModel {
   final String call;
   @override
   @JsonKey(name: "callId")
-  final dynamic callId;
+  final String? callId;
   @override
   @JsonKey(name: "callTime")
-  final dynamic callTime;
+  final DateTime? callTime;
   @override
   @JsonKey(name: "hasActiveOrder")
   final bool hasActiveOrder;
@@ -435,15 +450,15 @@ class _$TableModelImpl implements _TableModel {
   @JsonKey(name: "qrCode")
   final String qrCode;
   @override
-  @JsonKey(name: "totalOrders")
-  final dynamic totalOrders;
-  @override
   @JsonKey(name: "activeOrders")
   final Orders? activeOrders;
+  @override
+  @JsonKey(name: "totalOrders")
+  final Orders? totalOrders;
 
   @override
   String toString() {
-    return 'TableModel(id: $id, name: $name, typeOfTable: $typeOfTable, occupied: $occupied, setWaiterByAdmin: $setWaiterByAdmin, waiter: $waiter, call: $call, callId: $callId, callTime: $callTime, hasActiveOrder: $hasActiveOrder, restaurant: $restaurant, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, qrCode: $qrCode, totalOrders: $totalOrders, activeOrders: $activeOrders)';
+    return 'TableModel(id: $id, name: $name, typeOfTable: $typeOfTable, occupied: $occupied, setWaiterByAdmin: $setWaiterByAdmin, waiter: $waiter, call: $call, callId: $callId, callTime: $callTime, hasActiveOrder: $hasActiveOrder, restaurant: $restaurant, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, qrCode: $qrCode, activeOrders: $activeOrders, totalOrders: $totalOrders)';
   }
 
   @override
@@ -461,8 +476,9 @@ class _$TableModelImpl implements _TableModel {
                 other.setWaiterByAdmin == setWaiterByAdmin) &&
             (identical(other.waiter, waiter) || other.waiter == waiter) &&
             (identical(other.call, call) || other.call == call) &&
-            const DeepCollectionEquality().equals(other.callId, callId) &&
-            const DeepCollectionEquality().equals(other.callTime, callTime) &&
+            (identical(other.callId, callId) || other.callId == callId) &&
+            (identical(other.callTime, callTime) ||
+                other.callTime == callTime) &&
             (identical(other.hasActiveOrder, hasActiveOrder) ||
                 other.hasActiveOrder == hasActiveOrder) &&
             (identical(other.restaurant, restaurant) ||
@@ -473,10 +489,10 @@ class _$TableModelImpl implements _TableModel {
                 other.updatedAt == updatedAt) &&
             (identical(other.v, v) || other.v == v) &&
             (identical(other.qrCode, qrCode) || other.qrCode == qrCode) &&
-            const DeepCollectionEquality()
-                .equals(other.totalOrders, totalOrders) &&
             (identical(other.activeOrders, activeOrders) ||
-                other.activeOrders == activeOrders));
+                other.activeOrders == activeOrders) &&
+            (identical(other.totalOrders, totalOrders) ||
+                other.totalOrders == totalOrders));
   }
 
   @JsonKey(ignore: true)
@@ -490,16 +506,16 @@ class _$TableModelImpl implements _TableModel {
       setWaiterByAdmin,
       waiter,
       call,
-      const DeepCollectionEquality().hash(callId),
-      const DeepCollectionEquality().hash(callTime),
+      callId,
+      callTime,
       hasActiveOrder,
       restaurant,
       createdAt,
       updatedAt,
       v,
       qrCode,
-      const DeepCollectionEquality().hash(totalOrders),
-      activeOrders);
+      activeOrders,
+      totalOrders);
 
   @JsonKey(ignore: true)
   @override
@@ -524,17 +540,17 @@ abstract class _TableModel implements TableModel {
       @JsonKey(name: "setWaiterByAdmin") required final bool setWaiterByAdmin,
       @JsonKey(name: "waiter") required final Waiter? waiter,
       @JsonKey(name: "call") required final String call,
-      @JsonKey(name: "callId") required final dynamic callId,
-      @JsonKey(name: "callTime") required final dynamic callTime,
+      @JsonKey(name: "callId") required final String? callId,
+      @JsonKey(name: "callTime") required final DateTime? callTime,
       @JsonKey(name: "hasActiveOrder") required final bool hasActiveOrder,
       @JsonKey(name: "restaurant") required final String restaurant,
       @JsonKey(name: "createdAt") required final DateTime createdAt,
       @JsonKey(name: "updatedAt") required final DateTime updatedAt,
       @JsonKey(name: "__v") required final int v,
       @JsonKey(name: "qrCode") required final String qrCode,
-      @JsonKey(name: "totalOrders") required final dynamic totalOrders,
-      @JsonKey(name: "activeOrders")
-      required final Orders? activeOrders}) = _$TableModelImpl;
+      @JsonKey(name: "activeOrders") required final Orders? activeOrders,
+      @JsonKey(name: "totalOrders")
+      required final Orders? totalOrders}) = _$TableModelImpl;
 
   factory _TableModel.fromJson(Map<String, dynamic> json) =
       _$TableModelImpl.fromJson;
@@ -562,10 +578,10 @@ abstract class _TableModel implements TableModel {
   String get call;
   @override
   @JsonKey(name: "callId")
-  dynamic get callId;
+  String? get callId;
   @override
   @JsonKey(name: "callTime")
-  dynamic get callTime;
+  DateTime? get callTime;
   @override
   @JsonKey(name: "hasActiveOrder")
   bool get hasActiveOrder;
@@ -585,14 +601,585 @@ abstract class _TableModel implements TableModel {
   @JsonKey(name: "qrCode")
   String get qrCode;
   @override
-  @JsonKey(name: "totalOrders")
-  dynamic get totalOrders;
-  @override
   @JsonKey(name: "activeOrders")
   Orders? get activeOrders;
   @override
+  @JsonKey(name: "totalOrders")
+  Orders? get totalOrders;
+  @override
   @JsonKey(ignore: true)
   _$$TableModelImplCopyWith<_$TableModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Orders _$OrdersFromJson(Map<String, dynamic> json) {
+  return _Orders.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Orders {
+  @JsonKey(name: "_id")
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "table")
+  String get table => throw _privateConstructorUsedError;
+  @JsonKey(name: "waiter")
+  String get waiter => throw _privateConstructorUsedError;
+  @JsonKey(name: "totalPrice")
+  int get totalPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: "restaurant")
+  String get restaurant => throw _privateConstructorUsedError;
+  @JsonKey(name: "products")
+  List<ProductElement> get products => throw _privateConstructorUsedError;
+  @JsonKey(name: "createdAt")
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updatedAt")
+  DateTime get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "__v")
+  int get v => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OrdersCopyWith<Orders> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OrdersCopyWith<$Res> {
+  factory $OrdersCopyWith(Orders value, $Res Function(Orders) then) =
+      _$OrdersCopyWithImpl<$Res, Orders>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "_id") String id,
+      @JsonKey(name: "table") String table,
+      @JsonKey(name: "waiter") String waiter,
+      @JsonKey(name: "totalPrice") int totalPrice,
+      @JsonKey(name: "restaurant") String restaurant,
+      @JsonKey(name: "products") List<ProductElement> products,
+      @JsonKey(name: "createdAt") DateTime createdAt,
+      @JsonKey(name: "updatedAt") DateTime updatedAt,
+      @JsonKey(name: "__v") int v});
+}
+
+/// @nodoc
+class _$OrdersCopyWithImpl<$Res, $Val extends Orders>
+    implements $OrdersCopyWith<$Res> {
+  _$OrdersCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? table = null,
+    Object? waiter = null,
+    Object? totalPrice = null,
+    Object? restaurant = null,
+    Object? products = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? v = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      table: null == table
+          ? _value.table
+          : table // ignore: cast_nullable_to_non_nullable
+              as String,
+      waiter: null == waiter
+          ? _value.waiter
+          : waiter // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      restaurant: null == restaurant
+          ? _value.restaurant
+          : restaurant // ignore: cast_nullable_to_non_nullable
+              as String,
+      products: null == products
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductElement>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      v: null == v
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$OrdersImplCopyWith<$Res> implements $OrdersCopyWith<$Res> {
+  factory _$$OrdersImplCopyWith(
+          _$OrdersImpl value, $Res Function(_$OrdersImpl) then) =
+      __$$OrdersImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "_id") String id,
+      @JsonKey(name: "table") String table,
+      @JsonKey(name: "waiter") String waiter,
+      @JsonKey(name: "totalPrice") int totalPrice,
+      @JsonKey(name: "restaurant") String restaurant,
+      @JsonKey(name: "products") List<ProductElement> products,
+      @JsonKey(name: "createdAt") DateTime createdAt,
+      @JsonKey(name: "updatedAt") DateTime updatedAt,
+      @JsonKey(name: "__v") int v});
+}
+
+/// @nodoc
+class __$$OrdersImplCopyWithImpl<$Res>
+    extends _$OrdersCopyWithImpl<$Res, _$OrdersImpl>
+    implements _$$OrdersImplCopyWith<$Res> {
+  __$$OrdersImplCopyWithImpl(
+      _$OrdersImpl _value, $Res Function(_$OrdersImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? table = null,
+    Object? waiter = null,
+    Object? totalPrice = null,
+    Object? restaurant = null,
+    Object? products = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? v = null,
+  }) {
+    return _then(_$OrdersImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      table: null == table
+          ? _value.table
+          : table // ignore: cast_nullable_to_non_nullable
+              as String,
+      waiter: null == waiter
+          ? _value.waiter
+          : waiter // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      restaurant: null == restaurant
+          ? _value.restaurant
+          : restaurant // ignore: cast_nullable_to_non_nullable
+              as String,
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductElement>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      v: null == v
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$OrdersImpl implements _Orders {
+  const _$OrdersImpl(
+      {@JsonKey(name: "_id") required this.id,
+      @JsonKey(name: "table") required this.table,
+      @JsonKey(name: "waiter") required this.waiter,
+      @JsonKey(name: "totalPrice") required this.totalPrice,
+      @JsonKey(name: "restaurant") required this.restaurant,
+      @JsonKey(name: "products") required final List<ProductElement> products,
+      @JsonKey(name: "createdAt") required this.createdAt,
+      @JsonKey(name: "updatedAt") required this.updatedAt,
+      @JsonKey(name: "__v") required this.v})
+      : _products = products;
+
+  factory _$OrdersImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrdersImplFromJson(json);
+
+  @override
+  @JsonKey(name: "_id")
+  final String id;
+  @override
+  @JsonKey(name: "table")
+  final String table;
+  @override
+  @JsonKey(name: "waiter")
+  final String waiter;
+  @override
+  @JsonKey(name: "totalPrice")
+  final int totalPrice;
+  @override
+  @JsonKey(name: "restaurant")
+  final String restaurant;
+  final List<ProductElement> _products;
+  @override
+  @JsonKey(name: "products")
+  List<ProductElement> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
+
+  @override
+  @JsonKey(name: "createdAt")
+  final DateTime createdAt;
+  @override
+  @JsonKey(name: "updatedAt")
+  final DateTime updatedAt;
+  @override
+  @JsonKey(name: "__v")
+  final int v;
+
+  @override
+  String toString() {
+    return 'Orders(id: $id, table: $table, waiter: $waiter, totalPrice: $totalPrice, restaurant: $restaurant, products: $products, createdAt: $createdAt, updatedAt: $updatedAt, v: $v)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OrdersImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.table, table) || other.table == table) &&
+            (identical(other.waiter, waiter) || other.waiter == waiter) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice) &&
+            (identical(other.restaurant, restaurant) ||
+                other.restaurant == restaurant) &&
+            const DeepCollectionEquality().equals(other._products, _products) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.v, v) || other.v == v));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      table,
+      waiter,
+      totalPrice,
+      restaurant,
+      const DeepCollectionEquality().hash(_products),
+      createdAt,
+      updatedAt,
+      v);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OrdersImplCopyWith<_$OrdersImpl> get copyWith =>
+      __$$OrdersImplCopyWithImpl<_$OrdersImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$OrdersImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Orders implements Orders {
+  const factory _Orders(
+      {@JsonKey(name: "_id") required final String id,
+      @JsonKey(name: "table") required final String table,
+      @JsonKey(name: "waiter") required final String waiter,
+      @JsonKey(name: "totalPrice") required final int totalPrice,
+      @JsonKey(name: "restaurant") required final String restaurant,
+      @JsonKey(name: "products") required final List<ProductElement> products,
+      @JsonKey(name: "createdAt") required final DateTime createdAt,
+      @JsonKey(name: "updatedAt") required final DateTime updatedAt,
+      @JsonKey(name: "__v") required final int v}) = _$OrdersImpl;
+
+  factory _Orders.fromJson(Map<String, dynamic> json) = _$OrdersImpl.fromJson;
+
+  @override
+  @JsonKey(name: "_id")
+  String get id;
+  @override
+  @JsonKey(name: "table")
+  String get table;
+  @override
+  @JsonKey(name: "waiter")
+  String get waiter;
+  @override
+  @JsonKey(name: "totalPrice")
+  int get totalPrice;
+  @override
+  @JsonKey(name: "restaurant")
+  String get restaurant;
+  @override
+  @JsonKey(name: "products")
+  List<ProductElement> get products;
+  @override
+  @JsonKey(name: "createdAt")
+  DateTime get createdAt;
+  @override
+  @JsonKey(name: "updatedAt")
+  DateTime get updatedAt;
+  @override
+  @JsonKey(name: "__v")
+  int get v;
+  @override
+  @JsonKey(ignore: true)
+  _$$OrdersImplCopyWith<_$OrdersImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ProductElement _$ProductElementFromJson(Map<String, dynamic> json) {
+  return _ProductElement.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProductElement {
+  @JsonKey(name: "product")
+  ProductProduct get product => throw _privateConstructorUsedError;
+  @JsonKey(name: "quantity")
+  int get quantity => throw _privateConstructorUsedError;
+  @JsonKey(name: "price")
+  int get price => throw _privateConstructorUsedError;
+  @JsonKey(name: "_id")
+  String get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ProductElementCopyWith<ProductElement> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProductElementCopyWith<$Res> {
+  factory $ProductElementCopyWith(
+          ProductElement value, $Res Function(ProductElement) then) =
+      _$ProductElementCopyWithImpl<$Res, ProductElement>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "product") ProductProduct product,
+      @JsonKey(name: "quantity") int quantity,
+      @JsonKey(name: "price") int price,
+      @JsonKey(name: "_id") String id});
+
+  $ProductProductCopyWith<$Res> get product;
+}
+
+/// @nodoc
+class _$ProductElementCopyWithImpl<$Res, $Val extends ProductElement>
+    implements $ProductElementCopyWith<$Res> {
+  _$ProductElementCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? product = null,
+    Object? quantity = null,
+    Object? price = null,
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      product: null == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as ProductProduct,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductProductCopyWith<$Res> get product {
+    return $ProductProductCopyWith<$Res>(_value.product, (value) {
+      return _then(_value.copyWith(product: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ProductElementImplCopyWith<$Res>
+    implements $ProductElementCopyWith<$Res> {
+  factory _$$ProductElementImplCopyWith(_$ProductElementImpl value,
+          $Res Function(_$ProductElementImpl) then) =
+      __$$ProductElementImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "product") ProductProduct product,
+      @JsonKey(name: "quantity") int quantity,
+      @JsonKey(name: "price") int price,
+      @JsonKey(name: "_id") String id});
+
+  @override
+  $ProductProductCopyWith<$Res> get product;
+}
+
+/// @nodoc
+class __$$ProductElementImplCopyWithImpl<$Res>
+    extends _$ProductElementCopyWithImpl<$Res, _$ProductElementImpl>
+    implements _$$ProductElementImplCopyWith<$Res> {
+  __$$ProductElementImplCopyWithImpl(
+      _$ProductElementImpl _value, $Res Function(_$ProductElementImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? product = null,
+    Object? quantity = null,
+    Object? price = null,
+    Object? id = null,
+  }) {
+    return _then(_$ProductElementImpl(
+      product: null == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as ProductProduct,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ProductElementImpl implements _ProductElement {
+  const _$ProductElementImpl(
+      {@JsonKey(name: "product") required this.product,
+      @JsonKey(name: "quantity") required this.quantity,
+      @JsonKey(name: "price") required this.price,
+      @JsonKey(name: "_id") required this.id});
+
+  factory _$ProductElementImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductElementImplFromJson(json);
+
+  @override
+  @JsonKey(name: "product")
+  final ProductProduct product;
+  @override
+  @JsonKey(name: "quantity")
+  final int quantity;
+  @override
+  @JsonKey(name: "price")
+  final int price;
+  @override
+  @JsonKey(name: "_id")
+  final String id;
+
+  @override
+  String toString() {
+    return 'ProductElement(product: $product, quantity: $quantity, price: $price, id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProductElementImpl &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, product, quantity, price, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProductElementImplCopyWith<_$ProductElementImpl> get copyWith =>
+      __$$ProductElementImplCopyWithImpl<_$ProductElementImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ProductElementImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ProductElement implements ProductElement {
+  const factory _ProductElement(
+      {@JsonKey(name: "product") required final ProductProduct product,
+      @JsonKey(name: "quantity") required final int quantity,
+      @JsonKey(name: "price") required final int price,
+      @JsonKey(name: "_id") required final String id}) = _$ProductElementImpl;
+
+  factory _ProductElement.fromJson(Map<String, dynamic> json) =
+      _$ProductElementImpl.fromJson;
+
+  @override
+  @JsonKey(name: "product")
+  ProductProduct get product;
+  @override
+  @JsonKey(name: "quantity")
+  int get quantity;
+  @override
+  @JsonKey(name: "price")
+  int get price;
+  @override
+  @JsonKey(name: "_id")
+  String get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$ProductElementImplCopyWith<_$ProductElementImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -822,7 +1409,7 @@ mixin _$Waiter {
   @JsonKey(name: "lastName")
   String get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: "avatar")
-  String? get avatar => throw _privateConstructorUsedError;
+  String get avatar => throw _privateConstructorUsedError;
   @JsonKey(name: "phone")
   String get phone => throw _privateConstructorUsedError;
   @JsonKey(name: "role")
@@ -850,7 +1437,7 @@ abstract class $WaiterCopyWith<$Res> {
       {@JsonKey(name: "_id") String id,
       @JsonKey(name: "firstName") String firstName,
       @JsonKey(name: "lastName") String lastName,
-      @JsonKey(name: "avatar") String? avatar,
+      @JsonKey(name: "avatar") String avatar,
       @JsonKey(name: "phone") String phone,
       @JsonKey(name: "role") String role,
       @JsonKey(name: "restaurant") String restaurant,
@@ -875,7 +1462,7 @@ class _$WaiterCopyWithImpl<$Res, $Val extends Waiter>
     Object? id = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? avatar = freezed,
+    Object? avatar = null,
     Object? phone = null,
     Object? role = null,
     Object? restaurant = null,
@@ -896,10 +1483,10 @@ class _$WaiterCopyWithImpl<$Res, $Val extends Waiter>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: freezed == avatar
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -939,7 +1526,7 @@ abstract class _$$WaiterImplCopyWith<$Res> implements $WaiterCopyWith<$Res> {
       {@JsonKey(name: "_id") String id,
       @JsonKey(name: "firstName") String firstName,
       @JsonKey(name: "lastName") String lastName,
-      @JsonKey(name: "avatar") String? avatar,
+      @JsonKey(name: "avatar") String avatar,
       @JsonKey(name: "phone") String phone,
       @JsonKey(name: "role") String role,
       @JsonKey(name: "restaurant") String restaurant,
@@ -962,7 +1549,7 @@ class __$$WaiterImplCopyWithImpl<$Res>
     Object? id = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? avatar = freezed,
+    Object? avatar = null,
     Object? phone = null,
     Object? role = null,
     Object? restaurant = null,
@@ -983,10 +1570,10 @@ class __$$WaiterImplCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: freezed == avatar
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -1044,7 +1631,7 @@ class _$WaiterImpl implements _Waiter {
   final String lastName;
   @override
   @JsonKey(name: "avatar")
-  final String? avatar;
+  final String avatar;
   @override
   @JsonKey(name: "phone")
   final String phone;
@@ -1115,7 +1702,7 @@ abstract class _Waiter implements Waiter {
       {@JsonKey(name: "_id") required final String id,
       @JsonKey(name: "firstName") required final String firstName,
       @JsonKey(name: "lastName") required final String lastName,
-      @JsonKey(name: "avatar") required final String? avatar,
+      @JsonKey(name: "avatar") required final String avatar,
       @JsonKey(name: "phone") required final String phone,
       @JsonKey(name: "role") required final String role,
       @JsonKey(name: "restaurant") required final String restaurant,
@@ -1136,7 +1723,7 @@ abstract class _Waiter implements Waiter {
   String get lastName;
   @override
   @JsonKey(name: "avatar")
-  String? get avatar;
+  String get avatar;
   @override
   @JsonKey(name: "phone")
   String get phone;

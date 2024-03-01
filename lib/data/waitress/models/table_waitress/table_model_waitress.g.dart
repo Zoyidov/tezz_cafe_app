@@ -50,19 +50,3 @@ Map<String, dynamic> _$$TableModelWaitressImplToJson(
       'qrCode': instance.qrCode,
       'id': instance.tableModelWaitressId,
     };
-
-_$TypeOfTableImpl _$$TypeOfTableImplFromJson(Map<String, dynamic> json) =>
-    _$TypeOfTableImpl(
-      id: json['_id'] as String,
-      name: json['name'] as String,
-      restaurant: json['restaurant'] as String,
-      v: json['__v'] as int,
-    );
-
-Map<String, dynamic> _$$TypeOfTableImplToJson(_$TypeOfTableImpl instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-      'restaurant': instance.restaurant,
-      '__v': instance.v,
-    };
