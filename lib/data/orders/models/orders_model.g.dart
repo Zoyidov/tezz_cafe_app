@@ -6,40 +6,27 @@ part of 'orders_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProductElementImpl _$$ProductElementImplFromJson(Map<String, dynamic> json) =>
-    _$ProductElementImpl(
-      product: ProductProduct.fromJson(json['product'] as Map<String, dynamic>),
-      quantity: json['quantity'] as int,
-      price: json['price'] as int,
-      id: json['_id'] as String,
-    );
-
-Map<String, dynamic> _$$ProductElementImplToJson(
-        _$ProductElementImpl instance) =>
-    <String, dynamic>{
-      'product': instance.product,
-      'quantity': instance.quantity,
-      'price': instance.price,
-      '_id': instance.id,
-    };
-
 _$ProductProductImpl _$$ProductProductImplFromJson(Map<String, dynamic> json) =>
     _$ProductProductImpl(
-      id: json['_id'] as String,
-      name: json['name'] as String,
-      description: json['description'] as String,
-      photo: json['photo'] as String,
-      price: json['price'] as int,
-      oldPrice: json['oldPrice'] as int,
-      sale: json['sale'] as bool,
-      available: json['available'] as bool,
-      category: json['category'] as String,
-      unit: json['unit'] as String,
-      restaurant: json['restaurant'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
-      v: json['__v'] as int,
-      productId: json['id'] as String,
+      id: json['_id'] as String?,
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      photo: json['photo'] as String?,
+      price: json['price'] as int?,
+      oldPrice: json['oldPrice'] as int?,
+      sale: json['sale'] as bool?,
+      available: json['available'] as bool?,
+      category: json['category'] as String?,
+      unit: json['unit'] as String?,
+      restaurant: json['restaurant'] as String?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      v: json['__v'] as int?,
+      productId: json['id'] as String?,
     );
 
 Map<String, dynamic> _$$ProductProductImplToJson(
@@ -56,8 +43,25 @@ Map<String, dynamic> _$$ProductProductImplToJson(
       'category': instance.category,
       'unit': instance.unit,
       'restaurant': instance.restaurant,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
       '__v': instance.v,
       'id': instance.productId,
+    };
+
+_$ProductElementImpl _$$ProductElementImplFromJson(Map<String, dynamic> json) =>
+    _$ProductElementImpl(
+      product: ProductProduct.fromJson(json['product'] as Map<String, dynamic>),
+      quantity: json['quantity'] as int,
+      price: json['price'] as int,
+      id: json['_id'] as String,
+    );
+
+Map<String, dynamic> _$$ProductElementImplToJson(
+        _$ProductElementImpl instance) =>
+    <String, dynamic>{
+      'product': instance.product,
+      'quantity': instance.quantity,
+      'price': instance.price,
+      '_id': instance.id,
     };

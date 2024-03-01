@@ -21,37 +21,37 @@ CallModel _$CallModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CallModel {
   @JsonKey(name: "_id")
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: "name")
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: "typeOfTable")
-  String get typeOfTable => throw _privateConstructorUsedError;
+  String? get typeOfTable => throw _privateConstructorUsedError;
   @JsonKey(name: "occupied")
-  bool get occupied => throw _privateConstructorUsedError;
+  bool? get occupied => throw _privateConstructorUsedError;
   @JsonKey(name: "setWaiterByAdmin")
-  bool get setWaiterByAdmin => throw _privateConstructorUsedError;
+  bool? get setWaiterByAdmin => throw _privateConstructorUsedError;
   @JsonKey(name: "waiter")
-  String get waiter => throw _privateConstructorUsedError;
+  String? get waiter => throw _privateConstructorUsedError;
   @JsonKey(name: "call")
-  String get call => throw _privateConstructorUsedError;
+  String? get call => throw _privateConstructorUsedError;
   @JsonKey(name: "callId")
-  String get callId => throw _privateConstructorUsedError;
+  String? get callId => throw _privateConstructorUsedError;
   @JsonKey(name: "callTime")
-  DateTime get callTime => throw _privateConstructorUsedError;
+  DateTime? get callTime => throw _privateConstructorUsedError;
   @JsonKey(name: "hasActiveOrder")
-  bool get hasActiveOrder => throw _privateConstructorUsedError;
+  bool? get hasActiveOrder => throw _privateConstructorUsedError;
   @JsonKey(name: "restaurant")
-  String get restaurant => throw _privateConstructorUsedError;
+  String? get restaurant => throw _privateConstructorUsedError;
   @JsonKey(name: "createdAt")
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: "updatedAt")
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "__v")
-  int get v => throw _privateConstructorUsedError;
+  int? get v => throw _privateConstructorUsedError;
   @JsonKey(name: "qrCode")
-  String get qrCode => throw _privateConstructorUsedError;
+  String? get qrCode => throw _privateConstructorUsedError;
   @JsonKey(name: "id")
-  String get callModelId => throw _privateConstructorUsedError;
+  String? get callModelId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,22 +65,22 @@ abstract class $CallModelCopyWith<$Res> {
       _$CallModelCopyWithImpl<$Res, CallModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "_id") String id,
-      @JsonKey(name: "name") String name,
-      @JsonKey(name: "typeOfTable") String typeOfTable,
-      @JsonKey(name: "occupied") bool occupied,
-      @JsonKey(name: "setWaiterByAdmin") bool setWaiterByAdmin,
-      @JsonKey(name: "waiter") String waiter,
-      @JsonKey(name: "call") String call,
-      @JsonKey(name: "callId") String callId,
-      @JsonKey(name: "callTime") DateTime callTime,
-      @JsonKey(name: "hasActiveOrder") bool hasActiveOrder,
-      @JsonKey(name: "restaurant") String restaurant,
-      @JsonKey(name: "createdAt") DateTime createdAt,
-      @JsonKey(name: "updatedAt") DateTime updatedAt,
-      @JsonKey(name: "__v") int v,
-      @JsonKey(name: "qrCode") String qrCode,
-      @JsonKey(name: "id") String callModelId});
+      {@JsonKey(name: "_id") String? id,
+      @JsonKey(name: "name") String? name,
+      @JsonKey(name: "typeOfTable") String? typeOfTable,
+      @JsonKey(name: "occupied") bool? occupied,
+      @JsonKey(name: "setWaiterByAdmin") bool? setWaiterByAdmin,
+      @JsonKey(name: "waiter") String? waiter,
+      @JsonKey(name: "call") String? call,
+      @JsonKey(name: "callId") String? callId,
+      @JsonKey(name: "callTime") DateTime? callTime,
+      @JsonKey(name: "hasActiveOrder") bool? hasActiveOrder,
+      @JsonKey(name: "restaurant") String? restaurant,
+      @JsonKey(name: "createdAt") DateTime? createdAt,
+      @JsonKey(name: "updatedAt") DateTime? updatedAt,
+      @JsonKey(name: "__v") int? v,
+      @JsonKey(name: "qrCode") String? qrCode,
+      @JsonKey(name: "id") String? callModelId});
 }
 
 /// @nodoc
@@ -96,88 +96,88 @@ class _$CallModelCopyWithImpl<$Res, $Val extends CallModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? typeOfTable = null,
-    Object? occupied = null,
-    Object? setWaiterByAdmin = null,
-    Object? waiter = null,
-    Object? call = null,
-    Object? callId = null,
-    Object? callTime = null,
-    Object? hasActiveOrder = null,
-    Object? restaurant = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? v = null,
-    Object? qrCode = null,
-    Object? callModelId = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? typeOfTable = freezed,
+    Object? occupied = freezed,
+    Object? setWaiterByAdmin = freezed,
+    Object? waiter = freezed,
+    Object? call = freezed,
+    Object? callId = freezed,
+    Object? callTime = freezed,
+    Object? hasActiveOrder = freezed,
+    Object? restaurant = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? v = freezed,
+    Object? qrCode = freezed,
+    Object? callModelId = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      typeOfTable: null == typeOfTable
+              as String?,
+      typeOfTable: freezed == typeOfTable
           ? _value.typeOfTable
           : typeOfTable // ignore: cast_nullable_to_non_nullable
-              as String,
-      occupied: null == occupied
+              as String?,
+      occupied: freezed == occupied
           ? _value.occupied
           : occupied // ignore: cast_nullable_to_non_nullable
-              as bool,
-      setWaiterByAdmin: null == setWaiterByAdmin
+              as bool?,
+      setWaiterByAdmin: freezed == setWaiterByAdmin
           ? _value.setWaiterByAdmin
           : setWaiterByAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
-      waiter: null == waiter
+              as bool?,
+      waiter: freezed == waiter
           ? _value.waiter
           : waiter // ignore: cast_nullable_to_non_nullable
-              as String,
-      call: null == call
+              as String?,
+      call: freezed == call
           ? _value.call
           : call // ignore: cast_nullable_to_non_nullable
-              as String,
-      callId: null == callId
+              as String?,
+      callId: freezed == callId
           ? _value.callId
           : callId // ignore: cast_nullable_to_non_nullable
-              as String,
-      callTime: null == callTime
+              as String?,
+      callTime: freezed == callTime
           ? _value.callTime
           : callTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      hasActiveOrder: null == hasActiveOrder
+              as DateTime?,
+      hasActiveOrder: freezed == hasActiveOrder
           ? _value.hasActiveOrder
           : hasActiveOrder // ignore: cast_nullable_to_non_nullable
-              as bool,
-      restaurant: null == restaurant
+              as bool?,
+      restaurant: freezed == restaurant
           ? _value.restaurant
           : restaurant // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as DateTime?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      v: null == v
+              as DateTime?,
+      v: freezed == v
           ? _value.v
           : v // ignore: cast_nullable_to_non_nullable
-              as int,
-      qrCode: null == qrCode
+              as int?,
+      qrCode: freezed == qrCode
           ? _value.qrCode
           : qrCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      callModelId: null == callModelId
+              as String?,
+      callModelId: freezed == callModelId
           ? _value.callModelId
           : callModelId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -191,22 +191,22 @@ abstract class _$$CallModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "_id") String id,
-      @JsonKey(name: "name") String name,
-      @JsonKey(name: "typeOfTable") String typeOfTable,
-      @JsonKey(name: "occupied") bool occupied,
-      @JsonKey(name: "setWaiterByAdmin") bool setWaiterByAdmin,
-      @JsonKey(name: "waiter") String waiter,
-      @JsonKey(name: "call") String call,
-      @JsonKey(name: "callId") String callId,
-      @JsonKey(name: "callTime") DateTime callTime,
-      @JsonKey(name: "hasActiveOrder") bool hasActiveOrder,
-      @JsonKey(name: "restaurant") String restaurant,
-      @JsonKey(name: "createdAt") DateTime createdAt,
-      @JsonKey(name: "updatedAt") DateTime updatedAt,
-      @JsonKey(name: "__v") int v,
-      @JsonKey(name: "qrCode") String qrCode,
-      @JsonKey(name: "id") String callModelId});
+      {@JsonKey(name: "_id") String? id,
+      @JsonKey(name: "name") String? name,
+      @JsonKey(name: "typeOfTable") String? typeOfTable,
+      @JsonKey(name: "occupied") bool? occupied,
+      @JsonKey(name: "setWaiterByAdmin") bool? setWaiterByAdmin,
+      @JsonKey(name: "waiter") String? waiter,
+      @JsonKey(name: "call") String? call,
+      @JsonKey(name: "callId") String? callId,
+      @JsonKey(name: "callTime") DateTime? callTime,
+      @JsonKey(name: "hasActiveOrder") bool? hasActiveOrder,
+      @JsonKey(name: "restaurant") String? restaurant,
+      @JsonKey(name: "createdAt") DateTime? createdAt,
+      @JsonKey(name: "updatedAt") DateTime? updatedAt,
+      @JsonKey(name: "__v") int? v,
+      @JsonKey(name: "qrCode") String? qrCode,
+      @JsonKey(name: "id") String? callModelId});
 }
 
 /// @nodoc
@@ -220,88 +220,88 @@ class __$$CallModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? typeOfTable = null,
-    Object? occupied = null,
-    Object? setWaiterByAdmin = null,
-    Object? waiter = null,
-    Object? call = null,
-    Object? callId = null,
-    Object? callTime = null,
-    Object? hasActiveOrder = null,
-    Object? restaurant = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? v = null,
-    Object? qrCode = null,
-    Object? callModelId = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? typeOfTable = freezed,
+    Object? occupied = freezed,
+    Object? setWaiterByAdmin = freezed,
+    Object? waiter = freezed,
+    Object? call = freezed,
+    Object? callId = freezed,
+    Object? callTime = freezed,
+    Object? hasActiveOrder = freezed,
+    Object? restaurant = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? v = freezed,
+    Object? qrCode = freezed,
+    Object? callModelId = freezed,
   }) {
     return _then(_$CallModelImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      typeOfTable: null == typeOfTable
+              as String?,
+      typeOfTable: freezed == typeOfTable
           ? _value.typeOfTable
           : typeOfTable // ignore: cast_nullable_to_non_nullable
-              as String,
-      occupied: null == occupied
+              as String?,
+      occupied: freezed == occupied
           ? _value.occupied
           : occupied // ignore: cast_nullable_to_non_nullable
-              as bool,
-      setWaiterByAdmin: null == setWaiterByAdmin
+              as bool?,
+      setWaiterByAdmin: freezed == setWaiterByAdmin
           ? _value.setWaiterByAdmin
           : setWaiterByAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
-      waiter: null == waiter
+              as bool?,
+      waiter: freezed == waiter
           ? _value.waiter
           : waiter // ignore: cast_nullable_to_non_nullable
-              as String,
-      call: null == call
+              as String?,
+      call: freezed == call
           ? _value.call
           : call // ignore: cast_nullable_to_non_nullable
-              as String,
-      callId: null == callId
+              as String?,
+      callId: freezed == callId
           ? _value.callId
           : callId // ignore: cast_nullable_to_non_nullable
-              as String,
-      callTime: null == callTime
+              as String?,
+      callTime: freezed == callTime
           ? _value.callTime
           : callTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      hasActiveOrder: null == hasActiveOrder
+              as DateTime?,
+      hasActiveOrder: freezed == hasActiveOrder
           ? _value.hasActiveOrder
           : hasActiveOrder // ignore: cast_nullable_to_non_nullable
-              as bool,
-      restaurant: null == restaurant
+              as bool?,
+      restaurant: freezed == restaurant
           ? _value.restaurant
           : restaurant // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as DateTime?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      v: null == v
+              as DateTime?,
+      v: freezed == v
           ? _value.v
           : v // ignore: cast_nullable_to_non_nullable
-              as int,
-      qrCode: null == qrCode
+              as int?,
+      qrCode: freezed == qrCode
           ? _value.qrCode
           : qrCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      callModelId: null == callModelId
+              as String?,
+      callModelId: freezed == callModelId
           ? _value.callModelId
           : callModelId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -332,52 +332,52 @@ class _$CallModelImpl implements _CallModel {
 
   @override
   @JsonKey(name: "_id")
-  final String id;
+  final String? id;
   @override
   @JsonKey(name: "name")
-  final String name;
+  final String? name;
   @override
   @JsonKey(name: "typeOfTable")
-  final String typeOfTable;
+  final String? typeOfTable;
   @override
   @JsonKey(name: "occupied")
-  final bool occupied;
+  final bool? occupied;
   @override
   @JsonKey(name: "setWaiterByAdmin")
-  final bool setWaiterByAdmin;
+  final bool? setWaiterByAdmin;
   @override
   @JsonKey(name: "waiter")
-  final String waiter;
+  final String? waiter;
   @override
   @JsonKey(name: "call")
-  final String call;
+  final String? call;
   @override
   @JsonKey(name: "callId")
-  final String callId;
+  final String? callId;
   @override
   @JsonKey(name: "callTime")
-  final DateTime callTime;
+  final DateTime? callTime;
   @override
   @JsonKey(name: "hasActiveOrder")
-  final bool hasActiveOrder;
+  final bool? hasActiveOrder;
   @override
   @JsonKey(name: "restaurant")
-  final String restaurant;
+  final String? restaurant;
   @override
   @JsonKey(name: "createdAt")
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
   @JsonKey(name: "updatedAt")
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   @override
   @JsonKey(name: "__v")
-  final int v;
+  final int? v;
   @override
   @JsonKey(name: "qrCode")
-  final String qrCode;
+  final String? qrCode;
   @override
   @JsonKey(name: "id")
-  final String callModelId;
+  final String? callModelId;
 
   @override
   String toString() {
@@ -453,75 +453,75 @@ class _$CallModelImpl implements _CallModel {
 
 abstract class _CallModel implements CallModel {
   const factory _CallModel(
-      {@JsonKey(name: "_id") required final String id,
-      @JsonKey(name: "name") required final String name,
-      @JsonKey(name: "typeOfTable") required final String typeOfTable,
-      @JsonKey(name: "occupied") required final bool occupied,
-      @JsonKey(name: "setWaiterByAdmin") required final bool setWaiterByAdmin,
-      @JsonKey(name: "waiter") required final String waiter,
-      @JsonKey(name: "call") required final String call,
-      @JsonKey(name: "callId") required final String callId,
-      @JsonKey(name: "callTime") required final DateTime callTime,
-      @JsonKey(name: "hasActiveOrder") required final bool hasActiveOrder,
-      @JsonKey(name: "restaurant") required final String restaurant,
-      @JsonKey(name: "createdAt") required final DateTime createdAt,
-      @JsonKey(name: "updatedAt") required final DateTime updatedAt,
-      @JsonKey(name: "__v") required final int v,
-      @JsonKey(name: "qrCode") required final String qrCode,
+      {@JsonKey(name: "_id") required final String? id,
+      @JsonKey(name: "name") required final String? name,
+      @JsonKey(name: "typeOfTable") required final String? typeOfTable,
+      @JsonKey(name: "occupied") required final bool? occupied,
+      @JsonKey(name: "setWaiterByAdmin") required final bool? setWaiterByAdmin,
+      @JsonKey(name: "waiter") required final String? waiter,
+      @JsonKey(name: "call") required final String? call,
+      @JsonKey(name: "callId") required final String? callId,
+      @JsonKey(name: "callTime") required final DateTime? callTime,
+      @JsonKey(name: "hasActiveOrder") required final bool? hasActiveOrder,
+      @JsonKey(name: "restaurant") required final String? restaurant,
+      @JsonKey(name: "createdAt") required final DateTime? createdAt,
+      @JsonKey(name: "updatedAt") required final DateTime? updatedAt,
+      @JsonKey(name: "__v") required final int? v,
+      @JsonKey(name: "qrCode") required final String? qrCode,
       @JsonKey(name: "id")
-      required final String callModelId}) = _$CallModelImpl;
+      required final String? callModelId}) = _$CallModelImpl;
 
   factory _CallModel.fromJson(Map<String, dynamic> json) =
       _$CallModelImpl.fromJson;
 
   @override
   @JsonKey(name: "_id")
-  String get id;
+  String? get id;
   @override
   @JsonKey(name: "name")
-  String get name;
+  String? get name;
   @override
   @JsonKey(name: "typeOfTable")
-  String get typeOfTable;
+  String? get typeOfTable;
   @override
   @JsonKey(name: "occupied")
-  bool get occupied;
+  bool? get occupied;
   @override
   @JsonKey(name: "setWaiterByAdmin")
-  bool get setWaiterByAdmin;
+  bool? get setWaiterByAdmin;
   @override
   @JsonKey(name: "waiter")
-  String get waiter;
+  String? get waiter;
   @override
   @JsonKey(name: "call")
-  String get call;
+  String? get call;
   @override
   @JsonKey(name: "callId")
-  String get callId;
+  String? get callId;
   @override
   @JsonKey(name: "callTime")
-  DateTime get callTime;
+  DateTime? get callTime;
   @override
   @JsonKey(name: "hasActiveOrder")
-  bool get hasActiveOrder;
+  bool? get hasActiveOrder;
   @override
   @JsonKey(name: "restaurant")
-  String get restaurant;
+  String? get restaurant;
   @override
   @JsonKey(name: "createdAt")
-  DateTime get createdAt;
+  DateTime? get createdAt;
   @override
   @JsonKey(name: "updatedAt")
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
   @override
   @JsonKey(name: "__v")
-  int get v;
+  int? get v;
   @override
   @JsonKey(name: "qrCode")
-  String get qrCode;
+  String? get qrCode;
   @override
   @JsonKey(name: "id")
-  String get callModelId;
+  String? get callModelId;
   @override
   @JsonKey(ignore: true)
   _$$CallModelImplCopyWith<_$CallModelImpl> get copyWith =>

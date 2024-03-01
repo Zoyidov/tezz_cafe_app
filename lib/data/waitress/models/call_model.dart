@@ -9,37 +9,37 @@ part 'call_model.g.dart';
 class CallModel with _$CallModel {
   const factory CallModel({
     @JsonKey(name: "_id")
-    required String id,
+    required String? id,
     @JsonKey(name: "name")
-    required String name,
+    required String? name,
     @JsonKey(name: "typeOfTable")
-    required String typeOfTable,
+    required String? typeOfTable,
     @JsonKey(name: "occupied")
-    required bool occupied,
+    required bool? occupied,
     @JsonKey(name: "setWaiterByAdmin")
-    required bool setWaiterByAdmin,
+    required bool? setWaiterByAdmin,
     @JsonKey(name: "waiter")
-    required String waiter,
+    required String? waiter,
     @JsonKey(name: "call")
-    required String call,
+    required String? call,
     @JsonKey(name: "callId")
-    required String callId,
+    required String? callId,
     @JsonKey(name: "callTime")
-    required DateTime callTime,
+    required DateTime? callTime,
     @JsonKey(name: "hasActiveOrder")
-    required bool hasActiveOrder,
+    required bool? hasActiveOrder,
     @JsonKey(name: "restaurant")
-    required String restaurant,
+    required String? restaurant,
     @JsonKey(name: "createdAt")
-    required DateTime createdAt,
+    required DateTime? createdAt,
     @JsonKey(name: "updatedAt")
-    required DateTime updatedAt,
+    required DateTime? updatedAt,
     @JsonKey(name: "__v")
-    required int v,
+    required int? v,
     @JsonKey(name: "qrCode")
-    required String qrCode,
+    required String? qrCode,
     @JsonKey(name: "id")
-    required String callModelId,
+    required String? callModelId,
   }) = _CallModel;
 
   factory CallModel.fromJson(Map<String, dynamic> json) => _$CallModelFromJson(json);
