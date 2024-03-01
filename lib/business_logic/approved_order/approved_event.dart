@@ -7,3 +7,9 @@ class FetchApprovedOrder extends ApprovedEvent {
 
   FetchApprovedOrder(this.tableId);
 }
+
+class DeleteApprovedOrder extends ApprovedEvent {
+  final String tableId;
+
+  DeleteApprovedOrder(this.tableId);
+}
