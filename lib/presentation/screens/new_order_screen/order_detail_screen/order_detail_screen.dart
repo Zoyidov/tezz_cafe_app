@@ -21,7 +21,7 @@ class OrderDetailScreen extends StatelessWidget {
         scrolledUnderElevation: 0,
         title: Text(
           tableModelWaitress.name,
-          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
+          style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
         ),
         actions: [
           Padding(
@@ -79,6 +79,7 @@ class OrderDetailScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final product = state.order?.activeOrders?.products[index];
                     return OrderContainer(
+                      color: AppColors.red,
                       time: formatDate(product?.product.createdAt ??DateTime.now(), [ HH, ':', nn]),
                       foodName: product?.product.name ?? "",
                       price: currencyFormat.format(product?.product.price ?? 0),

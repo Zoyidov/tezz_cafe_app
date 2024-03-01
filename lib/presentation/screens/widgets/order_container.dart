@@ -14,6 +14,7 @@ class OrderContainer extends StatelessWidget {
   final String image;
   final VoidCallback? onTap;
   final bool isActive;
+  final Color? color;
 
   const OrderContainer({
     super.key,
@@ -25,6 +26,7 @@ class OrderContainer extends StatelessWidget {
     required this.image,
     this.onTap,
     this.isActive = false,
+    this.color,
   });
 
   @override
@@ -49,7 +51,7 @@ class OrderContainer extends StatelessWidget {
                     height: 12,
                     width: 12,
                     decoration: BoxDecoration(
-                      color: AppColors.green,
+                      color: color ?? AppColors.green,
                       shape: BoxShape.circle,
                     ),
                   ),
