@@ -43,7 +43,7 @@ class OrderItem extends StatelessWidget {
                     const Text('Chaqiruv', style: AppFontStyle.description),
                     const Gap(8),
                     Text(
-                      '/ ${formatDate(product.product.createdAt, [HH, ':', nn])}',
+                      '/ ${formatDate(product.product.createdAt ?? DateTime.now(), [HH, ':', nn])}',
                       style: context.bodySmall?.copyWith(color: AppColors.grey400),
                     ),
                   ],
@@ -62,7 +62,7 @@ class OrderItem extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: Image.network(
-                  ApiConstants.imageBaseUrl +product.product.photo,
+                  ApiConstants.imageBaseUrl + (product.product.photo ?? ""),
                   fit: BoxFit.cover,
                   cacheHeight: 1080,
                   cacheWidth: 1920,
@@ -81,7 +81,7 @@ class OrderItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      product.product.name,
+                      product.product.name??"",
                       style: AppFontStyle.description2.copyWith(fontWeight: FontWeight.w600, color: AppColors.black),
                     ),
                     const Gap(8),

@@ -80,23 +80,23 @@ class _CallScreenState extends State<CallScreen> {
                   return call.call == "accepted"
                       ? RecievedContainer(
                     type: "Chaqiruv",
-                    place: call.name,
+                    place: call.name ?? "Xatolik yuz berdi",
                     status: 'Boryapman',
                     onTap: () {
                       setState(() {
-                        context.read<WaitersCallBloc>().add(DeleteCallBack(tableId: call.id));
+                        context.read<WaitersCallBloc>().add(DeleteCallBack(tableId: call.id??""));
                       });
                     },
                   )
                       : call.call == "calling" ?
                   NotificationContainer(
                     type: 'Chaqiruv',
-                    place: call.name,
+                    place: call.name ?? "Xatolik yuz berdi",
                     time: call.createdAt.toString().substring(11, 16),
                     status: 'Boryapman',
                     onTap: () {
                       setState(() {
-                        context.read<WaitersCallBloc>().add(UpdateCallBack(tableId: call.id, index: index));
+                        context.read<WaitersCallBloc>().add(UpdateCallBack(tableId: call.id?? "", index: index));
                         state.showRecievedContainers[index] = state.showRecievedContainers[index];
                       });
                     },
