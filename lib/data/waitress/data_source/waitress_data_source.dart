@@ -95,11 +95,10 @@ class WaitressDataSource {
     }
   }
 
-  Future<void> closeOrder(String tableId,String productId, num quantity) async {
+  Future<void> closeOrder(String tableId) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
-      final response = await dio.put('/approved/orders/:id',
-          data: {'table': tableId,'product': productId,'quantity': quantity},
+      final response = await dio.put('/tables/$tableId',
           options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
         return;
