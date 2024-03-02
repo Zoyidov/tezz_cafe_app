@@ -82,4 +82,17 @@ class WaitressRepository {
       return Left(Failure(e.toString()));
     }
   }
+
+  Future<Either<Failure, void>> deleteOrder(String tableId,String productId, num quantity) async {
+    try {
+      await dataSource.deleteOrder(tableId,productId,quantity);
+      return const Right(null);
+    } on DioException catch (e) {
+      return Left(handleDioError(e));
+    } on FormatException catch (e) {
+      return Left(Failure("Error parsing data: ${e.message}"));
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
 }

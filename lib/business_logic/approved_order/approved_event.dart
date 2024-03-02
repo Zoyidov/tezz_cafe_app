@@ -10,6 +10,8 @@ class FetchApprovedOrder extends ApprovedEvent {
 
 class DeleteApprovedOrder extends ApprovedEvent {
   final String tableId;
+  final String productId;
+  final num quantity;
 
-  DeleteApprovedOrder(this.tableId);
+  DeleteApprovedOrder(this.tableId, this.productId, this.quantity);
 }
