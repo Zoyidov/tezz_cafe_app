@@ -11,10 +11,11 @@ import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key, required this.product, this.isActive = false});
+  const OrderItem({super.key, required this.product, this.isActive = false, required this.onTap});
 
   final ProductElement? product;
   final bool isActive;
+  final VoidCallback onTap;
 
   // final ProductProduct? product;
   // final ActiveOrders? activeOrder;
@@ -24,7 +25,7 @@ class OrderItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: isActive?const Color(0xFFF91506).withOpacity(.1): AppColors.textFieldColor,
+        color: isActive ? const Color(0xFFF91506).withOpacity(.1) : AppColors.textFieldColor,
       ),
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -39,24 +40,30 @@ class OrderItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CircleIcon(isActive: true),
+                    CircleIcon(
+                      isActive: isActive ? false : true,
+                    ),
                     const Gap(8),
                     const Text('Chaqiruv', style: AppFontStyle.description),
                     const Gap(8),
                     Text(
-                      '/ ${formatDate(product?.product.createdAt ?? DateTime.now(), [HH, ':', nn])}',
+                      '/ ${formatDate(product?.product.createdAt ?? DateTime.now(), [
+                            HH,
+                            ':',
+                            nn
+                          ])}',
                       style: context.bodySmall?.copyWith(color: AppColors.grey400),
                     ),
                   ],
                 ),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.clear), color: AppColors.grey500),
+                IconButton(
+                    onPressed: onTap, icon: const Icon(Icons.clear), color: AppColors.grey500),
               ],
             ),
           ),
           const Gap(12),
           Row(
             children: [
-              // todo image product
               Container(
                 height: 80,
                 width: 80,
@@ -83,7 +90,8 @@ class OrderItem extends StatelessWidget {
                   children: [
                     Text(
                       product?.product.name ?? "",
-                      style: AppFontStyle.description2.copyWith(fontWeight: FontWeight.w600, color: AppColors.black),
+                      style: AppFontStyle.description2
+                          .copyWith(fontWeight: FontWeight.w600, color: AppColors.black),
                     ),
                     const Gap(8),
                     Text(

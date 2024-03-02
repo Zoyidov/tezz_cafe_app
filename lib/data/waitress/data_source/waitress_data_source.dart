@@ -94,4 +94,19 @@ class WaitressDataSource {
       rethrow;
     }
   }
+
+  Future<void> closeOrder(String tableId,String productId, num quantity) async {
+    try {
+      final token = StorageRepository.getString(StorageKeys.token);
+      final response = await dio.put('/approved/orders/:id',
+          data: {'table': tableId,'product': productId,'quantity': quantity},
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
+      if (response.statusCode == 200) {
+        return;
+      }
+      throw 'Failed to close order ${response.statusCode} ${response.data}';
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

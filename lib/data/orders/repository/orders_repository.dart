@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
 import 'package:tezz_cafe_app/data/orders/data_source/orders_service_repo.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';

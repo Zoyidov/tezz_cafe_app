@@ -87,18 +87,22 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final product = state.order?.totalOrders?.products[index];
-                    return OrderItem(product: product);
+                    return OrderItem(product: product, onTap: () {
+                      context.read<ApprovedBloc>().add(DeleteApprovedOrder(table.id, product?.product.id ?? "", product?.quantity ?? 0));
+                    },);
                   },
                   separatorBuilder: (context, index) => const Gap(16),
                   itemCount: state.order?.totalOrders?.products.length ?? 0,
                 ),
-                const Gap(16),
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final product = state.order?.activeOrders?.products[index];
-                    return OrderItem(product: product,isActive: true);
+                    return OrderItem(product: product,isActive: true, onTap: () {
+                      context.read<ApprovedBloc>().add(DeleteApprovedOrder(table.id, product?.product.id ?? "", product?.quantity ?? 0));
+                    },
+                    );
                   },
                   separatorBuilder: (context, index) => const Gap(16),
                   itemCount: state.order?.activeOrders?.products.length ?? 0,
@@ -114,8 +118,15 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                         animType: AnimType.bottomSlide,
                         title: "Stolni yopish",
                         desc: '${table.name} ni yopmoqchimisiz?',
-                        btnCancelOnPress: () {},
-                        btnOkOnPress: () {},
+                        btnCancelOnPress: () {
+                          // print(table.id);
+                          // print(state.order?.totalOrders?.products.length);
+                        },
+                        btnOkOnPress: () {
+                          // context
+                          //     .read<ApprovedBloc>()
+                          //     .add(CloseApprovedOrder(table.id, state.order?.totalOrders?.id ?? '', 2));
+                        },
                         btnOkText: 'Yopish',
                         btnCancelText: 'Bekor qilish',
                       ).show();

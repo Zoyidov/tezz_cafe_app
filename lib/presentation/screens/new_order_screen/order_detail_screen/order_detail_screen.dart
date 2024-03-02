@@ -69,7 +69,6 @@ class OrderDetailScreen extends StatelessWidget {
                       image: product?.product.photo ?? "",
                       onTap: () {
                         context.read<ApprovedBloc>().add(DeleteApprovedOrder(tableModelWaitress.id, product?.product.id ?? "", product?.quantity ?? 0));
-                        print("deleted");
                       },
                     );
                   },
@@ -90,11 +89,7 @@ class OrderDetailScreen extends StatelessWidget {
                       countPrice: currencyFormat.format(product?.price ?? 0),
                       image: product?.product.photo ?? "",
                       onTap: () {
-                        print("TableId: ${tableModelWaitress.id}");
-                        print("productId: ${product?.product.id}");
-                        print("quantity: ${product?.quantity}");
                         context.read<ApprovedBloc>().add(DeleteApprovedOrder(tableModelWaitress.id, product?.product.id ?? "", product?.quantity ?? 0));
-                        print("deleted");
                       },
                       isActive: true,
                     );

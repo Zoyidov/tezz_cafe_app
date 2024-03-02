@@ -5,11 +5,9 @@ import 'package:formz/formz.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tezz_cafe_app/business_logic/approved_order/approved_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
-import 'package:tezz_cafe_app/presentation/screens/auth/login.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/order_detail_screen/order_detail_screen.dart';
 
-import '../../../utils/local_storage/storage_repository.dart';
 
 class NewOrderScreen extends StatelessWidget {
   const NewOrderScreen({super.key});
@@ -18,27 +16,11 @@ class NewOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(onPressed: () async{
-        // final response = await TableService(DioSettings.getDio()).getTablesByRestaurantId('65d652cec4485f20bdf5d897',true);
-      },),
+      // floatingActionButton: FloatingActionButton(onPressed: () async{
+      //   // final response = await TableService(DioSettings.getDio()).getTablesByRestaurantId('65d652cec4485f20bdf5d897',true);
+      // },),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-              onPressed: () {
-                StorageRepository.clearAll();
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ),
-                    (route) => false);
-              },
-              icon: const Icon(
-                Icons.logout_outlined,
-                color: Colors.red,
-              ))
-        ],
         scrolledUnderElevation: 0,
         title: const Text(
           "Faol Buyurtma",

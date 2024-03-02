@@ -17,6 +17,7 @@ class ApprovedBloc extends Bloc<ApprovedEvent, ApprovedState> {
   ApprovedBloc() : super(const ApprovedState()) {
     on<FetchApprovedOrder>(_onFetchApprovedOrder);
     on<DeleteApprovedOrder>(_deleteOrder);
+    on<CloseApprovedOrder>(_closeApprovedOrder);
   }
 
   FutureOr<void> _onFetchApprovedOrder(FetchApprovedOrder event, Emitter<ApprovedState> emit) async {
@@ -36,4 +37,15 @@ class ApprovedBloc extends Bloc<ApprovedEvent, ApprovedState> {
       (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
     );
   }
+
+
+  Future<void> _closeApprovedOrder(CloseApprovedOrder event, Emitter<ApprovedState> emit) async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    final order = await _waitressRepository.closeOrder(event.tableId, event.productId, event.quantity);
+    order.fold(
+      (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
+      (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
+    );
+  }
+
 }
