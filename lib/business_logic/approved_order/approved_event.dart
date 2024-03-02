@@ -15,3 +15,10 @@ class DeleteApprovedOrder extends ApprovedEvent {
 
   DeleteApprovedOrder(this.tableId, this.productId, this.quantity);
 }
+
+class CloseApprovedOrder extends ApprovedEvent {
+  final String tableId;
+  final String productId;
+  final num quantity;
+  CloseApprovedOrder(this.tableId, this.productId, this.quantity);
+}
