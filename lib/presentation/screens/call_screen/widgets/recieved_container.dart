@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 class RecievedContainer extends StatelessWidget {
   final String type;
   final String place;
@@ -35,20 +35,27 @@ class RecievedContainer extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                place,
-                style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+              Flexible(
+                child: AutoSizeText(
+                  place,
+                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+                  overflow: TextOverflow.ellipsis,
+                  
+                  maxLines: 1,
+                ),
               ),
               const Gap(20),
-              Container(
-                decoration: const BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
-                padding: const EdgeInsets.all(20),
-                child:  Icon(
-                  Icons.notifications_active_rounded,
-                  color: AppColors.green,
-                  size: 40,
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
+                  padding: const EdgeInsets.all(20),
+                  child:  Icon(
+                    Icons.notifications_active_rounded,
+                    color: AppColors.green,
+                    size: 40,
+                  ),
                 ),
               ),
             ],
