@@ -96,9 +96,9 @@ class WaitressRepository {
     }
   }
 
-  Future<Either<Failure, void>> closeOrder(String tableId,String productId, num quantity) async {
+  Future<Either<Failure, void>> closeOrder(String tableId) async {
     try {
-      await dataSource.closeOrder(tableId,productId,quantity);
+      await dataSource.closeOrder(tableId);
       return const Right(null);
     } on DioException catch (e) {
       return Left(handleDioError(e));

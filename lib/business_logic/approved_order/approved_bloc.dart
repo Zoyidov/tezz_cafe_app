@@ -41,7 +41,7 @@ class ApprovedBloc extends Bloc<ApprovedEvent, ApprovedState> {
 
   Future<void> _closeApprovedOrder(CloseApprovedOrder event, Emitter<ApprovedState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final order = await _waitressRepository.closeOrder(event.tableId, event.productId, event.quantity);
+    final order = await _waitressRepository.closeOrder(event.tableId);
     order.fold(
       (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
       (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),

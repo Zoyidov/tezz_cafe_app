@@ -123,9 +123,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                           // print(state.order?.totalOrders?.products.length);
                         },
                         btnOkOnPress: () {
-                          // context
-                          //     .read<ApprovedBloc>()
-                          //     .add(CloseApprovedOrder(table.id, state.order?.totalOrders?.id ?? '', 2));
+                          context.read<ApprovedBloc>().add(CloseApprovedOrder(table.id));
                         },
                         btnOkText: 'Yopish',
                         btnCancelText: 'Bekor qilish',
