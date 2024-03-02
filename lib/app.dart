@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/activate_table/activate_table_bloc.dart';
@@ -13,8 +12,6 @@ import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/waiters/waiters_call_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
-import 'package:tezz_cafe_app/data/activate_table/data_source/activate_serice_repo.dart';
-import 'package:tezz_cafe_app/data/activate_table/repository/activate_table_repository.dart';
 import 'package:tezz_cafe_app/utils/route/ruotes.dart';
 import 'package:tezz_cafe_app/utils/theme/app_theme.dart';
 

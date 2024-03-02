@@ -6,6 +6,8 @@ import 'package:formz/formz.dart';
 import 'package:tezz_cafe_app/data/activate_table/repository/activate_table_repository.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
+import '../../utils/di/service_locator.dart';
+
 part 'activate_table_event.dart';
 
 part 'activate_table_state.dart';

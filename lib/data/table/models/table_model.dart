@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 import 'package:tezz_cafe_app/data/waitress/models/waitress_order/table_orders.dart';
 

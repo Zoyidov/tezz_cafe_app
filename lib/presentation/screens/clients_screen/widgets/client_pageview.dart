@@ -13,10 +13,7 @@ class ClientsPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NewOrdersBloc, NewOrdersState>(
       builder: (context, state) {
-        print(state.status);
-        print(state.tables);
         if (state.status.isFailure) {
-          print('Error: ${state.failure?.message ?? ''}');
           return Center(child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

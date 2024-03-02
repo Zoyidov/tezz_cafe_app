@@ -5,9 +5,7 @@ import 'package:formz/formz.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/business_logic/order/order_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
-import 'package:tezz_cafe_app/data/category/models/category_model.dart';
 import 'package:tezz_cafe_app/data/product/models/product_model.dart';
-import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
@@ -37,13 +35,6 @@ class FoodDetailScreen extends StatelessWidget {
             autoCloseDuration: const Duration(seconds: 5),
             alignment: Alignment.bottomCenter,
             description: Text(state.failure?.message ?? 'Xatolik'),
-          );
-        }
-        if (state.status.isInProgress) {
-          showDialog(
-            barrierDismissible: true,
-            context: context,
-            builder: (context) => Center(child: CircularProgressIndicator(color: AppColors.primaryColor)),
           );
         }
         if (state.status.isSuccess) {
@@ -147,7 +138,6 @@ class FoodDetailScreen extends StatelessWidget {
             ),
             floatingActionButton: AnimatedOpacity(
               duration: const Duration(milliseconds: 300),
-              // top: state.isVisible ? 0 : 100,
               opacity: 1,
               child: Row(mainAxisSize: MainAxisSize.min, children: [
                 IconButton.filledTonal(
@@ -175,24 +165,33 @@ class FoodDetailScreen extends StatelessWidget {
                     style: iconButtonStyle),
               ]),
             ),
-            bottomNavigationBar: Padding(
-              padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 20),
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+            bottomNavigationBar: BlocBuilder<OrderBloc, OrderState>(
+              builder: (context, stateOrder) {
+                // if (stateOrder.status.isInProgress) {
+                //    return const Center(child: CircularProgressIndicator());
+                // }
+                return Padding(
+                  padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 20),
+                  child: FilledButton(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: AppColors.primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: stateOrder.status.isInProgress?null:() {
+                      context.read<OrderBloc>().add(CreateOrderEvent(
+                            tableId: table.id,
+                            productId: product.id,
+                            quantity: state.count,
+                          ));
+                    },
+                    child: stateOrder.status.isInProgress
+                        ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator())
+                        : Text(currencyFormat.format(product.price * state.count), style: AppFontStyle.description2),
                   ),
-                ),
-                onPressed: () {
-                  context.read<OrderBloc>().add(CreateOrderEvent(
-                        tableId: table.id,
-                        productId: product.id,
-                        quantity: state.count,
-                      ));
-                },
-                child: Text(currencyFormat.format(product.price * state.count), style: AppFontStyle.description2),
-              ),
+                );
+              },
             ),
           );
         },
