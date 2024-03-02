@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
@@ -53,12 +54,18 @@ class NotificationContainer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                place,
-                style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+              Flexible(
+                child: AutoSizeText(
+                  place,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+                ),
               ),
-              const Gap(20),
+              // Spacer(),
+              const Gap(10),
               Container(
+                alignment: Alignment.center,
                 decoration: const BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
                 padding: EdgeInsets.all(padding),
                 child: Icon(
