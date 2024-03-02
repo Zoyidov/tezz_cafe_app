@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 import 'package:tezz_cafe_app/data/activate_table/repository/activate_table_repository.dart';
+import 'package:tezz_cafe_app/utils/di/service_locator.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
 part 'activate_table_event.dart';
