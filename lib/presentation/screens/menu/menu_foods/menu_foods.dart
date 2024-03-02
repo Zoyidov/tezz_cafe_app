@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
 import 'package:tezz_cafe_app/data/category/models/category_model.dart';
-import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/food_detail/food_detail.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
@@ -59,48 +58,51 @@ class MenuFoodsScreen extends StatelessWidget {
             itemCount: category.products.length,
             itemBuilder: (context, index) {
               final product = category.products[index];
-              return GestureDetector(
-                onTap: () {
-                  context.read<ProductBloc>().add(SetProductCountEvent());
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FoodDetailScreen(product: product, table: table)));
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                      child: Image.network(ApiConstants.imageBaseUrl + (product.photo ??""),
-                          fit: BoxFit.cover,
-                          height: 170,
-                          width: double.infinity,
-                          errorBuilder: (context, error, stackTrace) => Image.asset(
-                                AppImages.imageNotFound,
-                                fit: BoxFit.cover,
-                                height: 170,
-                                width: double.infinity,
-                              )),
-                    ),
-                    const Gap(12),
-                    Flexible(
-                      child: Text(
-                        product.name,
-                        style: context.titleMedium?.copyWith(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.w600,
-                          height: 1.25,
-                          fontSize: 18,
+              return AbsorbPointer(
+                absorbing: !(product.available ?? false),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => FoodDetailScreen(product: product, table: table)));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                        child: Image.network(ApiConstants.imageBaseUrl + (product.photo ?? ""),
+                            fit: BoxFit.cover,
+                            color: product.available ?? false ? null : Colors.grey,
+                            colorBlendMode: product.available ?? false ? null : BlendMode.hue,
+                            height: 170,
+                            width: double.infinity,
+                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                                  AppImages.imageNotFound,
+                                  fit: BoxFit.cover,
+                                  height: 170,
+                                  width: double.infinity,
+                                )),
+                      ),
+                      const Gap(12),
+                      Flexible(
+                        child: Text(
+                          product.name,
+                          style: context.titleMedium?.copyWith(
+                            color: AppColors.black,
+                            fontWeight: FontWeight.w600,
+                            height: 1.25,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
-                    ),
-                    const Gap(8),
-                    Text(
-                      uzbekCurrencyFormat.format(product.price),
-                      // '356 000 uzs',
-                      style: AppFontStyle.description2.copyWith(color: AppColors.red),
-                    )
-                  ],
+                      const Gap(8),
+                      Text(
+                        uzbekCurrencyFormat.format(product.price),
+                        // '356 000 uzs',
+                        style: AppFontStyle.description2.copyWith(color: AppColors.red),
+                      )
+                    ],
+                  ),
                 ),
               );
             },

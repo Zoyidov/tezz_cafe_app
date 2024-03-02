@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
-import 'package:tezz_cafe_app/data/waitress/models/waitress_order/table_orders.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
 

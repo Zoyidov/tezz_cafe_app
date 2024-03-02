@@ -22,6 +22,7 @@ import 'package:tezz_cafe_app/utils/di/dio_options.dart';
 final GetIt getIt = GetIt.instance;
 
 Future<void> setupLocator() async {
+  getIt.registerSingleton(DioSettings.getDio());
   // Auth
   getIt.registerSingleton(AuthService(DioSettings.getDio()));
   getIt.registerSingleton(AuthRepository(getIt<AuthService>()));

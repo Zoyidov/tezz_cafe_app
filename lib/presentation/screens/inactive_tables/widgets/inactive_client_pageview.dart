@@ -12,8 +12,6 @@ class InActiveClientsPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NoActiveTableBloc, NoActiveTableState>(
       builder: (context, state) {
-        print(state.tables);
-        print(state.status);
         return PageView.builder(
           physics: const NeverScrollableScrollPhysics(),
           controller: context.read<NoActiveTableBloc>().pageController,
@@ -21,7 +19,6 @@ class InActiveClientsPageView extends StatelessWidget {
           itemBuilder: (context, index) {
             final zones = context.watch<ZoneBloc>().state.zones;
             final filter = state.tables.where((element) => element.typeOfTable.id == zones[index].id).toList();
-            print(filter.length);
             return InActiveClientsListView(index: index, tables: filter);
           },
         );

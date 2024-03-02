@@ -22,7 +22,6 @@ class TableService {
         throw 'Failed to get tables: ${response.statusCode} ${response.data}';
       }
     } catch (e) {
-      print(e);
       rethrow;
     }
   }
