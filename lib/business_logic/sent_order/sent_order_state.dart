@@ -1,26 +1,21 @@
-part of 'approved_bloc.dart';
+part of 'sent_order_bloc.dart';
 
-class ApprovedState {
+class SentOrderState {
   final FormzSubmissionStatus status;
   final Failure? failure;
-  final TableOrders? order;
 
-
-  const ApprovedState({
+  SentOrderState({
     this.status = FormzSubmissionStatus.initial,
     this.failure,
-    this.order,
   });
 
-  ApprovedState copyWith({
+  SentOrderState copyWith({
     FormzSubmissionStatus? status,
     Failure? failure,
-    TableOrders? order,
   }) {
-    return ApprovedState(
+    return SentOrderState(
       status: status ?? this.status,
       failure: failure ?? this.failure,
-      order: order ?? this.order,
     );
   }
 }

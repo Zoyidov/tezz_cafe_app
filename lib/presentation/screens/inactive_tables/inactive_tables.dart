@@ -23,7 +23,7 @@ class _InActiveTablesScreenState extends State<InActiveTablesScreen> {
         child: OutlinedButton(
           style: OutlinedButton.styleFrom(
             shape: const StadiumBorder(),
-            side: const BorderSide(color: Colors.black),
+            side: const BorderSide(),
             backgroundColor: AppColors.primaryColor
           ),
             onPressed: () {
