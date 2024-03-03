@@ -11,6 +11,7 @@ class NotificationContainer extends StatelessWidget {
   final double size;
   final double padding;
   final VoidCallback? onTap;
+  final Color? color;
 
   const NotificationContainer({
     super.key,
@@ -21,6 +22,7 @@ class NotificationContainer extends StatelessWidget {
     this.onTap,
     this.size = 40,
     this.padding = 20,
+    this.color,
   });
 
   @override
@@ -83,7 +85,7 @@ class NotificationContainer extends StatelessWidget {
           const Gap(8.0),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primaryColor,
+              backgroundColor: color?? AppColors.primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
