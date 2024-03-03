@@ -7,6 +7,7 @@ import 'package:tezz_cafe_app/business_logic/sent_order/sent_order_bloc.dart';
 import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/widgets/order_container.dart';
+import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/font_style.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -101,7 +102,7 @@ class OrderListWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       itemBuilder: (context, index) {
         final product = products?[index];
-        return OrderContainer(
+        return  OrderContainer(
           time: formatDate(product?.product.createdAt ?? DateTime.now(), [HH, ':', nn]),
           foodName: product?.product.name ?? "",
           price: currencyFormat.format(product?.product.price ?? 0),
@@ -114,6 +115,7 @@ class OrderListWidget extends StatelessWidget {
                 .add(DeleteApprovedOrder(tableModelWaitress.id, product?.product.id ?? "", product?.quantity ?? 0));
           },
           isActive: isActive,
+          color: isActive ? AppColors.green : AppColors.red,
         );
       },
       itemCount: products?.length ?? 0,

@@ -1,3 +1,4 @@
+import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:tezz_cafe_app/business_logic/approved_order/approved_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/order_detail_screen/order_detail_screen.dart';
+import 'package:tezz_cafe_app/utils/constants/colors.dart';
 
 
 class NewOrderScreen extends StatelessWidget {
@@ -46,27 +48,33 @@ class NewOrderScreen extends StatelessWidget {
 
           }
           return ListView.builder(
-            // shrinkWrap: true,
-            itemCount: state.tables.length,
+            itemCount: state.tables.where((table) => table.hasActiveOrder).length,
             itemBuilder: (context, index) {
-              final table = state.tables[index];
+              final activeTables = state.tables.where((table) => table.hasActiveOrder).toList();
+
+              activeTables.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+
+              final table = activeTables[index];
+
               return NotificationContainer(
                 type: 'Yangi buyurtma',
                 place: table.name,
                 time: formatDate(table.createdAt, [HH, ':', nn]),
                 status: 'Ko\'rish',
+                color: AppColors.primaryColor,
                 onTap: () {
                   context.read<ApprovedBloc>().add(FetchApprovedOrder(table.id));
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => OrderDetailScreen(tableModelWaitress: table),
-                      ),
-                    );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderDetailScreen(tableModelWaitress: table),
+                    ),
+                  );
                 },
               );
             },
           );
+
         },
       ),
       // floatingActionButton: FloatingActionButton(
