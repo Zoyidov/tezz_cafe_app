@@ -9,6 +9,7 @@ import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/no_active_table/no_active_table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/order/order_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/sent_order/sent_order_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/waiters/waiters_call_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
@@ -32,6 +33,7 @@ class App extends StatelessWidget {
       BlocProvider(create: (context) => NewOrdersBloc()),
       BlocProvider(create: (context) => OrderBloc()),
       BlocProvider(create: (context) => WaitersCallBloc()),
+      BlocProvider(create: (context) => SentOrderBloc()),
       BlocProvider(create: (context) => ActivateTableBloc()),
     ], child: const MainApp());
   }

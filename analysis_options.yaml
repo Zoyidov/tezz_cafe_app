@@ -3,9 +3,34 @@ include: package:flutter_lints/flutter.yaml
 linter:
   rules:
     - avoid_redundant_argument_values
+    - unnecessary_to_list_in_spreads
+    - unnecessary_this
+    - unnecessary_string_interpolations
+    - unnecessary_string_escapes
+    - unnecessary_statements
+    - unnecessary_raw_strings
+    - unnecessary_parenthesis
+    - unnecessary_overrides
+    - unnecessary_nullable_for_final_variable_declarations
+    - unnecessary_null_in_if_null_operators
+    - unnecessary_null_checks
+    - unnecessary_null_aware_operator_on_extension_on_nullable
+    - unnecessary_null_aware_assignments
+    - unnecessary_new
+    - unnecessary_library_directive
+    - unnecessary_late
+#    - unnecessary_lambdas
+    - unnecessary_getters_setters
+    - unnecessary_constructor_name
+    - unnecessary_const
+    - unnecessary_breaks
+    - unnecessary_brace_in_string_interps
+    - unnecessary_await_in_return
+
 analyzer:
   exclude:
     - '**/*.g.dart'
     - '**/*.freezed.dart'
   errors:
     invalid_annotation_target: ignore
+

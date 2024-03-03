@@ -8,3 +8,9 @@ class ChangeNoActiveTableEvent extends NoActiveTableEvent {
   final int index;
   ChangeNoActiveTableEvent( this.index);
 }
+
+class RemoveNoActiveTableEvent extends NoActiveTableEvent {
+  final String tableId;
+
+  RemoveNoActiveTableEvent(this.tableId);
+}

@@ -21,6 +21,7 @@ class NoActiveTableBloc extends Bloc<NoActiveTableEvent, NoActiveTableState> {
   NoActiveTableBloc() : super(NoActiveTableState()) {
     on<FetchNoActiveTables>(_onFetchNoActiveTablesEvent);
     on<ChangeNoActiveTableEvent>(_onChangeTableEvent);
+    on<RemoveNoActiveTableEvent>(_onRemoveTableEvent);
   }
 
   FutureOr<void> _onChangeTableEvent(ChangeNoActiveTableEvent event, Emitter<NoActiveTableState> emit) async =>
@@ -34,5 +35,12 @@ class NoActiveTableBloc extends Bloc<NoActiveTableEvent, NoActiveTableState> {
       (l) => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
       (r) => emit(state.copyWith(status: FormzSubmissionStatus.success, tables: r)),
     );
+  }
+
+  FutureOr<void> _onRemoveTableEvent(RemoveNoActiveTableEvent event, Emitter<NoActiveTableState> emit) async {
+    final tables = state.tables;
+    final index = tables.indexWhere((element) => element.id == event.tableId);
+    tables.removeAt(index);
+    emit(state.copyWith(tables: tables));
   }
 }

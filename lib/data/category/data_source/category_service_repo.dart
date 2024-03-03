@@ -17,7 +17,7 @@ class CategoryService {
           );
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
-        return data.map((json) => CategoryModel.fromJson(json)).toList();
+        return data.map ((json) => CategoryModel.fromJson(json)).toList();
       } else {
         throw 'Failed to get categories: ${response.statusCode} ${response.data}';
       }
