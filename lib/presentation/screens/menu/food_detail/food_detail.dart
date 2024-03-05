@@ -168,7 +168,7 @@ class FoodDetailScreen extends StatelessWidget {
             bottomNavigationBar: BlocBuilder<OrderBloc, OrderState>(
               builder: (context, stateOrder) {
                 // if (stateOrder.status.isInProgress) {
-                //    return const Center(child: CircularProgressIndicator());
+                //    return const Center(child: CircularProgressIndicator.adaptive());
                 // }
                 return Padding(
                   padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 20),
@@ -187,7 +187,7 @@ class FoodDetailScreen extends StatelessWidget {
                           ));
                     },
                     child: stateOrder.status.isInProgress
-                        ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator())
+                        ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator.adaptive())
                         : Text(currencyFormat.format(product.price * state.count), style: AppFontStyle.description2),
                   ),
                 );

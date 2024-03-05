@@ -18,6 +18,7 @@ class NewOrdersBloc extends Bloc<NewOrdersEvent, NewOrdersState> {
 
   NewOrdersBloc() : super(NewOrdersState()) {
     on<FetchNewOrdersEvent>(_onFetchNewOrdersEvent);
+
   }
 
   Future<void> _onFetchNewOrdersEvent(FetchNewOrdersEvent event, Emitter<NewOrdersState> emit) async {

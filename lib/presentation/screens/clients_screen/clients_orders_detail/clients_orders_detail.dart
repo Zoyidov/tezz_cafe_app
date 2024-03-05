@@ -63,7 +63,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
       body: BlocBuilder<ApprovedBloc, ApprovedState>(
         builder: (context, state) {
           if (state.status.isInProgress) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator.adaptive());
           }
           if (state.status.isFailure) {
             return Center(child: Text(state.failure?.message ?? ''));

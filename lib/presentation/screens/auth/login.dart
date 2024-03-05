@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
               const Gap(24),
               BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
-                  return state.status.isInProgress ? const Center(child: CircularProgressIndicator()) : FilledButton(
+                  return state.status.isInProgress ? const Center(child: CircularProgressIndicator.adaptive()) : FilledButton(
                       onPressed: () {
                         context.read<AuthBloc>().add(LoginEvent());
                       },

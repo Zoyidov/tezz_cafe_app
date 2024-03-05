@@ -37,7 +37,7 @@ class OrderDetailScreen extends StatelessWidget {
         body: BlocBuilder<ApprovedBloc, ApprovedState>(
           builder: (context, state) {
             if (state.status.isInProgress) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator.adaptive());
             }
             if (state.status.isFailure) {
               return Center(
@@ -149,7 +149,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                       ? const SizedBox(
                           height: 25,
                           width: 25,
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator.adaptive(),
                         )
                       : const Text(
                           "Buyurtma berish",

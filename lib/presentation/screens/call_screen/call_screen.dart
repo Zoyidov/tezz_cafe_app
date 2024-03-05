@@ -57,7 +57,7 @@ class _CallScreenState extends State<CallScreen> {
         body: BlocBuilder<WaitersCallBloc, WaitersCallState>(
           builder: (context, state) {
             if (state.status.isInProgress) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator.adaptive());
             } else if (state.status.isFailure) {
               return Center(
                 child: Column(
