@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:tezz_cafe_app/business_logic/cubit/tab_cubit.dart';
+import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/no_active_table/no_active_table_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/call_screen.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/clients_screen.dart';
@@ -66,6 +67,7 @@ class TabBoxState extends State<TabBox> {
       print(data);
       final id = data['id'];
       context.read<NoActiveTableBloc>().add(RemoveNoActiveTableEvent(id));
+      context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
     });
     socket.on('callAccepted', (data) => print(data));
     socket.onDisconnect((_) => print('Connection Disconnection'));

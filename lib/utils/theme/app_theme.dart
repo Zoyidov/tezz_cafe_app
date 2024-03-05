@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 
 final appTheme = ThemeData(
+  appBarTheme: AppBarTheme(
+
+  ),
     primaryColorDark: AppColors.mainColor,
     primaryColor: AppColors.mainColor,
     inputDecorationTheme: InputDecorationTheme(
