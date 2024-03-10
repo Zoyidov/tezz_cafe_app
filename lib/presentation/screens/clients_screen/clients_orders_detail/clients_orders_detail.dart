@@ -119,11 +119,15 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                         title: "Stolni yopish",
                         desc: '${table.name} ni yopmoqchimisiz?',
                         btnCancelOnPress: () {
-                          // print(table.id);
+                          print(table.id);
+                          print(table.waiter);
+                          print(state.order?.totalOrders?.totalPrice);
                           // print(state.order?.totalOrders?.products.length);
                         },
                         btnOkOnPress: () {
-                          context.read<ApprovedBloc>().add(CloseApprovedOrder(table.id));
+                          context.read<ApprovedBloc>().add(CloseApprovedOrder(
+                            table.id,
+                          ));
                         },
                         btnOkText: 'Yopish',
                         btnCancelText: 'Bekor qilish',
