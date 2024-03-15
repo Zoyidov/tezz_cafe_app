@@ -9,7 +9,8 @@ class TableService {
   TableService(this.dio);
 
   /// Get tables
-  Future<List<TableModel>> getTablesByRestaurantId(String restaurantId, bool occupied) async {
+  Future<List<TableModel>> getTablesByRestaurantId(
+      String restaurantId, bool occupied) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
       final response = await dio.get('/tables',
@@ -43,11 +44,13 @@ class TableService {
     }
   }
 
-  Future<void> sendOrder({required String tableId, required String activeOrderId}) async {
+  Future<void> sendOrder(
+      {required String tableId, required String activeOrderId}) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
       final response = await dio.post('/orders/$activeOrderId',
-          data: {'table': tableId}, options: Options(headers: {'Authorization': 'Bearer $token'}));
+          data: {'table': tableId},
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
         return;
       }

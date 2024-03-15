@@ -45,11 +45,15 @@ class NotificationContainer extends StatelessWidget {
             children: [
               Text(
                 type,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
               ),
               Text(
                 time,
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.grey),
+                style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey),
               ),
             ],
           ),
@@ -61,14 +65,16 @@ class NotificationContainer extends StatelessWidget {
                   place,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                      fontSize: 32, fontWeight: FontWeight.w600),
                 ),
               ),
               // Spacer(),
               const Gap(10),
               Container(
                 alignment: Alignment.center,
-                decoration: const BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
+                decoration: const BoxDecoration(
+                    color: AppColors.white, shape: BoxShape.circle),
                 padding: EdgeInsets.all(padding),
                 child: Icon(
                   Icons.notifications_active_rounded,
@@ -85,16 +91,16 @@ class NotificationContainer extends StatelessWidget {
           const Gap(8.0),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: color?? AppColors.primaryColor,
+              backgroundColor: color ?? AppColors.primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
             onPressed: onTap,
-            child:  Text(
-                    status,
-                    style: const TextStyle(fontSize: 18, color: Colors.white),
-                  ),
+            child: Text(
+              status,
+              style: const TextStyle(fontSize: 18, color: Colors.white),
+            ),
           )
         ],
       ),

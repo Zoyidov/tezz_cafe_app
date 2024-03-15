@@ -24,7 +24,6 @@ class ProductModel with _$ProductModel {
     @JsonKey(name: "id") required String productModelId,
   }) = _ProductModel;
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductModelFromJson(json);
 }
-
-

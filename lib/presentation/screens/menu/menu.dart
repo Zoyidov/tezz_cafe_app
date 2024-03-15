@@ -22,8 +22,16 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Menu', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
-        actions: [PlaceActionWidget(actionText: table.name,)],
+        title: const Text('Menu',
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600)),
+        actions: [
+          PlaceActionWidget(
+            actionText: table.name,
+          )
+        ],
         scrolledUnderElevation: 0,
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
@@ -33,8 +41,10 @@ class MenuScreen extends StatelessWidget {
           }
           if (state.status.isFailure) {
             return Center(
-                child: Text("Xatolik yuz berdi: ${state.failure?.message ?? ''}",
-                    textAlign: TextAlign.center, style: context.titleLarge));
+                child: Text(
+                    "Xatolik yuz berdi: ${state.failure?.message ?? ''}",
+                    textAlign: TextAlign.center,
+                    style: context.titleLarge));
           }
           return ListView.separated(
             padding: const EdgeInsets.all(16),
@@ -43,7 +53,13 @@ class MenuScreen extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   // context.read<ProductBloc>().add(FetchProductsEvent(categoryId: menuItem.id));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  MenuFoodsScreen(category: menuItem, table: table,)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MenuFoodsScreen(
+                                category: menuItem,
+                                table: table,
+                              )));
                   // context.pushNamed(RouteNames.category, arguments: menuItem);
                   // context.read<ProductBloc>().add(GetProductByMenuId(menuItem.id.toString()));
                 },
@@ -52,7 +68,8 @@ class MenuScreen extends StatelessWidget {
                   children: [
                     Container(
                       clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12)),
                       child: Image.network(
                         ApiConstants.imageBaseUrl + menuItem.photo,
                         fit: BoxFit.cover,
@@ -74,8 +91,10 @@ class MenuScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       child: Text(
                         menuItem.name,
-                        style: context.headlineSmall
-                            ?.copyWith(color: AppColors.black, fontWeight: FontWeight.w600, height: 1.25),
+                        style: context.headlineSmall?.copyWith(
+                            color: AppColors.black,
+                            fontWeight: FontWeight.w600,
+                            height: 1.25),
                       ),
                     ),
                   ],
@@ -106,7 +125,8 @@ class CustomMenuShimmer extends StatelessWidget {
             children: [
               Container(
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(12)),
                 child: Image.network(
                   '',
                   fit: BoxFit.cover,
@@ -128,8 +148,10 @@ class CustomMenuShimmer extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
                   'menuItem.name',
-                  style: context.headlineSmall
-                      ?.copyWith(color: AppColors.black, fontWeight: FontWeight.w600, height: 1.25),
+                  style: context.headlineSmall?.copyWith(
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w600,
+                      height: 1.25),
                 ),
               ),
             ],

@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+
 class RecievedContainer extends StatelessWidget {
   final String type;
   final String place;
   final String status;
   final VoidCallback? onTap;
 
-  const RecievedContainer({super.key, required this.type, required this.place, required this.status, this.onTap});
+  const RecievedContainer(
+      {super.key,
+      required this.type,
+      required this.place,
+      required this.status,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +35,8 @@ class RecievedContainer extends StatelessWidget {
             children: [
               Text(
                 type,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
               ),
               IconButton(onPressed: onTap, icon: const Icon(Icons.clear))
             ],
@@ -40,18 +47,19 @@ class RecievedContainer extends StatelessWidget {
               Flexible(
                 child: AutoSizeText(
                   place,
-                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                      fontSize: 32, fontWeight: FontWeight.w600),
                   overflow: TextOverflow.ellipsis,
-                  
                   maxLines: 1,
                 ),
               ),
               const Gap(20),
               Expanded(
                 child: Container(
-                  decoration: const BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
+                  decoration: const BoxDecoration(
+                      color: AppColors.white, shape: BoxShape.circle),
                   padding: const EdgeInsets.all(20),
-                  child:  Icon(
+                  child: Icon(
                     Icons.notifications_active_rounded,
                     color: AppColors.green,
                     size: 40,

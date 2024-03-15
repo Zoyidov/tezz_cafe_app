@@ -14,11 +14,10 @@ class ClientsListView extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       itemBuilder: (context, index) {
         final table = tables[index];
-        return  ClientListItemActive(table: table);
+        return ClientListItemActive(table: table);
       },
       separatorBuilder: (context, index) => const Gap(12),
       itemCount: tables.length,
     );
   }
 }
-

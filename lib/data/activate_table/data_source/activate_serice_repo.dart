@@ -10,7 +10,9 @@ class ActivateTableService {
   Future<void> activateTable(String tableId) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
-      final response = await dio.post('/waiters/:id/tables', data: {'table': tableId}, options: Options(headers: {'Authorization': 'Bearer $token'}));
+      final response = await dio.post('/waiters/:id/tables',
+          data: {'table': tableId},
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
         return;
       }

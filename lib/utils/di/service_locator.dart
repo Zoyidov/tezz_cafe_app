@@ -47,7 +47,8 @@ Future<void> setupLocator() async {
 
 //   ActivateTableService
   getIt.registerSingleton(ActivateTableService(DioSettings.getDio()));
-  getIt.registerSingleton(ActivateTableRepository(getIt<ActivateTableService>()));
+  getIt.registerSingleton(
+      ActivateTableRepository(getIt<ActivateTableService>()));
 }
 
 void tearDownLocator() => getIt.reset();

@@ -19,13 +19,12 @@ class _InActiveTablesScreenState extends State<InActiveTablesScreen> {
       appBar: const ClientsAppBarNoActive(),
       body: const InActiveClientsPageView(),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 50),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 50),
         child: OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            shape: const StadiumBorder(),
-            side: const BorderSide(),
-            backgroundColor: AppColors.primaryColor
-          ),
+            style: OutlinedButton.styleFrom(
+                shape: const StadiumBorder(),
+                side: const BorderSide(),
+                backgroundColor: AppColors.primaryColor),
             onPressed: () {
               StorageRepository.clearAll();
               Navigator.pushAndRemoveUntil(
@@ -35,7 +34,13 @@ class _InActiveTablesScreenState extends State<InActiveTablesScreen> {
                   ),
                   (route) => false);
             },
-            child: const Text('Logout', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),)),
+            child: const Text(
+              'Logout',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.white),
+            )),
       ),
       // floatingActionButton: FloatingActionButton(
       //   backgroundColor: AppColors.primaryColor,

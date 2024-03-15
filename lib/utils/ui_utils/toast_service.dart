@@ -4,7 +4,8 @@ import 'package:toastification/toastification.dart';
 class ToastService {
   static const Duration defaultDuration = Duration(seconds: 5);
 
-  static void showErrorToast(BuildContext context, String errorMessage, {Duration? duration}) {
+  static void showErrorToast(BuildContext context, String errorMessage,
+      {Duration? duration}) {
     toastification.show(
       context: context,
       type: ToastificationType.error,
@@ -16,7 +17,8 @@ class ToastService {
     );
   }
 
-  static void showSuccessToast(BuildContext context, String successMessage, {Duration? duration}) {
+  static void showSuccessToast(BuildContext context, String successMessage,
+      {Duration? duration}) {
     toastification.show(
       context: context,
       type: ToastificationType.success,

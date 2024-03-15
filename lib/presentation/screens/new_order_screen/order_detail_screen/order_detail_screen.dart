@@ -23,11 +23,13 @@ class OrderDetailScreen extends StatelessWidget {
     return BlocListener<SentOrderBloc, SentOrderState>(
       listener: (context, state) {
         if (state.status.isFailure) {
-          ToastService.showErrorToast(context, state.failure?.message ?? 'Xatolik');
+          ToastService.showErrorToast(
+              context, state.failure?.message ?? 'Xatolik');
         }
         if (state.status.isSuccess) {
           Navigator.pop(context);
-          ToastService.showSuccessToast(context, 'Sizning buyurtmangiz qabul qilindi');
+          ToastService.showSuccessToast(
+              context, 'Sizning buyurtmangiz qabul qilindi');
         }
       },
       child: Scaffold(
@@ -42,12 +44,17 @@ class OrderDetailScreen extends StatelessWidget {
             }
             if (state.status.isFailure) {
               return Center(
-                  child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(state.failure?.message ?? 'Xatolik', textAlign: TextAlign.center),
-                ElevatedButton(
-                    onPressed: () => context.read<ApprovedBloc>().add(FetchApprovedOrder(tableModelWaitress.id)),
-                    child: const Text('Qayta yuklash'))
-              ]));
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                    Text(state.failure?.message ?? 'Xatolik',
+                        textAlign: TextAlign.center),
+                    ElevatedButton(
+                        onPressed: () => context
+                            .read<ApprovedBloc>()
+                            .add(FetchApprovedOrder(tableModelWaitress.id)),
+                        child: const Text('Qayta yuklash'))
+                  ]));
             }
             return SingleChildScrollView(
               child: Column(
@@ -65,7 +72,8 @@ class OrderDetailScreen extends StatelessWidget {
             );
           },
         ),
-        bottomNavigationBar: BottomNavigationBarWidget(tableModelWaitress: tableModelWaitress),
+        bottomNavigationBar:
+            BottomNavigationBarWidget(tableModelWaitress: tableModelWaitress),
       ),
     );
   }
@@ -93,7 +101,11 @@ class OrderListWidget extends StatelessWidget {
   final bool isActive;
   final TableModelWaitress tableModelWaitress;
 
-  const OrderListWidget({super.key, required this.products, required this.isActive, required this.tableModelWaitress});
+  const OrderListWidget(
+      {super.key,
+      required this.products,
+      required this.isActive,
+      required this.tableModelWaitress});
 
   @override
   Widget build(BuildContext context) {
@@ -102,17 +114,19 @@ class OrderListWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       itemBuilder: (context, index) {
         final product = products?[index];
-        return  OrderContainer(
-          time: formatDate(product?.product.createdAt ?? DateTime.now(), [HH, ':', nn]),
+        return OrderContainer(
+          time: formatDate(
+              product?.product.createdAt ?? DateTime.now(), [HH, ':', nn]),
           foodName: product?.product.name ?? "",
           price: currencyFormat.format(product?.product.price ?? 0),
           count: "${product?.quantity.toString()} ta : ",
           countPrice: currencyFormat.format(product?.price ?? 0),
           image: product?.product.photo ?? "",
           onTap: () {
-            context
-                .read<ApprovedBloc>()
-                .add(DeleteApprovedOrder(tableModelWaitress.id, product?.product.id ?? "", product?.quantity ?? 0));
+            context.read<ApprovedBloc>().add(DeleteApprovedOrder(
+                tableModelWaitress.id,
+                product?.product.id ?? "",
+                product?.quantity ?? 0));
           },
           isActive: isActive,
           color: isActive ? AppColors.green : AppColors.red,
@@ -125,7 +139,8 @@ class OrderListWidget extends StatelessWidget {
 }
 
 class BottomNavigationBarWidget extends StatelessWidget {
-  const BottomNavigationBarWidget({super.key, required this.tableModelWaitress});
+  const BottomNavigationBarWidget(
+      {super.key, required this.tableModelWaitress});
 
   final TableModelWaitress tableModelWaitress;
 
@@ -144,8 +159,11 @@ class BottomNavigationBarWidget extends StatelessWidget {
                           (state.order?.activeOrders?.products ?? []).isEmpty
                       ? null
                       : () {
-                          context.read<SentOrderBloc>().add(SentActiveOrdersEvent(
-                              tableId: tableModelWaitress.id, activeOrderId: state.order?.activeOrders?.id ?? ""));
+                          context.read<SentOrderBloc>().add(
+                              SentActiveOrdersEvent(
+                                  tableId: tableModelWaitress.id,
+                                  activeOrderId:
+                                      state.order?.activeOrders?.id ?? ""));
                         },
                   child: stateSent.status.isInProgress
                       ? const SizedBox(
@@ -155,7 +173,10 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         )
                       : const Text(
                           "Buyurtma berish",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
                         ),
                 ),
               );
@@ -179,7 +200,10 @@ class PriceTextBlocBuilder extends StatelessWidget {
         builder: (context, state) {
           final price = state.order?.totalOrders?.totalPrice ?? 0;
           return state.status.isInProgress
-              ? const Skeletonizer(child: PriceText(price: 100000)) // Provide a default value or loading state
+              ? const Skeletonizer(
+                  child: PriceText(
+                      price:
+                          100000)) // Provide a default value or loading state
               : PriceText(price: price);
         },
       ),

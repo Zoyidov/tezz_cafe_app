@@ -59,6 +59,7 @@ class LoginScreen extends StatelessWidget {
           context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
           context.read<NoActiveTableBloc>().add(FetchNoActiveTables());
           context.read<WaitersCallBloc>().add(FetchCallsEvent());
+          context.read<AuthBloc>().add(ClearControllers());
           context.pushAndRemoveUntil(const TabBox());
         }
       },
@@ -83,12 +84,15 @@ class LoginScreen extends StatelessWidget {
               const Gap(24),
               BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
-                  return state.status.isInProgress ? const Center(child: CircularProgressIndicator.adaptive()) : FilledButton(
-                      onPressed: () {
-                        context.read<AuthBloc>().add(LoginEvent());
-                      },
-                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TabBox())),
-                      child: const Text('Kirish'));
+                  return state.status.isInProgress
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive())
+                      : FilledButton(
+                          onPressed: () {
+                            context.read<AuthBloc>().add(LoginEvent());
+                          },
+                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TabBox())),
+                          child: const Text('Kirish'));
                 },
               )
             ],
@@ -108,7 +112,8 @@ class LogoWidget extends StatelessWidget {
       height: 120,
       width: 120,
       alignment: Alignment.center,
-      decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColors.mainColor),
+      decoration: const BoxDecoration(
+          shape: BoxShape.circle, color: AppColors.mainColor),
       child: const Text('Logo'),
     );
   }
@@ -147,7 +152,8 @@ class PhoneNumberFormField extends StatelessWidget {
       ),
       validator: MultiValidator([
         RequiredValidator(errorText: 'Telefon raqamini kiriting'),
-        MinLengthValidator(19, errorText: 'Telefon raqami uzunligini tekshiring')
+        MinLengthValidator(19,
+            errorText: 'Telefon raqami uzunligini tekshiring')
       ]).call,
       inputFormatters: [context.read<AuthBloc>().formatter],
       textInputAction: TextInputAction.next,
@@ -155,27 +161,53 @@ class PhoneNumberFormField extends StatelessWidget {
   }
 }
 
-class PasswordFormField extends StatelessWidget {
+class PasswordFormField extends StatefulWidget {
   const PasswordFormField({super.key});
+
+  @override
+  State<PasswordFormField> createState() => _PasswordFormFieldState();
+}
+
+class _PasswordFormFieldState extends State<PasswordFormField> {
+  late ValueNotifier<bool> isVisible;
+
+  @override
+  void initState() {
+    isVisible = ValueNotifier(false);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    isVisible.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        return TextFormField(
-          controller: context.read<AuthBloc>().passwordController,
-          decoration: InputDecoration(
-            prefixIcon: const PrefixIcon(icon: Icons.lock),
-            prefixIconConstraints: const BoxConstraints(),
-            hintText: "*********",
-            suffixIcon: IconButton(
-                onPressed: () => context.read<AuthBloc>().add(ChangePasswordVisibility()),
-                icon: Icon(state.isVisible ? Icons.visibility_off : Icons.visibility)),
-          ),
-          obscureText: state.isVisible,
-          keyboardType: TextInputType.visiblePassword,
-          textInputAction: TextInputAction.done,
-          validator: AppValidators.validatePassword,
+        return ValueListenableBuilder(
+          valueListenable: isVisible,
+          builder: (context, visibility, _) {
+            return TextFormField(
+              controller: context.read<AuthBloc>().passwordController,
+              decoration: InputDecoration(
+                prefixIcon: const PrefixIcon(icon: Icons.lock),
+                prefixIconConstraints: const BoxConstraints(),
+                hintText: "*********",
+                suffixIcon: IconButton(
+                  onPressed: () => isVisible.value = !isVisible.value,
+                  icon: Icon(
+                      visibility ? Icons.visibility_off : Icons.visibility),
+                ),
+              ),
+              obscureText: !visibility,
+              keyboardType: TextInputType.visiblePassword,
+              textInputAction: TextInputAction.done,
+              validator: AppValidators.validatePassword,
+            );
+          },
         );
       },
     );
@@ -192,7 +224,8 @@ class PrefixIcon extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(right: 10.0),
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: const BoxDecoration(border: Border(right: BorderSide(color: Colors.grey))),
+      decoration: const BoxDecoration(
+          border: Border(right: BorderSide(color: Colors.grey))),
       child: Icon(icon),
     );
   }

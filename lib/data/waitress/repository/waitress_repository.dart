@@ -54,7 +54,8 @@ class WaitressRepository {
     }
   }
 
-  Future<Either<Failure, List<TableModelWaitress>>> getTables(String waitressId) async {
+  Future<Either<Failure, List<TableModelWaitress>>> getTables(
+      String waitressId) async {
     try {
       final response = await dataSource.getTables(waitressId);
       return Right(response);
@@ -71,21 +72,19 @@ class WaitressRepository {
     try {
       final response = await dataSource.getWaitressOrder(tableId);
       return Right(response);
-    }
-    on DioException catch (e) {
+    } on DioException catch (e) {
       return Left(handleDioError(e));
-    }
-    on FormatException catch (e) {
+    } on FormatException catch (e) {
       return Left(Failure("Error parsing data: ${e.message}"));
-    }
-    catch (e) {
+    } catch (e) {
       return Left(Failure(e.toString()));
     }
   }
 
-  Future<Either<Failure, void>> deleteOrder(String tableId,String productId, num quantity) async {
+  Future<Either<Failure, void>> deleteOrder(
+      String tableId, String productId, num quantity) async {
     try {
-      await dataSource.deleteOrder(tableId,productId,quantity);
+      await dataSource.deleteOrder(tableId, productId, quantity);
       return const Right(null);
     } on DioException catch (e) {
       return Left(handleDioError(e));

@@ -6,6 +6,7 @@ class StorageRepository {
 
   static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
+    // await _prefs.clear();
   }
 
   // Create (Save) methods
@@ -33,7 +34,7 @@ class StorageRepository {
 
   // Read methods
 
-  static String getString(String key,[String defaultValue = '']) {
+  static String getString(String key, [String defaultValue = '']) {
     return _prefs.getString(key) ?? defaultValue;
   }
 

@@ -38,7 +38,10 @@ class InActiveToggleButtonsContainer extends StatelessWidget {
               selectedBorderColor: Colors.red,
               borderWidth: 1.5,
               constraints: BoxConstraints(
-                  maxWidth: context.width * 0.3, minWidth: context.width * 0.3, minHeight: 36, maxHeight: 36),
+                  maxWidth: context.width * 0.3,
+                  minWidth: context.width * 0.3,
+                  minHeight: 36,
+                  maxHeight: 36),
               isSelected: state.selectedZones,
               onPressed: (index) {
                 context.read<ZoneBloc>().add(ChangeSelectedZoneEvent(index));
@@ -75,7 +78,10 @@ class CustomZonesShimmer extends StatelessWidget {
             selectedBorderColor: Colors.black,
             borderWidth: 1.5,
             constraints: BoxConstraints(
-                maxWidth: context.width * 0.3, minWidth: context.width * 0.3, minHeight: 36, maxHeight: 36),
+                maxWidth: context.width * 0.3,
+                minWidth: context.width * 0.3,
+                minHeight: 36,
+                maxHeight: 36),
             isSelected: List.generate(3, (index) => false),
             // onPressed: (index) => context.read<ZoneBloc>().add(ChangeSelectedZoneEvent(index)),
             children: List.generate(3, (index) => Text('Zone ${index + 1}')),

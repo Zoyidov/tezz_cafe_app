@@ -16,8 +16,7 @@ class ClientsScreen extends StatefulWidget {
 class _ClientsScreenState extends State<ClientsScreen> {
   @override
   Widget build(BuildContext context) {
-    return  const Scaffold(
-
+    return const Scaffold(
       appBar: ClientsAppBar(),
       body: ClientsPageView(),
       // floatingActionButton: FloatingActionButton(
@@ -34,11 +33,11 @@ class FlipCardNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Center(
         child: FlipCard(
           controller: context.read<TabCubit>().flipCardController,
-            front: const ClientsScreen(),
+          front: const ClientsScreen(),
           back: const InActiveTablesScreen(),
         ),
       ),

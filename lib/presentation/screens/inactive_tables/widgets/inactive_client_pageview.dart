@@ -15,10 +15,14 @@ class InActiveClientsPageView extends StatelessWidget {
         return PageView.builder(
           physics: const NeverScrollableScrollPhysics(),
           controller: context.read<NoActiveTableBloc>().pageController,
-          itemCount: state.status.isInProgress ? 1 : context.watch<ZoneBloc>().state.zones.length,
+          itemCount: state.status.isInProgress
+              ? 1
+              : context.watch<ZoneBloc>().state.zones.length,
           itemBuilder: (context, index) {
             final zones = context.watch<ZoneBloc>().state.zones;
-            final filter = state.tables.where((element) => element.typeOfTable.id == zones[index].id).toList();
+            final filter = state.tables
+                .where((element) => element.typeOfTable.id == zones[index].id)
+                .toList();
             return InActiveClientsListView(index: index, tables: filter);
           },
         );

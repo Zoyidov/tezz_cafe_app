@@ -7,7 +7,6 @@ class ZoneState {
   final List<bool> selectedZones;
   final List<bool> selectedZonesNoActive;
 
-
   const ZoneState({
     this.status = FormzSubmissionStatus.initial,
     this.failure,
@@ -28,7 +27,8 @@ class ZoneState {
       failure: failure ?? this.failure,
       zones: zones ?? this.zones,
       selectedZones: selectedZones ?? this.selectedZones,
-      selectedZonesNoActive: selectedZonesNoActive ?? this.selectedZonesNoActive,
+      selectedZonesNoActive:
+          selectedZonesNoActive ?? this.selectedZonesNoActive,
     );
   }
 }

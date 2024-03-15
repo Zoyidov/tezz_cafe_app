@@ -23,21 +23,30 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<DecrementProductCountEvent>(_onDecrementProductCountEvent);
   }
 
-  FutureOr<void> _onFetchProductsEvent(FetchProductsEvent event, Emitter<ProductState> emit) async {
+  FutureOr<void> _onFetchProductsEvent(
+      FetchProductsEvent event, Emitter<ProductState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final restaurant = StorageRepository.getString(StorageKeys.restaurant);
-    final products = await _productRepository.getProductsByRestaurantAndCategory(restaurant, event.categoryId);
+    final products = await _productRepository
+        .getProductsByRestaurantAndCategory(restaurant, event.categoryId);
     products.fold(
-      (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
-      (r) => emit(state.copyWith(products: r, status: FormzSubmissionStatus.success)),
+      (l) => emit(
+          state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
+      (r) => emit(
+          state.copyWith(products: r, status: FormzSubmissionStatus.success)),
     );
   }
 
-  FutureOr<void> _onSetProductCountEvent(SetProductCountEvent event, Emitter<ProductState> emit) async => emit(state.copyWith(count: 1));
+  FutureOr<void> _onSetProductCountEvent(
+          SetProductCountEvent event, Emitter<ProductState> emit) async =>
+      emit(state.copyWith(count: 1));
 
-  FutureOr<void> _onIncrementProductCountEvent(IncrementProductCountEvent event, Emitter<ProductState> emit) async => emit(state.copyWith(count: state.count + 1));
+  FutureOr<void> _onIncrementProductCountEvent(
+          IncrementProductCountEvent event, Emitter<ProductState> emit) async =>
+      emit(state.copyWith(count: state.count + 1));
 
-  FutureOr<void> _onDecrementProductCountEvent(DecrementProductCountEvent event, Emitter<ProductState> emit) async {
+  FutureOr<void> _onDecrementProductCountEvent(
+      DecrementProductCountEvent event, Emitter<ProductState> emit) async {
     if (state.count == 1) {
       return;
     }

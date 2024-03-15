@@ -17,50 +17,85 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final MaskTextInputFormatter formatter = MaskTextInputFormatter(
-      mask: '+998 (##) ###-##-##', filter: {"#": RegExp(r'[0-9]')});
+      mask: '+998 (##) ###-##-##', filter: {"#": RegExp('[0-9]')});
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  late final TextEditingController phoneController;
+  late final TextEditingController passwordController;
   final AuthRepository authRepository = getIt<AuthRepository>();
 
   AuthBloc() : super(const AuthState()) {
-    on<ChangePasswordVisibility>(_onChangePasswordVisibilityEvent);
+    phoneController = TextEditingController();
+    passwordController = TextEditingController();
+    on<ClearControllers>(_onClearControllersEvent);
     on<LoginEvent>(_onLoginEvent);
   }
 
-  void _onChangePasswordVisibilityEvent(ChangePasswordVisibility event, Emitter<AuthState> emit) async =>
-      emit(state.copyWith(isVisible: !state.isVisible, status: FormzSubmissionStatus.initial));
+  void _onClearControllersEvent(
+    ClearControllers event,
+    Emitter<AuthState> emit,
+  ) async {
+    phoneController.clear();
+    passwordController.clear();
+  }
 
-  Future<void> _onLoginEvent(LoginEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onLoginEvent(
+    LoginEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     if (!formKey.currentState!.validate()) {
       return;
     }
     if (!(await TDeviceUtils.hasInternetConnection())) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: NoInternetFailure('No internet connection')));
+      emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.failure,
+          failure: NoInternetFailure('No internet connection'),
+        ),
+      );
       return;
     }
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final result =
-        await authRepository.getToken(formatPhoneNumber(phoneController.text), passwordController.text.trim());
+    final result = await authRepository.getToken(
+      _formatPhoneNumber(phoneController.text),
+      passwordController.text.trim(),
+    );
     await result.fold(
-      (l) async => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
+      (l) async => emit(
+        state.copyWith(status: FormzSubmissionStatus.failure, failure: l),
+      ),
       (token) async {
         final waitress = await authRepository.getWaitress(token);
-        waitress.fold((failure) async => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: failure)), (waiter) async {
-          StorageRepository.putString(StorageKeys.token, token);
-          StorageRepository.putString(StorageKeys.restaurant, waiter.restaurant);
-          StorageRepository.putString(StorageKeys.waiter, waiter.id);
-          StorageRepository.putBool(StorageKeys.isAuth, true);
-          StorageRepository.putObject(StorageKeys.waiterObject, waiter);
-          emit(state.copyWith(status: FormzSubmissionStatus.success));
-        });
+        waitress.fold(
+          (failure) async => emit(
+            state.copyWith(
+              status: FormzSubmissionStatus.failure,
+              failure: failure,
+            ),
+          ),
+          (waiter) async {
+            StorageRepository.putString(StorageKeys.token, token);
+            debugPrint("----------------------Token----------------");
+            debugPrint(token);
+            StorageRepository.putString(
+                StorageKeys.restaurant, waiter.restaurant);
+            StorageRepository.putString(StorageKeys.waiter, waiter.id);
+            StorageRepository.putBool(StorageKeys.isAuth, true);
+            StorageRepository.putObject(StorageKeys.waiterObject, waiter);
+            emit(
+              state.copyWith(status: FormzSubmissionStatus.success),
+            );
+          },
+        );
       },
     );
   }
-}
 
-String formatPhoneNumber(String phoneNumber) {
-  final regex = RegExp(r'(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})');
-  final matches = regex.allMatches(phoneNumber).map((e) => "${e[1]}${e[2]}${e[3]}${e[4]}").join();
-  return '+$matches';
+  String _formatPhoneNumber(String phoneNumber) {
+    final regex = RegExp(r'(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})');
+    final matches = regex
+        .allMatches(phoneNumber)
+        .map((e) => "${e[1]}${e[2]}${e[3]}${e[4]}")
+        .join();
+    return '+$matches';
+  }
 }

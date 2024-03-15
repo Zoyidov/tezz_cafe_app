@@ -17,7 +17,8 @@ import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 import 'package:toastification/toastification.dart';
 
 class FoodDetailScreen extends StatelessWidget {
-  const FoodDetailScreen({super.key, required this.product, required this.table});
+  const FoodDetailScreen(
+      {super.key, required this.product, required this.table});
 
   final ProductModel product;
   final TableModelWaitress table;
@@ -55,7 +56,10 @@ class FoodDetailScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(product.name,
-                  style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600)),
               actions: [
                 PlaceActionWidget(
                   actionText: table.name,
@@ -71,12 +75,15 @@ class FoodDetailScreen extends StatelessWidget {
                     height: 200,
                     width: 336,
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    child: Image.network(ApiConstants.imageBaseUrl + (product.photo ?? ''),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    child: Image.network(
+                        ApiConstants.imageBaseUrl + (product.photo ?? ''),
                         fit: BoxFit.cover,
                         height: 170,
                         width: double.infinity,
-                        errorBuilder: (context, error, stackTrace) => Image.asset(
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
                               AppImages.imageNotFound,
                               fit: BoxFit.cover,
                               height: 170,
@@ -101,7 +108,8 @@ class FoodDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             currencyFormat.format(product.price),
-                            style: AppFontStyle.description2.copyWith(color: AppColors.red),
+                            style: AppFontStyle.description2
+                                .copyWith(color: AppColors.red),
                           ),
                           const Gap(14),
                           if (product.sale == true)
@@ -125,11 +133,14 @@ class FoodDetailScreen extends StatelessWidget {
                       const Divider(),
                       const Gap(12),
                       Text('Tarif:',
-                          style: context.titleMedium?.copyWith(color: AppColors.grey500, fontWeight: FontWeight.w600)),
+                          style: context.titleMedium?.copyWith(
+                              color: AppColors.grey500,
+                              fontWeight: FontWeight.w600)),
                       const Gap(4),
                       Text(
                         product.description,
-                        style: AppFontStyle.description.copyWith(color: AppColors.grey500),
+                        style: AppFontStyle.description
+                            .copyWith(color: AppColors.grey500),
                       )
                     ],
                   ),
@@ -142,7 +153,9 @@ class FoodDetailScreen extends StatelessWidget {
               child: Row(mainAxisSize: MainAxisSize.min, children: [
                 IconButton.filledTonal(
                     onPressed: () {
-                      context.read<ProductBloc>().add(DecrementProductCountEvent());
+                      context
+                          .read<ProductBloc>()
+                          .add(DecrementProductCountEvent());
                     },
                     icon: const Icon(Icons.remove),
                     style: iconButtonStyle),
@@ -159,7 +172,9 @@ class FoodDetailScreen extends StatelessWidget {
                 const Gap(12),
                 IconButton.filledTonal(
                     onPressed: () {
-                      context.read<ProductBloc>().add(IncrementProductCountEvent());
+                      context
+                          .read<ProductBloc>()
+                          .add(IncrementProductCountEvent());
                     },
                     icon: const Icon(Icons.add),
                     style: iconButtonStyle),
@@ -171,7 +186,8 @@ class FoodDetailScreen extends StatelessWidget {
                 //    return const Center(child: CircularProgressIndicator.adaptive());
                 // }
                 return Padding(
-                  padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 20),
+                  padding: const EdgeInsets.only(
+                      left: 12.0, right: 12.0, bottom: 20),
                   child: FilledButton(
                     style: FilledButton.styleFrom(
                       backgroundColor: AppColors.primaryColor,
@@ -179,16 +195,23 @@ class FoodDetailScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    onPressed: stateOrder.status.isInProgress?null:() {
-                      context.read<OrderBloc>().add(CreateOrderEvent(
-                            tableId: table.id,
-                            productId: product.id,
-                            quantity: state.count,
-                          ));
-                    },
+                    onPressed: stateOrder.status.isInProgress
+                        ? null
+                        : () {
+                            context.read<OrderBloc>().add(CreateOrderEvent(
+                                  tableId: table.id,
+                                  productId: product.id,
+                                  quantity: state.count,
+                                ));
+                          },
                     child: stateOrder.status.isInProgress
-                        ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator.adaptive())
-                        : Text(currencyFormat.format(product.price * state.count), style: AppFontStyle.description2),
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator.adaptive())
+                        : Text(
+                            currencyFormat.format(product.price * state.count),
+                            style: AppFontStyle.description2),
                   ),
                 );
               },

@@ -25,7 +25,8 @@ class OrderService {
   }
 
   /// Create an order
-  Future<void> createOrder(String tableId, String productId, int quantity) async {
+  Future<void> createOrder(
+      String tableId, String productId, int quantity) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
       final response = await dio.post(

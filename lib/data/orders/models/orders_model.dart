@@ -1,4 +1,3 @@
-
 // part 'orders_model.freezed.dart';
 // part 'orders_model.g.dart';
 

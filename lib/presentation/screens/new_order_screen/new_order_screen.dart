@@ -1,4 +1,3 @@
-import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +8,6 @@ import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
 import 'package:tezz_cafe_app/presentation/screens/new_order_screen/order_detail_screen/order_detail_screen.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
-
 
 class NewOrderScreen extends StatelessWidget {
   const NewOrderScreen({super.key});
@@ -26,7 +24,8 @@ class NewOrderScreen extends StatelessWidget {
         scrolledUnderElevation: 0,
         title: const Text(
           "Faol Buyurtma",
-          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
         ),
       ),
       body: BlocBuilder<NewOrdersBloc, NewOrdersState>(
@@ -36,21 +35,25 @@ class NewOrderScreen extends StatelessWidget {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(state.failure?.message ?? 'Xatolik', textAlign: TextAlign.center),
+                Text(state.failure?.message ?? 'Xatolik',
+                    textAlign: TextAlign.center),
                 ElevatedButton(
-                    onPressed: () => context.read<NewOrdersBloc>().add(FetchNewOrdersEvent()),
+                    onPressed: () => context
+                        .read<NewOrdersBloc>()
+                        .add(FetchNewOrdersEvent()),
                     child: const Text('Qayta yuklash'))
               ],
             ));
           }
           if (state.status.isInProgress) {
             return const NewOrdersShimmer();
-
           }
           return ListView.builder(
-            itemCount: state.tables.where((table) => table.hasActiveOrder).length,
+            itemCount:
+                state.tables.where((table) => table.hasActiveOrder).length,
             itemBuilder: (context, index) {
-              final activeTables = state.tables.where((table) => table.hasActiveOrder).toList();
+              final activeTables =
+                  state.tables.where((table) => table.hasActiveOrder).toList();
 
               activeTables.sort((a, b) => a.createdAt.compareTo(b.createdAt));
 
@@ -63,18 +66,20 @@ class NewOrderScreen extends StatelessWidget {
                 status: 'Ko\'rish',
                 color: AppColors.primaryColor,
                 onTap: () {
-                  context.read<ApprovedBloc>().add(FetchApprovedOrder(table.id));
+                  context
+                      .read<ApprovedBloc>()
+                      .add(FetchApprovedOrder(table.id));
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => OrderDetailScreen(tableModelWaitress: table),
+                      builder: (context) =>
+                          OrderDetailScreen(tableModelWaitress: table),
                     ),
                   );
                 },
               );
             },
           );
-
         },
       ),
       // floatingActionButton: FloatingActionButton(

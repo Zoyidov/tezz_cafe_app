@@ -51,7 +51,6 @@ class MainApp extends StatelessWidget {
       theme: appTheme,
       navigatorKey: navigatorKey,
       onGenerateRoute: AppRoutes.generateRoute,
-
     );
   }
 }

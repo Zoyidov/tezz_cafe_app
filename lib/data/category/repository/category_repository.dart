@@ -10,7 +10,8 @@ class CategoryRepository {
 
   CategoryRepository(this._categoryService);
 
-  Future<Either<Failure, List<CategoryModel>>> getAllCategories(String restaurantId) async {
+  Future<Either<Failure, List<CategoryModel>>> getAllCategories(
+      String restaurantId) async {
     try {
       final categories = await _categoryService.getAllCategories(restaurantId);
       return Right(categories);

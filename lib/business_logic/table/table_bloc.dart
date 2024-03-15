@@ -15,21 +15,28 @@ part 'table_state.dart';
 
 class TableBloc extends Bloc<TableEvent, TableState> {
   final TableRepository _tableRepository = getIt<TableRepository>();
-final PageController pageController = PageController();
+  final PageController pageController = PageController();
   TableBloc() : super(const TableState()) {
     on<GetAllTablesEvent>(_onGetAllTablesEvent);
     on<ChangeTableEvent>(_onChangeTableEvent);
   }
 
-    FutureOr<void> _onChangeTableEvent(ChangeTableEvent event, Emitter<TableState> emit) async => pageController.animateToPage(event.index, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  FutureOr<void> _onChangeTableEvent(
+          ChangeTableEvent event, Emitter<TableState> emit) async =>
+      pageController.animateToPage(event.index,
+          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
 
-  FutureOr<void> _onGetAllTablesEvent(GetAllTablesEvent event, Emitter<TableState> emit) async {
+  FutureOr<void> _onGetAllTablesEvent(
+      GetAllTablesEvent event, Emitter<TableState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final restaurantId = StorageRepository.getString(StorageKeys.restaurant);
-    final tables = await _tableRepository.getTablesByRestaurantId(restaurantId,true);
+    final tables =
+        await _tableRepository.getTablesByRestaurantId(restaurantId, true);
     tables.fold(
-      (l) => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(status: FormzSubmissionStatus.success, tables: r)),
+      (l) => emit(
+          state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
+      (r) => emit(
+          state.copyWith(status: FormzSubmissionStatus.success, tables: r)),
     );
   }
 }

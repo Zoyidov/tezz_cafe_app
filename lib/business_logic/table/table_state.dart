@@ -1,17 +1,17 @@
 part of 'table_bloc.dart';
 
- class TableState {
-   final List<TableModel> tables;
-   final FormzSubmissionStatus status;
-   final Failure? failure;
+class TableState {
+  final List<TableModel> tables;
+  final FormzSubmissionStatus status;
+  final Failure? failure;
 
-   const TableState({
-     this.tables = const [],
-     this.status = FormzSubmissionStatus.initial,
-     this.failure,
-   });
+  const TableState({
+    this.tables = const [],
+    this.status = FormzSubmissionStatus.initial,
+    this.failure,
+  });
 
-   TableState copyWith({
+  TableState copyWith({
     List<TableModel>? tables,
     FormzSubmissionStatus? status,
     Failure? failure,
@@ -23,4 +23,3 @@ part of 'table_bloc.dart';
     );
   }
 }
-

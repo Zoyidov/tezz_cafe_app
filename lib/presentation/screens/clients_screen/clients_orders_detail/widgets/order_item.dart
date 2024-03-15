@@ -11,7 +11,11 @@ import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key, required this.product, this.isActive = false, required this.onTap});
+  const OrderItem(
+      {super.key,
+      required this.product,
+      this.isActive = false,
+      required this.onTap});
 
   final ProductElement? product;
   final bool isActive;
@@ -25,7 +29,9 @@ class OrderItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: isActive ? const Color(0xFFF91506).withOpacity(.1) : AppColors.textFieldColor,
+        color: isActive
+            ? const Color(0xFFF91506).withOpacity(.1)
+            : AppColors.textFieldColor,
       ),
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -33,7 +39,8 @@ class OrderItem extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              border: BorderDirectional(bottom: BorderSide(color: AppColors.textFieldColor)),
+              border: BorderDirectional(
+                  bottom: BorderSide(color: AppColors.textFieldColor)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,12 +59,15 @@ class OrderItem extends StatelessWidget {
                             ':',
                             nn
                           ])}',
-                      style: context.bodySmall?.copyWith(color: AppColors.grey400),
+                      style:
+                          context.bodySmall?.copyWith(color: AppColors.grey400),
                     ),
                   ],
                 ),
                 IconButton(
-                    onPressed: onTap, icon: const Icon(Icons.clear), color: AppColors.grey500),
+                    onPressed: onTap,
+                    icon: const Icon(Icons.clear),
+                    color: AppColors.grey500),
               ],
             ),
           ),
@@ -68,7 +78,8 @@ class OrderItem extends StatelessWidget {
                 height: 80,
                 width: 80,
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: Image.network(
                   ApiConstants.imageBaseUrl + (product?.product.photo ?? ""),
                   fit: BoxFit.cover,
@@ -90,13 +101,14 @@ class OrderItem extends StatelessWidget {
                   children: [
                     Text(
                       product?.product.name ?? "",
-                      style: AppFontStyle.description2
-                          .copyWith(fontWeight: FontWeight.w600, color: AppColors.black),
+                      style: AppFontStyle.description2.copyWith(
+                          fontWeight: FontWeight.w600, color: AppColors.black),
                     ),
                     const Gap(8),
                     Text(
                       currencyFormat.format(product?.product.price ?? 0),
-                      style: AppFontStyle.mIn12.copyWith(color: AppColors.grey400),
+                      style:
+                          AppFontStyle.mIn12.copyWith(color: AppColors.grey400),
                     ),
                     const Gap(4),
                     Row(
@@ -104,12 +116,14 @@ class OrderItem extends StatelessWidget {
                       children: [
                         Text(
                           "${product?.quantity ?? 0} ta: ",
-                          style: AppFontStyle.description2
-                              .copyWith(fontWeight: FontWeight.w600, color: AppColors.primaryColor),
+                          style: AppFontStyle.description2.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.primaryColor),
                         ),
                         Text(currencyFormat.format(product?.price ?? 0),
-                            style: AppFontStyle.description2
-                                .copyWith(fontWeight: FontWeight.w600, color: AppColors.grey500)),
+                            style: AppFontStyle.description2.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.grey500)),
                       ],
                     ),
                   ],

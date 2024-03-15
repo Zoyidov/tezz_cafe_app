@@ -14,13 +14,15 @@ class SentOrderBloc extends Bloc<SentOrderEvent, SentOrderState> {
     on<SentActiveOrdersEvent>(_onSentActiveOrders);
   }
 
-  FutureOr<void> _onSentActiveOrders(SentActiveOrdersEvent event, Emitter<SentOrderState> emit) async {
+  FutureOr<void> _onSentActiveOrders(
+      SentActiveOrdersEvent event, Emitter<SentOrderState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final order = await _tableRepository.sendOrder(tableId: event.tableId, activeOrderId: event.activeOrderId);
+    final order = await _tableRepository.sendOrder(
+        tableId: event.tableId, activeOrderId: event.activeOrderId);
     order.fold(
-      (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
+      (l) => emit(
+          state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
       (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
     );
-
   }
 }

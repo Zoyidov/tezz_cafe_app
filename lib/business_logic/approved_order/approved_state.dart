@@ -5,7 +5,6 @@ class ApprovedState {
   final Failure? failure;
   final TableOrders? order;
 
-
   const ApprovedState({
     this.status = FormzSubmissionStatus.initial,
     this.failure,

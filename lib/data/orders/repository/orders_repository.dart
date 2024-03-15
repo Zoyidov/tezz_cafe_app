@@ -11,7 +11,8 @@ class OrderRepository {
 
   OrderRepository(this._orderService);
 
-  Future<Either<Failure, List<Orders>>> getOrdersByTableId(String tableId) async {
+  Future<Either<Failure, List<Orders>>> getOrdersByTableId(
+      String tableId) async {
     try {
       final orders = await _orderService.getOrdersByTableId(tableId);
       return Right(orders);
@@ -24,13 +25,15 @@ class OrderRepository {
     }
   }
 
-  Future<Either<Failure, void>> createOrder(String tableId, String productId, int quantity) async {
+  Future<Either<Failure, void>> createOrder(
+      String tableId, String productId, int quantity) async {
     try {
       await _orderService.createOrder(tableId, productId, quantity);
       return const Right(null);
     } on DioException catch (e) {
       if (e.response?.statusCode == 400) {
-        return Left(Failure((e.response?.data['error']as List).firstOrNull ?? 'Failed to create order'));
+        return Left(Failure((e.response?.data['error'] as List).firstOrNull ??
+            'Failed to create order'));
       }
       return Left(handleDioError(e));
     } on FormatException catch (e) {

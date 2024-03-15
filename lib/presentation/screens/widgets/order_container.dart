@@ -26,18 +26,25 @@ class OrderHeader extends StatelessWidget {
             Container(
               height: 12,
               width: 12,
-              decoration: BoxDecoration(color: color ?? AppColors.green, shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: color ?? AppColors.green, shape: BoxShape.circle),
             ),
             const Gap(8),
             RichText(
               text: TextSpan(children: [
                 TextSpan(
                   text: "Chaqiruv  ",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.grey500),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.grey500),
                 ),
                 TextSpan(
                   text: time,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.grey400),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.grey400),
                 )
               ]),
             ),
@@ -113,17 +120,27 @@ class OrderDetails extends StatelessWidget {
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
           const Gap(8),
-          Text(price, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.grey400)),
+          Text(price,
+              style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.grey400)),
           const Gap(4),
           RichText(
             text: TextSpan(children: [
               TextSpan(
                 text: count,
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.primaryColor),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primaryColor),
               ),
               TextSpan(
                 text: countPrice,
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.grey500),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.grey500),
               ),
             ]),
           ),
@@ -165,7 +182,9 @@ class OrderContainer extends StatelessWidget {
         vertical: 10,
       ),
       decoration: BoxDecoration(
-        color: isActive ? const Color(0xFFF91506).withOpacity(0.1) : AppColors.textFieldColor,
+        color: isActive
+            ? const Color(0xFFF91506).withOpacity(0.1)
+            : AppColors.textFieldColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -177,7 +196,11 @@ class OrderContainer extends StatelessWidget {
             children: [
               OrderImage(image: image),
               const Gap(12),
-              OrderDetails(foodName: foodName, price: price, count: count, countPrice: countPrice),
+              OrderDetails(
+                  foodName: foodName,
+                  price: price,
+                  count: count,
+                  countPrice: countPrice),
             ],
           ),
         ],

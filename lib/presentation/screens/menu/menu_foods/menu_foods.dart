@@ -15,7 +15,8 @@ import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
 class MenuFoodsScreen extends StatelessWidget {
-  const MenuFoodsScreen({super.key, required this.category, required this.table});
+  const MenuFoodsScreen(
+      {super.key, required this.category, required this.table});
 
   final CategoryModel category;
   final TableModelWaitress table;
@@ -24,8 +25,11 @@ class MenuFoodsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text(category.name, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
+        title: Text(category.name,
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600)),
         actions: [
           PlaceActionWidget(
             actionText: table.name,
@@ -45,7 +49,8 @@ class MenuFoodsScreen extends StatelessWidget {
           // }
           if (category.products.isEmpty) {
             return Center(
-                child: Text("Mahsulotlar mavjud emas", textAlign: TextAlign.center, style: context.titleLarge));
+                child: Text("Mahsulotlar mavjud emas",
+                    textAlign: TextAlign.center, style: context.titleLarge));
           }
           return GridView.builder(
             padding: const EdgeInsets.all(12),
@@ -62,21 +67,31 @@ class MenuFoodsScreen extends StatelessWidget {
                 absorbing: !(product.available ?? false),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FoodDetailScreen(product: product, table: table)));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FoodDetailScreen(
+                                product: product, table: table)));
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Container(
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                        child: Image.network(ApiConstants.imageBaseUrl + (product.photo ?? ""),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Image.network(
+                            ApiConstants.imageBaseUrl + (product.photo ?? ""),
                             fit: BoxFit.cover,
-                            color: product.available ?? false ? null : Colors.grey,
-                            colorBlendMode: product.available ?? false ? null : BlendMode.hue,
+                            color:
+                                product.available ?? false ? null : Colors.grey,
+                            colorBlendMode: product.available ?? false
+                                ? null
+                                : BlendMode.hue,
                             height: 170,
                             width: double.infinity,
-                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                            errorBuilder: (context, error, stackTrace) =>
+                                Image.asset(
                                   AppImages.imageNotFound,
                                   fit: BoxFit.cover,
                                   height: 170,
@@ -99,7 +114,8 @@ class MenuFoodsScreen extends StatelessWidget {
                       Text(
                         uzbekCurrencyFormat.format(product.price),
                         // '356 000 uzs',
-                        style: AppFontStyle.description2.copyWith(color: AppColors.red),
+                        style: AppFontStyle.description2
+                            .copyWith(color: AppColors.red),
                       )
                     ],
                   ),
@@ -137,7 +153,8 @@ class CustomProductShimmer extends StatelessWidget {
             children: [
               Container(
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: Image.network('',
                     fit: BoxFit.cover,
                     height: 170,

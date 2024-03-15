@@ -18,6 +18,4 @@ class OrderState {
       failure: failure ?? this.failure,
     );
   }
-
-
 }

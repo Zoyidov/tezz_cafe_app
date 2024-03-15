@@ -9,7 +9,7 @@ class AppValidators {
     return null;
   }
 
-  static String? validateUsername(String? value){
+  static String? validateUsername(String? value) {
     if (value == null || value.isEmpty) {
       return 'Iltimos foydalanuvchi nomini kiriting';
     }

@@ -10,7 +10,10 @@ class AuthRepository {
 
   AuthRepository(this.authService);
 
-  Future<Either<Failure, String>> getToken(String phone, String password) async {
+  Future<Either<Failure, String>> getToken(
+    String phone,
+    String password,
+  ) async {
     try {
       final response = await authService.getToken(phone, password);
       return Right(response);

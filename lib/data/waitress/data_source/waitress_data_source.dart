@@ -12,10 +12,12 @@ class WaitressDataSource {
   Future<List<CallModel>> getWaitressCalls() async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
-      final response =
-          await dio.get('/waiters/tables/calls', options: Options(headers: {'Authorization': 'Bearer $token'}));
+      final response = await dio.get('/waiters/tables/calls',
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
-        return (response.data as List).map((e) => CallModel.fromJson(e)).toList();
+        return (response.data as List)
+            .map((e) => CallModel.fromJson(e))
+            .toList();
       }
       throw 'Failed to get calls ${response.statusCode} ${response.data}';
     } catch (e) {
@@ -54,10 +56,12 @@ class WaitressDataSource {
   Future<List<TableModelWaitress>> getTables(String waitressId) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
-      final response =
-          await dio.get('/waiters/$waitressId/tables', options: Options(headers: {'Authorization': 'Bearer $token'}));
+      final response = await dio.get('/waiters/$waitressId/tables',
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
-        return (response.data as List).map((e) => TableModelWaitress.fromJson(e)).toList();
+        return (response.data as List)
+            .map((e) => TableModelWaitress.fromJson(e))
+            .toList();
       }
       throw 'Failed to get tables ${response.statusCode} ${response.data}';
     } catch (e) {
@@ -80,11 +84,12 @@ class WaitressDataSource {
     }
   }
 
-  Future<void> deleteOrder(String tableId,String productId, num quantity) async {
+  Future<void> deleteOrder(
+      String tableId, String productId, num quantity) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
       final response = await dio.delete('/orders/:id',
-          data: {'table': tableId,'product': productId,'quantity': quantity},
+          data: {'table': tableId, 'product': productId, 'quantity': quantity},
           options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
         return;

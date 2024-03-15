@@ -43,7 +43,6 @@ class TabBoxState extends State<TabBox> {
         'autoConnect': false,
         'query': {'token': token},
       },
-
     );
 
     socket.connect();

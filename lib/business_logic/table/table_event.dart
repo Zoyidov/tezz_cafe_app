@@ -6,5 +6,5 @@ class GetAllTablesEvent extends TableEvent {}
 
 class ChangeTableEvent extends TableEvent {
   final int index;
-  ChangeTableEvent( this.index);
+  ChangeTableEvent(this.index);
 }

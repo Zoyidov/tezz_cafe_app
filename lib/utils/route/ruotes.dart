@@ -11,7 +11,6 @@ class RouteNames {
   static const String category = '/category';
   static const String foodDetail = '/foodDetail';
   static const String place = '/place';
-
 }
 
 class AppRoutes {
@@ -32,6 +31,8 @@ class AppRoutes {
       // case RouteNames.place:
       //   return MaterialPageRoute(builder: (context) =>  PlaceScreen(table: settings.arguments as TableModel));
     }
-    return MaterialPageRoute(builder: (context) => const Scaffold(body: Center(child: Text("Route not found"))));
+    return MaterialPageRoute(
+        builder: (context) =>
+            const Scaffold(body: Center(child: Text("Route not found"))));
   }
 }

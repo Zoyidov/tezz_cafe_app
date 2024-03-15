@@ -24,20 +24,27 @@ class NoActiveTableBloc extends Bloc<NoActiveTableEvent, NoActiveTableState> {
     on<RemoveNoActiveTableEvent>(_onRemoveTableEvent);
   }
 
-  FutureOr<void> _onChangeTableEvent(ChangeNoActiveTableEvent event, Emitter<NoActiveTableState> emit) async =>
-      pageController.animateToPage(event.index, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  FutureOr<void> _onChangeTableEvent(ChangeNoActiveTableEvent event,
+          Emitter<NoActiveTableState> emit) async =>
+      pageController.animateToPage(event.index,
+          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
 
-  void _onFetchNoActiveTablesEvent(FetchNoActiveTables event, Emitter<NoActiveTableState> emit) async {
+  void _onFetchNoActiveTablesEvent(
+      FetchNoActiveTables event, Emitter<NoActiveTableState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final restaurantId = StorageRepository.getString(StorageKeys.restaurant);
-    final tables = await _tableRepository.getTablesByRestaurantId(restaurantId, false);
+    final tables =
+        await _tableRepository.getTablesByRestaurantId(restaurantId, false);
     tables.fold(
-      (l) => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(status: FormzSubmissionStatus.success, tables: r)),
+      (l) => emit(
+          state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
+      (r) => emit(
+          state.copyWith(status: FormzSubmissionStatus.success, tables: r)),
     );
   }
 
-  FutureOr<void> _onRemoveTableEvent(RemoveNoActiveTableEvent event, Emitter<NoActiveTableState> emit) async {
+  FutureOr<void> _onRemoveTableEvent(
+      RemoveNoActiveTableEvent event, Emitter<NoActiveTableState> emit) async {
     final tables = state.tables;
     final index = tables.indexWhere((element) => element.id == event.tableId);
     tables.removeAt(index);

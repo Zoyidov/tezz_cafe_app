@@ -6,10 +6,14 @@ import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/circle
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 
 class ClientIcon extends StatelessWidget {
-  const ClientIcon({super.key, this.isActive = true, required this.table,});
+  const ClientIcon({
+    super.key,
+    this.isActive = true,
+    required this.table,
+  });
 
   final bool isActive;
-final TableModelWaitress table;
+  final TableModelWaitress table;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -18,7 +22,8 @@ final TableModelWaitress table;
         const Gap(8),
         Text(
           table.name,
-          style: context.headlineSmall?.copyWith(color: AppColors.black, fontWeight: FontWeight.w600),
+          style: context.headlineSmall
+              ?.copyWith(color: AppColors.black, fontWeight: FontWeight.w600),
         ),
       ],
     );

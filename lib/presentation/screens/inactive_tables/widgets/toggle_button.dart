@@ -38,11 +38,18 @@ class ToggleButtonsContainerNoActive extends StatelessWidget {
               selectedBorderColor: Colors.black,
               borderWidth: 1.5,
               constraints: BoxConstraints(
-                  maxWidth: context.width * 0.3, minWidth: context.width * 0.3, minHeight: 36, maxHeight: 36),
+                  maxWidth: context.width * 0.3,
+                  minWidth: context.width * 0.3,
+                  minHeight: 36,
+                  maxHeight: 36),
               isSelected: state.selectedZonesNoActive,
               onPressed: (index) {
-                context.read<ZoneBloc>().add(ChangeSelectedNoActiveZoneEvent(index));
-                context.read<NoActiveTableBloc>().add(ChangeNoActiveTableEvent(index));
+                context
+                    .read<ZoneBloc>()
+                    .add(ChangeSelectedNoActiveZoneEvent(index));
+                context
+                    .read<NoActiveTableBloc>()
+                    .add(ChangeNoActiveTableEvent(index));
               },
               children: state.zones.map((e) => Text(e.name)).toList(),
             ),
@@ -75,7 +82,10 @@ class CustomZonesShimmer extends StatelessWidget {
             selectedBorderColor: Colors.black,
             borderWidth: 1.5,
             constraints: BoxConstraints(
-                maxWidth: context.width * 0.3, minWidth: context.width * 0.3, minHeight: 36, maxHeight: 36),
+                maxWidth: context.width * 0.3,
+                minWidth: context.width * 0.3,
+                minHeight: 36,
+                maxHeight: 36),
             isSelected: List.generate(3, (index) => false),
             // onPressed: (index) => context.read<ZoneBloc>().add(ChangeSelectedZoneEvent(index)),
             children: List.generate(3, (index) => Text('Zone ${index + 1}')),

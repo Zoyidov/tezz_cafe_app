@@ -20,13 +20,16 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<FetchCategoriesEvent>(_fetchCategoriesEvent);
   }
 
-  FutureOr<void> _fetchCategoriesEvent(FetchCategoriesEvent event, Emitter<CategoryState> emit) async {
+  FutureOr<void> _fetchCategoriesEvent(
+      FetchCategoriesEvent event, Emitter<CategoryState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final restaurantId = StorageRepository.getString(StorageKeys.restaurant);
     final categories = await _categoryRepository.getAllCategories(restaurantId);
     categories.fold(
-      (failure) => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: failure)),
-      (categories) => emit(state.copyWith(status: FormzSubmissionStatus.success, categories: categories)),
+      (failure) => emit(state.copyWith(
+          status: FormzSubmissionStatus.failure, failure: failure)),
+      (categories) => emit(state.copyWith(
+          status: FormzSubmissionStatus.success, categories: categories)),
     );
   }
 }

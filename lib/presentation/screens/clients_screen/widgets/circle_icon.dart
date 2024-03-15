@@ -14,7 +14,9 @@ class CircleIcon extends StatelessWidget {
     return Container(
       height: 12,
       width: 12,
-      decoration: ShapeDecoration(shape: const CircleBorder(), color: isActive ? AppColors.green : AppColors.red),
+      decoration: ShapeDecoration(
+          shape: const CircleBorder(),
+          color: isActive ? AppColors.green : AppColors.red),
     );
   }
 }

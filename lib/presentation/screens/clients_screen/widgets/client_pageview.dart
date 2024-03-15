@@ -14,12 +14,17 @@ class ClientsPageView extends StatelessWidget {
     return BlocBuilder<NewOrdersBloc, NewOrdersState>(
       builder: (context, state) {
         if (state.status.isFailure) {
-          return Center(child: Column(
+          return Center(
+              child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Xatolik yuz berdi: ${state.failure?.message ?? ''}', textAlign: TextAlign.center),
+              Text('Xatolik yuz berdi: ${state.failure?.message ?? ''}',
+                  textAlign: TextAlign.center),
               const SizedBox(height: 20),
-              ElevatedButton(onPressed: () => context.read<TableBloc>().add( GetAllTablesEvent()), child: const Text('Yangilash'))
+              ElevatedButton(
+                  onPressed: () =>
+                      context.read<TableBloc>().add(GetAllTablesEvent()),
+                  child: const Text('Yangilash'))
             ],
           ));
         }
@@ -27,10 +32,14 @@ class ClientsPageView extends StatelessWidget {
         return PageView.builder(
           physics: const NeverScrollableScrollPhysics(),
           controller: context.read<TableBloc>().pageController,
-          itemCount: state.status.isInProgress ? 1 : context.watch<ZoneBloc>().state.zones.length,
+          itemCount: state.status.isInProgress
+              ? 1
+              : context.watch<ZoneBloc>().state.zones.length,
           itemBuilder: (context, index) {
             final zones = context.watch<ZoneBloc>().state.zones;
-            final filter = state.tables.where((element) => element.typeOfTable.id == zones[index].id).toList();
+            final filter = state.tables
+                .where((element) => element.typeOfTable.id == zones[index].id)
+                .toList();
             return ClientsListView(index: index, tables: filter);
           },
         );

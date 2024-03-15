@@ -26,37 +26,44 @@ class WaitersCallBloc extends Bloc<WaitersCallEvent, WaitersCallState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final calls = await _waitressRepository.getWaitressCalls();
     calls.fold(
-      (failure) => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: failure)),
+      (failure) => emit(state.copyWith(
+          status: FormzSubmissionStatus.failure, failure: failure)),
       (calls) => emit(state.copyWith(
           status: FormzSubmissionStatus.success,
           calls: calls,
-          showRecievedContainers: List.generate(calls.length, (index) => false))),
+          showRecievedContainers:
+              List.generate(calls.length, (index) => false))),
     );
   }
 
-  Future<void> _updateCallBack(UpdateCallBack event, Emitter<WaitersCallState> emit) async {
+  Future<void> _updateCallBack(
+      UpdateCallBack event, Emitter<WaitersCallState> emit) async {
     emit(state.copyWith(updateStatus: FormzSubmissionStatus.inProgress));
     final result = await _waitressRepository.updateCallBack(event.tableId);
     result.fold(
-      (failure) => emit(state.copyWith(updateStatus: FormzSubmissionStatus.failure, failure: failure)),
+      (failure) => emit(state.copyWith(
+          updateStatus: FormzSubmissionStatus.failure, failure: failure)),
       (success) {
         // update showRecievedContainers index value to true
-        final newShowRecievedContainers = List<bool>.from(state.showRecievedContainers);
+        final newShowRecievedContainers =
+            List<bool>.from(state.showRecievedContainers);
         newShowRecievedContainers[event.index] = true;
         emit(state.copyWith(
-        updateStatus: FormzSubmissionStatus.success,
-        showRecievedContainers:  newShowRecievedContainers
-      ));
+            updateStatus: FormzSubmissionStatus.success,
+            showRecievedContainers: newShowRecievedContainers));
       },
     );
   }
 
-  Future<void> _deleteCallBack(DeleteCallBack event, Emitter<WaitersCallState> emit) async {
+  Future<void> _deleteCallBack(
+      DeleteCallBack event, Emitter<WaitersCallState> emit) async {
     emit(state.copyWith(deleteStatus: FormzSubmissionStatus.inProgress));
     final result = await _waitressRepository.deleteCallBack(event.tableId);
     result.fold(
-      (failure) => emit(state.copyWith(deleteStatus: FormzSubmissionStatus.failure, failure: failure)),
-      (success) => emit(state.copyWith(deleteStatus: FormzSubmissionStatus.success)),
+      (failure) => emit(state.copyWith(
+          deleteStatus: FormzSubmissionStatus.failure, failure: failure)),
+      (success) =>
+          emit(state.copyWith(deleteStatus: FormzSubmissionStatus.success)),
     );
   }
 }

@@ -11,7 +11,8 @@ class ZoneService {
   Future<List<ZoneModel>> getAllZones() async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
-      final response = await dio.get('/tables/type', options: Options(headers: {'Authorization': 'Bearer $token'}));
+      final response = await dio.get('/tables/type',
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         return data.map((json) => ZoneModel.fromJson(json)).toList();

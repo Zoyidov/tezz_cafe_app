@@ -11,13 +11,14 @@ class CategoryService {
   Future<List<CategoryModel>> getAllCategories(String restaurantId) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
-      final response = await dio.get('/categories?restaurant=$restaurantId',
-          // options: DioSettings.getOptions().copyWith(policy: CachePolicy.refresh).toOptions()..headers = {'Authorization': 'Bearer $token'}
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
-          );
+      final response = await dio.get(
+        '/categories?restaurant=$restaurantId',
+        // options: DioSettings.getOptions().copyWith(policy: CachePolicy.refresh).toOptions()..headers = {'Authorization': 'Bearer $token'}
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
-        return data.map ((json) => CategoryModel.fromJson(json)).toList();
+        return data.map((json) => CategoryModel.fromJson(json)).toList();
       } else {
         throw 'Failed to get categories: ${response.statusCode} ${response.data}';
       }

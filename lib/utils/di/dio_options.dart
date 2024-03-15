@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:logger/logger.dart';
 import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
 
 class DioSettings {
@@ -18,32 +17,38 @@ class DioSettings {
     // final Dio dio = Dio(getBaseOptions());
     _dio.options = getBaseOptions();
     // Add an interceptor to log requests and responses
-    _dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          // options.headers.addAll({'Authorization': ApiConstants.token});
-          // Log request data
+    _dio.interceptors.addAll(
+      [
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            // options.headers.addAll({'Authorization': ApiConstants.token});
+            // Log request data
 
-          // Logger().w('REQUEST[${options.method}] => ${options.uri}');
-          // Logger().w('Headers: ${options.headers}');
-          // Logger().w('Data: ${options.data ?? ''}');
-          return handler.next(options);
-        },
-        onResponse: (response, handler) {
-          // Log response data
-          // Logger().i('RESPONSE[${response.statusCode}] => ${response.requestOptions.uri}');
-          // Logger().i('Headers: ${response.headers}');
-          // Logger().i('Data: ${response.data ?? ''}');
-          return handler.next(response);
-        },
-        onError: (DioException e, handler) {
-          // Log error data
-          // Logger().e('ERROR[${e.response?.statusCode}] => ${e.requestOptions.uri}');
-          // Logger().e('Message: ${e.message}');
-          // Logger().e('Response: ${e.response?.data ?? ''}');
-          return handler.next(e);
-        },
-      ),
+            // Logger().w('REQUEST[${options.method}] => ${options.uri}');
+            // Logger().w('Headers: ${options.headers}');
+            // Logger().w('Data: ${options.data ?? ''}');
+            return handler.next(options);
+          },
+          onResponse: (response, handler) {
+            // Log response data
+            // Logger().i('RESPONSE[${response.statusCode}] => ${response.requestOptions.uri}');
+            // Logger().i('Headers: ${response.headers}');
+            // Logger().i('Data: ${response.data ?? ''}');
+            return handler.next(response);
+          },
+          onError: (DioException e, handler) {
+            // Log error data
+            // Logger().e('ERROR[${e.response?.statusCode}] => ${e.requestOptions.uri}');
+            // Logger().e('Message: ${e.message}');
+            // Logger().e('Response: ${e.response?.data ?? ''}');
+            return handler.next(e);
+          },
+        ),
+        LogInterceptor(
+          requestBody: true,
+          responseBody: true,
+        )
+      ],
     );
 
     return _dio;

@@ -15,4 +15,3 @@ class ChangeSelectedNoActiveZoneEvent extends ZoneEvent {
 
   ChangeSelectedNoActiveZoneEvent(this.index);
 }
-

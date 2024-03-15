@@ -9,7 +9,4 @@ class StorageKeys {
   static const String restaurant = 'restaurant';
   static const String waiter = 'waiter';
   static const String waiterObject = 'waiterObject';
-
-
-
 }

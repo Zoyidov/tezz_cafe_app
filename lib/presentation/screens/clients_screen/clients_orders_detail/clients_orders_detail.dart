@@ -27,7 +27,11 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(table.name, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
+        title: Text(table.name,
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600)),
         actions: [
           BlocBuilder<ApprovedBloc, ApprovedState>(
             builder: (context, state) {
@@ -35,14 +39,16 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                 return Skeletonizer(
                   child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text(currencyFormat.format(1000000), style: AppFontStyle.description2)),
+                      child: Text(currencyFormat.format(1000000),
+                          style: AppFontStyle.description2)),
                 );
               }
               return Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
                       currencyFormat.format(
-                          (state.order?.totalOrders?.totalPrice ?? 0) + (state.order?.activeOrders?.totalPrice ?? 0)),
+                          (state.order?.totalOrders?.totalPrice ?? 0) +
+                              (state.order?.activeOrders?.totalPrice ?? 0)),
                       style: AppFontStyle.description2));
             },
           )
@@ -53,7 +59,10 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
           context.read<CategoryBloc>().add(FetchCategoriesEvent());
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(table: table)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MenuScreen(table: table)));
         },
         child: const Icon(
           Icons.add,
@@ -68,12 +77,14 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
           if (state.status.isFailure) {
             return Center(child: Text(state.failure?.message ?? ''));
           }
-          if (state.order?.activeOrders == null && state.order?.totalOrders == null) {
+          if (state.order?.activeOrders == null &&
+              state.order?.totalOrders == null) {
             return Center(
                 child: Column(
               children: [
                 Lottie.asset(AppImages.noOrder),
-                Text(" \"${table.name}\" da Hozircha Buyurtma Mavjud Emas", style: AppFontStyle.description2),
+                Text(" \"${table.name}\" da Hozircha Buyurtma Mavjud Emas",
+                    style: AppFontStyle.description2),
               ],
             ));
           }
@@ -87,9 +98,15 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final product = state.order?.totalOrders?.products[index];
-                    return OrderItem(product: product, onTap: () {
-                      context.read<ApprovedBloc>().add(DeleteApprovedOrder(table.id, product?.product.id ?? "", product?.quantity ?? 0));
-                    },);
+                    return OrderItem(
+                      product: product,
+                      onTap: () {
+                        context.read<ApprovedBloc>().add(DeleteApprovedOrder(
+                            table.id,
+                            product?.product.id ?? "",
+                            product?.quantity ?? 0));
+                      },
+                    );
                   },
                   separatorBuilder: (context, index) => const Gap(16),
                   itemCount: state.order?.totalOrders?.products.length ?? 0,
@@ -99,9 +116,15 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final product = state.order?.activeOrders?.products[index];
-                    return OrderItem(product: product,isActive: true, onTap: () {
-                      context.read<ApprovedBloc>().add(DeleteApprovedOrder(table.id, product?.product.id ?? "", product?.quantity ?? 0));
-                    },
+                    return OrderItem(
+                      product: product,
+                      isActive: true,
+                      onTap: () {
+                        context.read<ApprovedBloc>().add(DeleteApprovedOrder(
+                            table.id,
+                            product?.product.id ?? "",
+                            product?.quantity ?? 0));
+                      },
                     );
                   },
                   separatorBuilder: (context, index) => const Gap(16),
@@ -126,8 +149,8 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                         },
                         btnOkOnPress: () {
                           context.read<ApprovedBloc>().add(CloseApprovedOrder(
-                            table.id,
-                          ));
+                                table.id,
+                              ));
                         },
                         btnOkText: 'Yopish',
                         btnCancelText: 'Bekor qilish',

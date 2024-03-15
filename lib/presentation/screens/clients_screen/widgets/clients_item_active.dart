@@ -9,7 +9,6 @@ import 'package:tezz_cafe_app/presentation/screens/clients_screen/clients_orders
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/widgets/client_icon.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 
-
 class ClientListItemActive extends StatelessWidget {
   const ClientListItemActive({super.key, required this.table});
 
@@ -18,8 +17,12 @@ class ClientListItemActive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {context.read<ApprovedBloc>().add(FetchApprovedOrder(table.id));
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ClientsOrdersDetailScreen(table: table)));
+      onTap: () {
+        context.read<ApprovedBloc>().add(FetchApprovedOrder(table.id));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ClientsOrdersDetailScreen(table: table)));
       },
       child: Container(
         padding: const EdgeInsets.all(16),

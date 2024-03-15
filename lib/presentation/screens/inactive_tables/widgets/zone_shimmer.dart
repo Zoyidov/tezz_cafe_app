@@ -16,7 +16,10 @@ class ZoneShimmerWidget extends StatelessWidget {
         child: ToggleButtons(
           borderRadius: BorderRadius.circular(10),
           constraints: BoxConstraints(
-              maxWidth: context.width * 0.3, minWidth: context.width * 0.3, minHeight: 36, maxHeight: 36),
+              maxWidth: context.width * 0.3,
+              minWidth: context.width * 0.3,
+              minHeight: 36,
+              maxHeight: 36),
           isSelected: mockValues,
           children: mockValues.map((e) => const Text('Teressa')).toList(),
         ),

@@ -11,17 +11,18 @@ class ProductRepository {
 
   ProductRepository(this._productService);
 
-  Future<Either<Failure, List<ProductModel>>> getProductsByRestaurantAndCategory(
-      String restaurantId, String categoryId) async {
+  Future<Either<Failure, List<ProductModel>>>
+      getProductsByRestaurantAndCategory(
+          String restaurantId, String categoryId) async {
     try {
-      final products =
-          await _productService.getProductsByRestaurantAndCategory(restaurantId, categoryId);
+      final products = await _productService.getProductsByRestaurantAndCategory(
+          restaurantId, categoryId);
       return Right(products);
     } on DioException catch (e) {
       return Left(handleDioError(e));
     } on FormatException catch (e) {
       return Left(Failure(e.toString()));
-    }catch (e) {
+    } catch (e) {
       return Left(Failure(e.toString()));
     }
   }

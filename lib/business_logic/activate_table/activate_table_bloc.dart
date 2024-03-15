@@ -7,23 +7,26 @@ import 'package:tezz_cafe_app/data/activate_table/repository/activate_table_repo
 import 'package:tezz_cafe_app/utils/di/service_locator.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
-
 part 'activate_table_event.dart';
 
 part 'activate_table_state.dart';
 
 class ActivateTableBloc extends Bloc<ActivateTableEvent, ActivateTableState> {
-  final ActivateTableRepository _activateTableRepository = getIt<ActivateTableRepository>();
+  final ActivateTableRepository _activateTableRepository =
+      getIt<ActivateTableRepository>();
 
   ActivateTableBloc() : super(const ActivateTableState()) {
     on<ActiveTableEvent>(_activateTable);
   }
 
-  Future<void> _activateTable(ActiveTableEvent event, Emitter<ActivateTableState> emit) async {
+  Future<void> _activateTable(
+      ActiveTableEvent event, Emitter<ActivateTableState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final response = await _activateTableRepository.activateTable(event.tableId);
+    final response =
+        await _activateTableRepository.activateTable(event.tableId);
     response.fold(
-      (l) => emit(state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
+      (l) => emit(
+          state.copyWith(status: FormzSubmissionStatus.failure, failure: l)),
       (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
     );
   }

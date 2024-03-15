@@ -20,32 +20,38 @@ class ApprovedBloc extends Bloc<ApprovedEvent, ApprovedState> {
     on<CloseApprovedOrder>(_closeApprovedOrder);
   }
 
-  FutureOr<void> _onFetchApprovedOrder(FetchApprovedOrder event, Emitter<ApprovedState> emit) async {
+  FutureOr<void> _onFetchApprovedOrder(
+      FetchApprovedOrder event, Emitter<ApprovedState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final order = await _waitressRepository.getOrders(event.tableId);
     order.fold(
-      (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
-      (r) => emit(state.copyWith(order: r, status: FormzSubmissionStatus.success)),
+      (l) => emit(
+          state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
+      (r) =>
+          emit(state.copyWith(order: r, status: FormzSubmissionStatus.success)),
     );
   }
 
-  FutureOr<void> _deleteOrder(DeleteApprovedOrder event, Emitter<ApprovedState> emit) async {
+  FutureOr<void> _deleteOrder(
+      DeleteApprovedOrder event, Emitter<ApprovedState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    final order = await _waitressRepository.deleteOrder(event.tableId, event.productId, event.quantity);
+    final order = await _waitressRepository.deleteOrder(
+        event.tableId, event.productId, event.quantity);
     order.fold(
-      (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
+      (l) => emit(
+          state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
       (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
     );
   }
 
-
-  Future<void> _closeApprovedOrder(CloseApprovedOrder event, Emitter<ApprovedState> emit) async {
+  Future<void> _closeApprovedOrder(
+      CloseApprovedOrder event, Emitter<ApprovedState> emit) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final order = await _waitressRepository.closeOrder(event.tableId);
     order.fold(
-      (l) => emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
+      (l) => emit(
+          state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
       (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
     );
   }
-
 }
