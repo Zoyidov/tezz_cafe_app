@@ -17,6 +17,7 @@ class WaitersCallBloc extends Bloc<WaitersCallEvent, WaitersCallState> {
     on<FetchCallsEvent>(_fetchCallsEvent);
     on<UpdateCallBack>(_updateCallBack);
     on<DeleteCallBack>(_deleteCallBack);
+    on<AddWaiterCall>(_addWaiterCall);
   }
 
   Future<void> _fetchCallsEvent(
@@ -64,6 +65,17 @@ class WaitersCallBloc extends Bloc<WaitersCallEvent, WaitersCallState> {
           deleteStatus: FormzSubmissionStatus.failure, failure: failure)),
       (success) =>
           emit(state.copyWith(deleteStatus: FormzSubmissionStatus.success)),
+    );
+  }
+
+  FutureOr<void> _addWaiterCall(
+    AddWaiterCall event,
+    Emitter<WaitersCallState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        calls: [event.call, ...state.calls],
+      ),
     );
   }
 }

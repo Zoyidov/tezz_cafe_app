@@ -77,7 +77,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             debugPrint("----------------------Token----------------");
             debugPrint(token);
             StorageRepository.putString(
-                StorageKeys.restaurant, waiter.restaurant);
+              StorageKeys.restaurant,
+              waiter.restaurant,
+            );
             StorageRepository.putString(StorageKeys.waiter, waiter.id);
             StorageRepository.putBool(StorageKeys.isAuth, true);
             StorageRepository.putObject(StorageKeys.waiterObject, waiter);

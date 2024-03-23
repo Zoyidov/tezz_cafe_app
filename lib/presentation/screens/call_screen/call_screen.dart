@@ -2,6 +2,7 @@ import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+
 // import 'package:tezz_cafe_app/business_logic/update_callback/update_call_back_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/recieved_container.dart';
@@ -36,8 +37,8 @@ class _CallScreenState extends State<CallScreen> {
             barrierDismissible: true,
             context: context,
             builder: (context) => Center(
-                child:
-                    CircularProgressIndicator(color: AppColors.primaryColor)),
+              child: CircularProgressIndicator(color: AppColors.primaryColor),
+            ),
           );
         }
         if (state.updateStatus.isSuccess) {
@@ -57,21 +58,26 @@ class _CallScreenState extends State<CallScreen> {
         body: BlocBuilder<WaitersCallBloc, WaitersCallState>(
           builder: (context, state) {
             if (state.status.isInProgress) {
-              return const Center(child: CircularProgressIndicator.adaptive());
+              return const Center(
+                child: CircularProgressIndicator.adaptive(),
+              );
             } else if (state.status.isFailure) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Failed to fetch calls: ${state.failure?.message}',
-                        textAlign: TextAlign.center),
+                    Text(
+                      'Failed to fetch calls: ${state.failure?.message}',
+                      textAlign: TextAlign.center,
+                    ),
                     ElevatedButton(
-                        onPressed: () {
-                          context
-                              .read<WaitersCallBloc>()
-                              .add(FetchCallsEvent());
-                        },
-                        child: const Text('Retry'))
+                      onPressed: () {
+                        context.read<WaitersCallBloc>().add(
+                              FetchCallsEvent(),
+                            );
+                      },
+                      child: const Text('Retry'),
+                    )
                   ],
                 ),
               );
@@ -112,12 +118,18 @@ class _CallScreenState extends State<CallScreen> {
                               },
                             )
                           : const Center(
-                              child: Text("Chaqiruv mavjud emas",
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold)));
+                              child: Text(
+                                "Chaqiruv mavjud emas",
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            );
                 } else {
-                  return const Center(child: Text("Not found"));
+                  return const Center(
+                    child: Text("Not found"),
+                  );
                 }
               },
             );

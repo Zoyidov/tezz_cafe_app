@@ -18,11 +18,12 @@ class ClientListItemActive extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<ApprovedBloc>().add(FetchApprovedOrder(table.id));
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ClientsOrdersDetailScreen(table: table)));
+          context,
+          MaterialPageRoute(
+            builder: (context) => ClientsOrdersDetailScreen(table: table),
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(16),

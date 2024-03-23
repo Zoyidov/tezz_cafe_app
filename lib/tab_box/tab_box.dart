@@ -1,10 +1,14 @@
+import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:tezz_cafe_app/business_logic/cubit/tab_cubit.dart';
 import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/no_active_table/no_active_table_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/waiters/waiters_call_bloc.dart';
+import 'package:tezz_cafe_app/data/waitress/models/call_model.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/call_screen.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/clients_screen.dart';
 import 'package:tezz_cafe_app/presentation/screens/inactive_tables/inactive_tables.dart';
@@ -13,6 +17,7 @@ import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
+import 'package:tezz_cafe_app/utils/services/sound_manager.dart';
 
 class TabBox extends StatefulWidget {
   const TabBox({super.key});
@@ -50,25 +55,61 @@ class TabBoxState extends State<TabBox> {
       print('Connection established');
     });
 
-    socket.on('callAccepted', (data) => print(data));
-    socket.on('categoryCreated', (data) => print(data));
-    socket.on('newActiveOrder', (data) => print(data));
-    socket.on('noActiveOrder', (data) => print(data));
-    socket.on('newTable', (data) => print(data));
-    socket.on('closedTable', (data) => print(data));
-    socket.on('updateTable', (data) => print(data));
-    socket.on('deletedTable', (data) => print(data));
-    socket.on('callWaiter', (data) => print(data));
-    socket.on('newTypeOfTable', (data) => print(data));
-    socket.on('updateTypeOfTable', (data) => print(data));
-    socket.on('deleteTypeOfTable', (data) => print(data));
+    socket.on('categoryCreated', (data) => print("categoryCreated: $data"));
+
+    socket.on('newActiveOrder', (data) => print("newActiveOrder: $data"));
+
+    socket.on('noActiveOrder', (data) => print("noActiveOrder: $data"));
+
+    socket.on('newTable', (data) => print("newTable: $data"));
+
+    socket.on('closedTable', (data) => print("closedTable: $data"));
+
+    socket.on('updateTable', (data) => print("updateTable: $data"));
+
+    socket.on('deletedTable', (data) => print("deletedTable: $data"));
+
+    socket.on(
+      'callWaiter',
+      (data) async {
+        print("-----------------------------------");
+        print("Waiter called: $data");
+        final CallModel newCall = CallModel.fromJson(data);
+        if (newCall.waiter == null ||
+            newCall.waiter == StorageRepository.getString(StorageKeys.waiter)) {
+          final soundManager = context.read<SoundManager>();
+          final waiterBloc = context.read<WaitersCallBloc>();
+          await soundManager.initAudio(audio: "sound");
+          soundManager.play();
+          waiterBloc.add(
+            AddWaiterCall(call: newCall),
+          );
+        }
+      },
+    );
+
+    socket.on('newTypeOfTable', (data) => print("newTypeOfTable: $data")); // ?
+
+    socket.on(
+        'updateTypeOfTable', (data) => print("updateTypeOfTable: $data")); // ?
+
+    socket.on(
+        'deleteTypeOfTable', (data) => print("deleteTypeOfTable: $data")); // ?
+
+    socket.on('newProduct', (data) => print("newProduct: $data"));
+
+    socket.on('updateProduct', (data) => print("updateProduct: $data"));
+
+    socket.on('deleteProduct', (data) => print("deleteProduct: $data"));
+
     socket.on('tableOccupied', (data) {
-      print(data);
+      // ?
+      print("tableOccupied: $data");
       final id = data['id'];
       context.read<NoActiveTableBloc>().add(RemoveNoActiveTableEvent(id));
       context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
     });
-    socket.on('callAccepted', (data) => print(data));
+
     socket.onDisconnect((_) => print('Connection Disconnection'));
     socket.onConnectError((err) => print(err));
     socket.onError((err) => print(err));

@@ -16,10 +16,25 @@ import 'package:tezz_cafe_app/utils/constants/font_style.dart';
 import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/formatters/currency_formatter.dart';
 
-class ClientsOrdersDetailScreen extends StatelessWidget {
+class ClientsOrdersDetailScreen extends StatefulWidget {
   const ClientsOrdersDetailScreen({super.key, required this.table});
 
   final TableModelWaitress table;
+
+  @override
+  State<ClientsOrdersDetailScreen> createState() =>
+      _ClientsOrdersDetailScreenState();
+}
+
+class _ClientsOrdersDetailScreenState extends State<ClientsOrdersDetailScreen> {
+  @override
+  void initState() {
+    context.read<ApprovedBloc>().add(
+          FetchApprovedOrder(widget.table.id),
+        );
+    print(StackTrace.current);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +42,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(table.name,
+        title: Text(widget.table.name,
             style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20,
@@ -62,7 +77,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MenuScreen(table: table)));
+                  builder: (context) => MenuScreen(table: widget.table)));
         },
         child: const Icon(
           Icons.add,
@@ -83,7 +98,8 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                 child: Column(
               children: [
                 Lottie.asset(AppImages.noOrder),
-                Text(" \"${table.name}\" da Hozircha Buyurtma Mavjud Emas",
+                Text(
+                    " \"${widget.table.name}\" da Hozircha Buyurtma Mavjud Emas",
                     style: AppFontStyle.description2),
               ],
             ));
@@ -102,7 +118,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                       product: product,
                       onTap: () {
                         context.read<ApprovedBloc>().add(DeleteApprovedOrder(
-                            table.id,
+                            widget.table.id,
                             product?.product.id ?? "",
                             product?.quantity ?? 0));
                       },
@@ -121,7 +137,7 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                       isActive: true,
                       onTap: () {
                         context.read<ApprovedBloc>().add(DeleteApprovedOrder(
-                            table.id,
+                            widget.table.id,
                             product?.product.id ?? "",
                             product?.quantity ?? 0));
                       },
@@ -140,16 +156,16 @@ class ClientsOrdersDetailScreen extends StatelessWidget {
                         dialogType: DialogType.warning,
                         animType: AnimType.bottomSlide,
                         title: "Stolni yopish",
-                        desc: '${table.name} ni yopmoqchimisiz?',
+                        desc: '${widget.table.name} ni yopmoqchimisiz?',
                         btnCancelOnPress: () {
-                          print(table.id);
-                          print(table.waiter);
+                          print(widget.table.id);
+                          print(widget.table.waiter);
                           print(state.order?.totalOrders?.totalPrice);
                           // print(state.order?.totalOrders?.products.length);
                         },
                         btnOkOnPress: () {
                           context.read<ApprovedBloc>().add(CloseApprovedOrder(
-                                table.id,
+                                widget.table.id,
                               ));
                         },
                         btnOkText: 'Yopish',

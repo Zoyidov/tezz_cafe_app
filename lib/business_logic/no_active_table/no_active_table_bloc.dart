@@ -45,7 +45,7 @@ class NoActiveTableBloc extends Bloc<NoActiveTableEvent, NoActiveTableState> {
 
   FutureOr<void> _onRemoveTableEvent(
       RemoveNoActiveTableEvent event, Emitter<NoActiveTableState> emit) async {
-    final tables = state.tables;
+    final tables = state.tables.toList();
     final index = tables.indexWhere((element) => element.id == event.tableId);
     tables.removeAt(index);
     emit(state.copyWith(tables: tables));

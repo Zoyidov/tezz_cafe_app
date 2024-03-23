@@ -47,7 +47,7 @@ class DioSettings {
         LogInterceptor(
           requestBody: true,
           responseBody: true,
-        )
+        ),
       ],
     );
 

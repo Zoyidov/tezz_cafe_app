@@ -16,3 +16,11 @@ class DeleteCallBack extends WaitersCallEvent {
 
   DeleteCallBack({required this.tableId});
 }
+
+class AddWaiterCall extends WaitersCallEvent {
+  final CallModel call;
+
+  AddWaiterCall({
+    required this.call,
+  });
+}
