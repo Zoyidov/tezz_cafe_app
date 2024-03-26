@@ -22,6 +22,7 @@ class NoActiveTableBloc extends Bloc<NoActiveTableEvent, NoActiveTableState> {
     on<FetchNoActiveTables>(_onFetchNoActiveTablesEvent);
     on<ChangeNoActiveTableEvent>(_onChangeTableEvent);
     on<RemoveNoActiveTableEvent>(_onRemoveTableEvent);
+    on<AddNoActiveTableEvent>(_onAddTableEvent);
   }
 
   FutureOr<void> _onChangeTableEvent(ChangeNoActiveTableEvent event,
@@ -49,5 +50,12 @@ class NoActiveTableBloc extends Bloc<NoActiveTableEvent, NoActiveTableState> {
     final index = tables.indexWhere((element) => element.id == event.tableId);
     tables.removeAt(index);
     emit(state.copyWith(tables: tables));
+  }
+
+  FutureOr<void> _onAddTableEvent(
+    AddNoActiveTableEvent event,
+    Emitter<NoActiveTableState> emit,
+  ) {
+    emit(state.copyWith(tables: [event.table, ...state.tables]));
   }
 }

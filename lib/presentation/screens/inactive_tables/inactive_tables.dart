@@ -21,32 +21,28 @@ class _InActiveTablesScreenState extends State<InActiveTablesScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 50),
         child: OutlinedButton(
-            style: OutlinedButton.styleFrom(
-                shape: const StadiumBorder(),
-                side: const BorderSide(),
-                backgroundColor: AppColors.primaryColor),
-            onPressed: () {
-              StorageRepository.clearAll();
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ),
-                  (route) => false);
-            },
-            child: const Text(
-              'Logout',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.white),
-            )),
+          style: OutlinedButton.styleFrom(
+            shape: const StadiumBorder(),
+            side: const BorderSide(),
+            backgroundColor: AppColors.primaryColor,
+          ),
+          onPressed: () {
+            StorageRepository.clearAll();
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginScreen(),
+              ),
+              (route) => false,
+            );
+          },
+          child: const Text(
+            'Logout',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+          ),
+        ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: AppColors.primaryColor,
-      //   onPressed: () => context.read<TabCubit>().flipCardController.toggleCard(),
-      //   child: const Icon(Icons.add, color: Colors.white),
-      // )
     );
   }
 }

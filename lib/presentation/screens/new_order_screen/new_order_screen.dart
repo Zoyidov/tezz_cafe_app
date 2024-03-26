@@ -16,9 +16,6 @@ class NewOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // floatingActionButton: FloatingActionButton(onPressed: () async{
-      //   // final response = await TableService(DioSettings.getDio()).getTablesByRestaurantId('65d652cec4485f20bdf5d897',true);
-      // },),
       appBar: AppBar(
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
@@ -60,6 +57,8 @@ class NewOrderScreen extends StatelessWidget {
               final table = activeTables[index];
 
               return NotificationContainer(
+                isButton: true,
+                zone: table.typeOfTable.name,
                 type: 'Yangi buyurtma',
                 place: table.name,
                 time: formatDate(table.createdAt, [HH, ':', nn]),
@@ -114,6 +113,7 @@ class NewOrdersShimmer extends StatelessWidget {
             onTap: () {
               // Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderDetailScreen()));
             },
+            zone: "table.typeOfTable",
           );
         },
       ),

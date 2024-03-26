@@ -158,6 +158,7 @@ class OrderContainer extends StatelessWidget {
   final String countPrice;
   final String image;
   final VoidCallback? onTap;
+  final VoidCallback? onCardTap;
   final bool isActive;
   final Color? color;
 
@@ -170,40 +171,44 @@ class OrderContainer extends StatelessWidget {
     required this.countPrice,
     required this.image,
     this.onTap,
+    this.onCardTap,
     this.isActive = false,
     this.color,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      margin: const EdgeInsets.symmetric(
-        vertical: 10,
-      ),
-      decoration: BoxDecoration(
-        color: isActive
-            ? const Color(0xFFF91506).withOpacity(0.1)
-            : AppColors.textFieldColor,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        children: [
-          OrderHeader(time: time, onTap: onTap, color: color),
-          const Divider(),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              OrderImage(image: image),
-              const Gap(12),
-              OrderDetails(
-                  foodName: foodName,
-                  price: price,
-                  count: count,
-                  countPrice: countPrice),
-            ],
-          ),
-        ],
+    return GestureDetector(
+      onTap: onCardTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        margin: const EdgeInsets.symmetric(
+          vertical: 10,
+        ),
+        decoration: BoxDecoration(
+          color: isActive
+              ? const Color(0xFFF91506).withOpacity(0.1)
+              : AppColors.textFieldColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          children: [
+            OrderHeader(time: time, onTap: onTap, color: color),
+            const Divider(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                OrderImage(image: image),
+                const Gap(12),
+                OrderDetails(
+                    foodName: foodName,
+                    price: price,
+                    count: count,
+                    countPrice: countPrice),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

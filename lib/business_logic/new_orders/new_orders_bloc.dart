@@ -18,18 +18,40 @@ class NewOrdersBloc extends Bloc<NewOrdersEvent, NewOrdersState> {
 
   NewOrdersBloc() : super(NewOrdersState()) {
     on<FetchNewOrdersEvent>(_onFetchNewOrdersEvent);
+    on<AddNewOrdersEvent>(_onAddNewOrdersEvent);
   }
 
-  Future<void> _onFetchNewOrdersEvent(
-      FetchNewOrdersEvent event, Emitter<NewOrdersState> emit) async {
+  FutureOr<void> _onFetchNewOrdersEvent(
+    FetchNewOrdersEvent event,
+    Emitter<NewOrdersState> emit,
+  ) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final waitress = StorageRepository.getString(StorageKeys.waiter);
     final tables = await _waitressRepository.getTables(waitress);
     tables.fold(
-      (failure) => emit(state.copyWith(
-          status: FormzSubmissionStatus.failure, failure: failure)),
-      (tables) => emit(state.copyWith(
-          status: FormzSubmissionStatus.success, tables: tables)),
+      (failure) => emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.failure,
+          failure: failure,
+        ),
+      ),
+      (tables) {
+        emit(
+          state.copyWith(
+            status: FormzSubmissionStatus.success,
+            tables: tables,
+          ),
+        );
+      },
     );
+  }
+
+  FutureOr<void> _onAddNewOrdersEvent(
+    AddNewOrdersEvent event,
+    Emitter<NewOrdersState> emit,
+  ) {
+    emit(state.copyWith(
+      tables: [event.newTable, ...state.tables],
+    ));
   }
 }

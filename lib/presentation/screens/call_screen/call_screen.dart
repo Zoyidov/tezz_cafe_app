@@ -2,6 +2,7 @@ import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
 
 // import 'package:tezz_cafe_app/business_logic/update_callback/update_call_back_bloc.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/notification_container.dart';
@@ -29,7 +30,17 @@ class _CallScreenState extends State<CallScreen> {
             style: ToastificationStyle.fillColored,
             title: const Text('Xatolik'),
             autoCloseDuration: const Duration(seconds: 5),
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment.topCenter,
+          );
+        }
+        if (state.deleteStatus.isFailure) {
+          toastification.show(
+            context: context,
+            type: ToastificationType.error,
+            style: ToastificationStyle.fillColored,
+            title: const Text('Xatolik'),
+            autoCloseDuration: const Duration(seconds: 5),
+            alignment: Alignment.topCenter,
           );
         }
         if (state.updateStatus.isInProgress) {
@@ -87,11 +98,17 @@ class _CallScreenState extends State<CallScreen> {
               itemBuilder: (context, index) {
                 if (index < state.calls.length) {
                   final call = state.calls[index];
+                  final zone = context
+                      .read<ZoneBloc>()
+                      .state
+                      .zones
+                      .firstWhere((e) => e.id == call.typeOfTable);
                   return call.call == "accepted"
                       ? RecievedContainer(
-                          type: "Chaqiruv",
+                          zone: zone.name,
                           place: call.name ?? "Xatolik yuz berdi",
                           status: 'Boryapman',
+                          time: call.updatedAt.toString().substring(11, 16),
                           onTap: () {
                             setState(() {
                               context
@@ -102,19 +119,24 @@ class _CallScreenState extends State<CallScreen> {
                         )
                       : call.call == "calling"
                           ? NotificationContainer(
+                              isButton: true,
+                              zone: zone.name,
                               type: 'Chaqiruv',
                               place: call.name ?? "Xatolik yuz berdi",
-                              time: call.createdAt.toString().substring(11, 16),
+                              time: call.callTime
+                                      ?.toUtc()
+                                      .toLocal()
+                                      .toString()
+                                      .substring(11, 16) ??
+                                  "00:00",
                               status: 'Boryapman',
                               onTap: () {
-                                setState(() {
-                                  context.read<WaitersCallBloc>().add(
+                                context.read<WaitersCallBloc>().add(
                                       UpdateCallBack(
-                                          tableId: call.id ?? "",
-                                          index: index));
-                                  state.showRecievedContainers[index] =
-                                      state.showRecievedContainers[index];
-                                });
+                                        tableId: call.id ?? "",
+                                        index: index,
+                                      ),
+                                    );
                               },
                             )
                           : const Center(

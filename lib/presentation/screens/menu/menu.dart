@@ -41,10 +41,12 @@ class MenuScreen extends StatelessWidget {
           }
           if (state.status.isFailure) {
             return Center(
-                child: Text(
-                    "Xatolik yuz berdi: ${state.failure?.message ?? ''}",
-                    textAlign: TextAlign.center,
-                    style: context.titleLarge));
+              child: Text(
+                "Xatolik yuz berdi: ${state.failure?.message ?? ''}",
+                textAlign: TextAlign.center,
+                style: context.titleLarge,
+              ),
+            );
           }
           return ListView.separated(
             padding: const EdgeInsets.all(16),
@@ -52,16 +54,15 @@ class MenuScreen extends StatelessWidget {
               final menuItem = state.categories[index];
               return GestureDetector(
                 onTap: () {
-                  // context.read<ProductBloc>().add(FetchProductsEvent(categoryId: menuItem.id));
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MenuFoodsScreen(
-                                category: menuItem,
-                                table: table,
-                              )));
-                  // context.pushNamed(RouteNames.category, arguments: menuItem);
-                  // context.read<ProductBloc>().add(GetProductByMenuId(menuItem.id.toString()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MenuFoodsScreen(
+                        category: menuItem,
+                        table: table,
+                      ),
+                    ),
+                  );
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

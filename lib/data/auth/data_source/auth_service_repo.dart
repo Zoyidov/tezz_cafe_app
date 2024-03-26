@@ -9,7 +9,7 @@ class AuthService {
   Future<String> getToken(String phone, String password) async {
     try {
       final response = await dio
-          .post('/auth/login', data: {'phone': phone, 'password': password});
+          .post('/auth/login', data: {'phone': phone.substring(4), 'password': password});
       if (response.statusCode == 200) {
         return response.data;
       }

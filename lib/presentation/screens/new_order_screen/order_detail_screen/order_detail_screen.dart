@@ -59,10 +59,10 @@ class OrderDetailScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  OrderListWidget(
-                      products: state.order?.totalOrders?.products ?? [],
-                      isActive: false,
-                      tableModelWaitress: tableModelWaitress),
+                  // OrderListWidget(
+                  //     products: state.order?.totalOrders?.products ?? [],
+                  //     isActive: false,
+                  //     tableModelWaitress: tableModelWaitress),
                   OrderListWidget(
                       products: state.order?.activeOrders?.products ?? [],
                       isActive: true,
@@ -101,11 +101,12 @@ class OrderListWidget extends StatelessWidget {
   final bool isActive;
   final TableModelWaitress tableModelWaitress;
 
-  const OrderListWidget(
-      {super.key,
-      required this.products,
-      required this.isActive,
-      required this.tableModelWaitress});
+  const OrderListWidget({
+    super.key,
+    required this.products,
+    required this.isActive,
+    required this.tableModelWaitress,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +116,7 @@ class OrderListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final product = products?[index];
         return OrderContainer(
+          onCardTap: () {},
           time: formatDate(
               product?.product.createdAt ?? DateTime.now(), [HH, ':', nn]),
           foodName: product?.product.name ?? "",
@@ -198,7 +200,7 @@ class PriceTextBlocBuilder extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: BlocBuilder<ApprovedBloc, ApprovedState>(
         builder: (context, state) {
-          final price = state.order?.totalOrders?.totalPrice ?? 0;
+          final price = state.order?.activeOrders?.totalPrice ?? 0;
           return state.status.isInProgress
               ? const Skeletonizer(
                   child: PriceText(

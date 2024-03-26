@@ -14,3 +14,9 @@ class RemoveNoActiveTableEvent extends NoActiveTableEvent {
 
   RemoveNoActiveTableEvent(this.tableId);
 }
+
+class AddNoActiveTableEvent extends NoActiveTableEvent {
+  final TableModel table;
+
+  AddNoActiveTableEvent(this.table);
+}

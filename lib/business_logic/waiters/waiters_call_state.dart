@@ -8,13 +8,14 @@ class WaitersCallState {
   final FormzSubmissionStatus updateStatus;
   final FormzSubmissionStatus deleteStatus;
 
-  const WaitersCallState(
-      {this.calls = const [],
-      this.status = FormzSubmissionStatus.initial,
-      this.updateStatus = FormzSubmissionStatus.initial,
-      this.deleteStatus = FormzSubmissionStatus.initial,
-      this.failure,
-      this.showRecievedContainers = const []});
+  const WaitersCallState({
+    this.calls = const [],
+    this.status = FormzSubmissionStatus.initial,
+    this.updateStatus = FormzSubmissionStatus.initial,
+    this.deleteStatus = FormzSubmissionStatus.initial,
+    this.failure,
+    this.showRecievedContainers = const [],
+  });
 
   WaitersCallState copyWith({
     List<CallModel>? calls,

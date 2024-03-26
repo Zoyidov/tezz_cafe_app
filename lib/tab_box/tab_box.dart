@@ -1,14 +1,18 @@
-import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:tezz_cafe_app/app.dart';
+import 'package:tezz_cafe_app/business_logic/category/category_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/cubit/tab_cubit.dart';
 import 'package:tezz_cafe_app/business_logic/new_orders/new_orders_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/no_active_table/no_active_table_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/waiters/waiters_call_bloc.dart';
+import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
+import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/data/waitress/models/call_model.dart';
+import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/call_screen/call_screen.dart';
 import 'package:tezz_cafe_app/presentation/screens/clients_screen/clients_screen.dart';
 import 'package:tezz_cafe_app/presentation/screens/inactive_tables/inactive_tables.dart';
@@ -18,6 +22,7 @@ import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_keys.dart';
 import 'package:tezz_cafe_app/utils/local_storage/storage_repository.dart';
 import 'package:tezz_cafe_app/utils/services/sound_manager.dart';
+import 'package:tezz_cafe_app/utils/ui_utils/toast_service.dart';
 
 class TabBox extends StatefulWidget {
   const TabBox({super.key});
@@ -27,92 +32,168 @@ class TabBox extends StatefulWidget {
 }
 
 class TabBoxState extends State<TabBox> {
-  List<Widget> pages = [
-    const CallScreen(),
-    const NewOrderScreen(),
-    const FlipCardNavigation(),
-  ];
-
   @override
   void initState() {
-    initSocket();
+    initSocket(navigatorKey.currentState!.context);
     super.initState();
   }
 
-  void initSocket() {
+  void initSocket(BuildContext context) {
     final token = StorageRepository.getString(StorageKeys.token);
     final socket = io(
       'https://tezzcafe.uz',
       <String, dynamic>{
+        'reconnection': true,
         'transports': ['websocket'],
-        'autoConnect': false,
+        'autoConnect': true,
         'query': {'token': token},
       },
     );
 
     socket.connect();
-    socket.onConnect((_) {
-      print('Connection established');
+
+    socket.onConnect((_) => debugPrint('Connection established'));
+
+    socket.on(
+      'categoryCreated',
+      (data) => context.read<CategoryBloc>().add(FetchCategoriesEvent()),
+    );
+
+    socket.on(
+      'newActiveOrder',
+      (data) {
+        if (data['waiter'] == StorageRepository.getString(StorageKeys.waiter)) {
+          final soundManager = context.read<SoundManager>();
+          soundManager.play(audio: "new_order");
+        }
+        context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
+      },
+    );
+
+    socket.on(
+      'noActiveOrder',
+      (data) => context.read<NewOrdersBloc>().add(FetchNewOrdersEvent()),
+    );
+
+    socket.on(
+      'newTable',
+      (data) {
+        context.read<TableBloc>().add(GetAllTablesEvent());
+        final newTable =
+            data['waiter'] != null ? Waiter.fromJson(data['waiter']) : null;
+        if (newTable == null) {
+          context.read<NoActiveTableBloc>().add(FetchNoActiveTables());
+        } else if (newTable.id ==
+            StorageRepository.getString(StorageKeys.waiter)) {
+          final newModel = (data as Map).cast<String, dynamic>();
+          newModel['waiter'] = newTable.id;
+          final table = TableModelWaitress.fromJson(newModel);
+          context.read<NewOrdersBloc>().add(AddNewOrdersEvent(table));
+        } else {
+          context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
+        }
+      },
+    );
+
+    socket.on(
+      'closedTable',
+      (data) {
+        context.read<NoActiveTableBloc>().add(FetchNoActiveTables());
+        context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
+        context.read<TableBloc>().add(GetAllTablesEvent());
+      },
+    );
+
+    socket.on('updateTable', (data) {
+      context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
+      context.read<NoActiveTableBloc>().add(FetchNoActiveTables());
+      context.read<TableBloc>().add(GetAllTablesEvent());
     });
 
-    socket.on('categoryCreated', (data) => print("categoryCreated: $data"));
+    socket.on('deletedTable', (data) {
+      context.read<NoActiveTableBloc>().add(FetchNoActiveTables());
+      context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
+      context.read<TableBloc>().add(GetAllTablesEvent());
+    });
 
-    socket.on('newActiveOrder', (data) => print("newActiveOrder: $data"));
+    socket.on('callAccepted', (data) {
+      context.read<WaitersCallBloc>().add(FetchCallsEvent());
+    });
 
-    socket.on('noActiveOrder', (data) => print("noActiveOrder: $data"));
-
-    socket.on('newTable', (data) => print("newTable: $data"));
-
-    socket.on('closedTable', (data) => print("closedTable: $data"));
-
-    socket.on('updateTable', (data) => print("updateTable: $data"));
-
-    socket.on('deletedTable', (data) => print("deletedTable: $data"));
+    socket.on('callDeclined', (data) {
+      context.read<WaitersCallBloc>().add(FetchCallsEvent());
+    });
 
     socket.on(
       'callWaiter',
       (data) async {
-        print("-----------------------------------");
-        print("Waiter called: $data");
         final CallModel newCall = CallModel.fromJson(data);
-        if (newCall.waiter == null ||
-            newCall.waiter == StorageRepository.getString(StorageKeys.waiter)) {
+        if (newCall.waiter != null &&
+            newCall.waiter != StorageRepository.getString(StorageKeys.waiter)) {
+          return;
+        }
+        context.read<WaitersCallBloc>().add(
+              AddWaiterCall(call: newCall),
+            );
+        try {
           final soundManager = context.read<SoundManager>();
-          final waiterBloc = context.read<WaitersCallBloc>();
-          await soundManager.initAudio(audio: "sound");
-          soundManager.play();
-          waiterBloc.add(
-            AddWaiterCall(call: newCall),
+          Future.delayed(
+            await soundManager.play(audio: "new_call"),
+            () async {
+              Future.delayed(
+                await soundManager.play(audio: "sound"),
+                () async {
+                  await soundManager.play(audio: "sound");
+                },
+              );
+            },
+          );
+        } catch (e) {
+          if (!context.mounted) return;
+          ToastService.showErrorToast(
+            context,
+            e.toString(),
           );
         }
       },
     );
 
-    socket.on('newTypeOfTable', (data) => print("newTypeOfTable: $data")); // ?
+    socket.on(
+      'newTypeOfTable',
+      (data) => context.read<ZoneBloc>().add(GetAllZonesEvent()),
+    );
 
     socket.on(
-        'updateTypeOfTable', (data) => print("updateTypeOfTable: $data")); // ?
+      'updateTypeOfTable',
+      (data) => context.read<ZoneBloc>().add(GetAllZonesEvent()),
+    );
 
     socket.on(
-        'deleteTypeOfTable', (data) => print("deleteTypeOfTable: $data")); // ?
+      'deleteTypeOfTable',
+      (data) => context.read<ZoneBloc>().add(GetAllZonesEvent()),
+    );
 
-    socket.on('newProduct', (data) => print("newProduct: $data"));
+    socket.on('newProduct', (data) {
+      context.read<CategoryBloc>().add(FetchCategoriesEvent());
+    });
 
-    socket.on('updateProduct', (data) => print("updateProduct: $data"));
+    socket.on('updateProduct', (data) {
+      context.read<CategoryBloc>().add(FetchCategoriesEvent());
+    });
 
-    socket.on('deleteProduct', (data) => print("deleteProduct: $data"));
+    socket.on('deleteProduct', (data) {
+      context.read<CategoryBloc>().add(FetchCategoriesEvent());
+    });
 
     socket.on('tableOccupied', (data) {
-      // ?
-      print("tableOccupied: $data");
       final id = data['id'];
       context.read<NoActiveTableBloc>().add(RemoveNoActiveTableEvent(id));
       context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
     });
 
-    socket.onDisconnect((_) => print('Connection Disconnection'));
-    socket.onConnectError((err) => print(err));
-    socket.onError((err) => print(err));
+    socket.onDisconnect((_) => debugPrint('Connection Disconnection'));
+    socket.onConnectError((err) => debugPrint("Socket Connection Error: $err"));
+    socket.onError((err) => debugPrint("Socket Error: $err"));
   }
 
   @override
@@ -138,12 +219,12 @@ class TabBoxState extends State<TabBox> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            activeIcon: SvgPicture.asset(AppImages.Schaqiruv),
+            activeIcon: SvgPicture.asset(AppImages.schaqiruv),
             icon: SvgPicture.asset(AppImages.chaqiruv),
             label: "Chaqiruv",
           ),
           BottomNavigationBarItem(
-            activeIcon: SvgPicture.asset(AppImages.Sbuyurtma),
+            activeIcon: SvgPicture.asset(AppImages.sbuyurtma),
             icon: SvgPicture.asset(AppImages.buyurtma),
             label: "Yangi Buyurtma",
           ),

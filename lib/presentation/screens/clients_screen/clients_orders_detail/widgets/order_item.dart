@@ -51,23 +51,20 @@ class OrderItem extends StatelessWidget {
                       isActive: isActive ? false : true,
                     ),
                     const Gap(8),
-                    const Text('Chaqiruv', style: AppFontStyle.description),
-                    const Gap(8),
+                    // const Text('Chaqiruv', style: AppFontStyle.description),
+                    // const Gap(8),
                     Text(
-                      '/ ${formatDate(product?.product.createdAt ?? DateTime.now(), [
-                            HH,
-                            ':',
-                            nn
-                          ])}',
+                      formatDate(product?.product.createdAt ?? DateTime.now(),
+                          [HH, ':', nn]),
                       style:
                           context.bodySmall?.copyWith(color: AppColors.grey400),
                     ),
                   ],
                 ),
-                IconButton(
-                    onPressed: onTap,
-                    icon: const Icon(Icons.clear),
-                    color: AppColors.grey500),
+                // IconButton(
+                //     onPressed: onTap,
+                //     icon: const Icon(Icons.clear),
+                //     color: AppColors.grey500),
               ],
             ),
           ),

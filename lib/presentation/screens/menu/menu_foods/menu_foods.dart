@@ -39,18 +39,14 @@ class MenuFoodsScreen extends StatelessWidget {
       ),
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
-          // if (state.status.isInProgress) {
-          //   return const CustomProductShimmer();
-          // }
-          // if (state.status.isFailure) {
-          //   return Center(
-          //       child: Text("Xatolik yuz berdi: ${state.failure?.message ?? ''}",
-          //           textAlign: TextAlign.center, style: context.titleLarge));
-          // }
           if (category.products.isEmpty) {
             return Center(
-                child: Text("Mahsulotlar mavjud emas",
-                    textAlign: TextAlign.center, style: context.titleLarge));
+              child: Text(
+                "Mahsulotlar mavjud emas",
+                textAlign: TextAlign.center,
+                style: context.titleLarge,
+              ),
+            );
           }
           return GridView.builder(
             padding: const EdgeInsets.all(12),
@@ -68,10 +64,14 @@ class MenuFoodsScreen extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FoodDetailScreen(
-                                product: product, table: table)));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FoodDetailScreen(
+                          product: product,
+                          table: table,
+                        ),
+                      ),
+                    );
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,

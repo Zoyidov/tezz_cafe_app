@@ -8,7 +8,6 @@ import 'package:tezz_cafe_app/utils/di/service_locator.dart';
 import 'package:tezz_cafe_app/utils/failures/failures.dart';
 
 part 'activate_table_event.dart';
-
 part 'activate_table_state.dart';
 
 class ActivateTableBloc extends Bloc<ActivateTableEvent, ActivateTableState> {

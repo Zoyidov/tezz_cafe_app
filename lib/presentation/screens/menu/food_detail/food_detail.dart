@@ -8,7 +8,6 @@ import 'package:tezz_cafe_app/business_logic/product/product_bloc.dart';
 import 'package:tezz_cafe_app/data/product/models/product_model.dart';
 import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/menu/widgets/place_action.dart';
-import 'package:tezz_cafe_app/tab_box/tab_box.dart';
 import 'package:tezz_cafe_app/utils/constants/api_constants.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:tezz_cafe_app/utils/constants/font_style.dart';
@@ -34,7 +33,7 @@ class FoodDetailScreen extends StatelessWidget {
             style: ToastificationStyle.fillColored,
             title: const Text('Xatolik'),
             autoCloseDuration: const Duration(seconds: 5),
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment.topCenter,
             description: Text(state.failure?.message ?? 'Xatolik'),
           );
         }
@@ -45,10 +44,10 @@ class FoodDetailScreen extends StatelessWidget {
             style: ToastificationStyle.fillColored,
             title: const Text('Muvaffaqiyatli'),
             autoCloseDuration: const Duration(seconds: 5),
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment.topCenter,
             description: const Text('Maxsulot yaratildi'),
           );
-          context.pushAndRemoveUntil(const TabBox());
+          Navigator.popUntil(context, (route) => route.isFirst);
         }
       },
       child: BlocBuilder<ProductBloc, ProductState>(

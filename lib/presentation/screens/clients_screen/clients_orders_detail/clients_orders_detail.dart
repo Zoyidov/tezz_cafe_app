@@ -32,7 +32,6 @@ class _ClientsOrdersDetailScreenState extends State<ClientsOrdersDetailScreen> {
     context.read<ApprovedBloc>().add(
           FetchApprovedOrder(widget.table.id),
         );
-    print(StackTrace.current);
     super.initState();
   }
 
@@ -59,12 +58,14 @@ class _ClientsOrdersDetailScreenState extends State<ClientsOrdersDetailScreen> {
                 );
               }
               return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                      currencyFormat.format(
-                          (state.order?.totalOrders?.totalPrice ?? 0) +
-                              (state.order?.activeOrders?.totalPrice ?? 0)),
-                      style: AppFontStyle.description2));
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  currencyFormat.format(
+                      (state.order?.totalOrders?.totalPrice ?? 0) +
+                          (state.order?.activeOrders?.totalPrice ?? 0)),
+                  style: AppFontStyle.description2,
+                ),
+              );
             },
           )
         ],
@@ -75,9 +76,11 @@ class _ClientsOrdersDetailScreenState extends State<ClientsOrdersDetailScreen> {
         onPressed: () {
           context.read<CategoryBloc>().add(FetchCategoriesEvent());
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MenuScreen(table: widget.table)));
+            context,
+            MaterialPageRoute(
+              builder: (context) => MenuScreen(table: widget.table),
+            ),
+          );
         },
         child: const Icon(
           Icons.add,
@@ -92,8 +95,9 @@ class _ClientsOrdersDetailScreenState extends State<ClientsOrdersDetailScreen> {
           if (state.status.isFailure) {
             return Center(child: Text(state.failure?.message ?? ''));
           }
-          if (state.order?.activeOrders == null &&
-              state.order?.totalOrders == null) {
+          // final actives = state.order?.activeOrders;
+          final orders = state.order?.totalOrders;
+          if ((orders == null) || (orders.products.isEmpty)) {
             return Center(
                 child: Column(
               children: [
@@ -117,35 +121,41 @@ class _ClientsOrdersDetailScreenState extends State<ClientsOrdersDetailScreen> {
                     return OrderItem(
                       product: product,
                       onTap: () {
-                        context.read<ApprovedBloc>().add(DeleteApprovedOrder(
-                            widget.table.id,
-                            product?.product.id ?? "",
-                            product?.quantity ?? 0));
+                        context.read<ApprovedBloc>().add(
+                              DeleteApprovedOrder(
+                                widget.table.id,
+                                product?.product.id ?? "",
+                                product?.quantity ?? 0,
+                              ),
+                            );
                       },
                     );
                   },
                   separatorBuilder: (context, index) => const Gap(16),
                   itemCount: state.order?.totalOrders?.products.length ?? 0,
                 ),
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final product = state.order?.activeOrders?.products[index];
-                    return OrderItem(
-                      product: product,
-                      isActive: true,
-                      onTap: () {
-                        context.read<ApprovedBloc>().add(DeleteApprovedOrder(
-                            widget.table.id,
-                            product?.product.id ?? "",
-                            product?.quantity ?? 0));
-                      },
-                    );
-                  },
-                  separatorBuilder: (context, index) => const Gap(16),
-                  itemCount: state.order?.activeOrders?.products.length ?? 0,
-                ),
+                // ListView.separated(
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   itemBuilder: (context, index) {
+                //     final product = state.order?.activeOrders?.products[index];
+                //     return OrderItem(
+                //       product: product,
+                //       isActive: true,
+                //       onTap: () {
+                //         context.read<ApprovedBloc>().add(
+                //               DeleteApprovedOrder(
+                //                 widget.table.id,
+                //                 product?.product.id ?? "",
+                //                 product?.quantity ?? 0,
+                //               ),
+                //             );
+                //       },
+                //     );
+                //   },
+                //   separatorBuilder: (context, index) => const Gap(16),
+                //   itemCount: state.order?.activeOrders?.products.length ?? 0,
+                // ),
                 const Gap(10),
                 SizedBox(
                   width: context.width / 2,
@@ -158,9 +168,6 @@ class _ClientsOrdersDetailScreenState extends State<ClientsOrdersDetailScreen> {
                         title: "Stolni yopish",
                         desc: '${widget.table.name} ni yopmoqchimisiz?',
                         btnCancelOnPress: () {
-                          print(widget.table.id);
-                          print(widget.table.waiter);
-                          print(state.order?.totalOrders?.totalPrice);
                           // print(state.order?.totalOrders?.products.length);
                         },
                         btnOkOnPress: () {

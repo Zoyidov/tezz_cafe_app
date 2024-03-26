@@ -10,8 +10,8 @@ import 'package:tezz_cafe_app/business_logic/table/table_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/waiters/waiters_call_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/zone/zone_bloc.dart';
 import 'package:tezz_cafe_app/tab_box/tab_box.dart';
+import 'package:tezz_cafe_app/utils/constants/image_strings.dart';
 import 'package:tezz_cafe_app/utils/validators/validators.dart';
-import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:toastification/toastification.dart';
 
@@ -42,8 +42,8 @@ class LoginScreen extends StatelessWidget {
             style: ToastificationStyle.fillColored,
             title: const Text('Xatolik'),
             autoCloseDuration: const Duration(seconds: 5),
-            alignment: Alignment.bottomCenter,
-            description: Text(state.failure?.message ?? 'Xatolik'),
+            alignment: Alignment.topCenter,
+            description: const Text("Login yoki parol noto'g'ri kiritildi"),
           );
         }
         // if (state.status.isInProgress) {
@@ -59,7 +59,6 @@ class LoginScreen extends StatelessWidget {
           context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
           context.read<NoActiveTableBloc>().add(FetchNoActiveTables());
           context.read<WaitersCallBloc>().add(FetchCallsEvent());
-          context.read<AuthBloc>().add(ClearControllers());
           context.pushAndRemoveUntil(const TabBox());
         }
       },
@@ -113,8 +112,12 @@ class LogoWidget extends StatelessWidget {
       width: 120,
       alignment: Alignment.center,
       decoration: const BoxDecoration(
-          shape: BoxShape.circle, color: AppColors.mainColor),
-      child: const Text('Logo'),
+        image: DecorationImage(
+          image: AssetImage(
+            AppImages.appIcon,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -144,6 +147,7 @@ class PhoneNumberFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: TextInputType.number,
+      autofillHints: const [AutofillHints.telephoneNumber],
       controller: context.read<AuthBloc>().phoneController,
       decoration: const InputDecoration(
         prefixIcon: PrefixIcon(icon: Icons.phone),
@@ -192,6 +196,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
           builder: (context, visibility, _) {
             return TextFormField(
               controller: context.read<AuthBloc>().passwordController,
+              autofillHints: const [AutofillHints.password],
               decoration: InputDecoration(
                 prefixIcon: const PrefixIcon(icon: Icons.lock),
                 prefixIconConstraints: const BoxConstraints(),

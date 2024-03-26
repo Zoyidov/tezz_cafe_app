@@ -19,11 +19,6 @@ class _ClientsScreenState extends State<ClientsScreen> {
     return const Scaffold(
       appBar: ClientsAppBar(),
       body: ClientsPageView(),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: AppColors.primaryColor,
-      //   onPressed: () => context.read<TabCubit>().flipCardController.toggleCard(),
-      //   child: const Icon(Icons.add, color: Colors.white),
-      // ),
     );
   }
 }

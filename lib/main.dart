@@ -9,9 +9,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   await StorageRepository.init();
+  final soundManager = await SoundManager.getInstance();
   runApp(
-    RepositoryProvider(
-      create: (context) => SoundManager.getInstance(),
+    RepositoryProvider.value(
+      value: soundManager,
       child: const App(),
     ),
   );

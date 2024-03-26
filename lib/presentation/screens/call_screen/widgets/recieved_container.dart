@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/zone_show.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class RecievedContainer extends StatelessWidget {
-  final String type;
   final String place;
   final String status;
+  final String time;
+  final String zone;
   final VoidCallback? onTap;
 
-  const RecievedContainer(
-      {super.key,
-      required this.type,
-      required this.place,
-      required this.status,
-      this.onTap});
+  const RecievedContainer({
+    super.key,
+    required this.place,
+    required this.status,
+    required this.zone,
+    required this.time,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +34,13 @@ class RecievedContainer extends StatelessWidget {
       ),
       child: Column(
         children: [
+          ZoneShow(zone: zone),
+          const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                type,
+                time,
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
               ),
@@ -42,7 +48,7 @@ class RecievedContainer extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Flexible(
                 child: AutoSizeText(
@@ -54,20 +60,19 @@ class RecievedContainer extends StatelessWidget {
                 ),
               ),
               const Gap(20),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                      color: AppColors.white, shape: BoxShape.circle),
-                  padding: const EdgeInsets.all(20),
-                  child: Icon(
-                    Icons.notifications_active_rounded,
-                    color: AppColors.green,
-                    size: 40,
-                  ),
+              Container(
+                decoration: const BoxDecoration(
+                    color: AppColors.white, shape: BoxShape.circle),
+                padding: const EdgeInsets.all(20),
+                child: Icon(
+                  Icons.notifications_active_rounded,
+                  color: AppColors.green,
+                  size: 40,
                 ),
               ),
             ],
           ),
+          const Gap(16),
         ],
       ),
     );

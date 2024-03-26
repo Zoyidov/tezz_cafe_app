@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tezz_cafe_app/presentation/screens/call_screen/widgets/zone_show.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
 
 class NotificationContainer extends StatelessWidget {
@@ -8,10 +9,12 @@ class NotificationContainer extends StatelessWidget {
   final String place;
   final String time;
   final String status;
+  final String zone;
   final double size;
   final double padding;
   final VoidCallback? onTap;
   final Color? color;
+  final bool isButton;
 
   const NotificationContainer({
     super.key,
@@ -19,6 +22,8 @@ class NotificationContainer extends StatelessWidget {
     required this.place,
     required this.time,
     required this.status,
+    required this.zone,
+    this.isButton = false,
     this.onTap,
     this.size = 40,
     this.padding = 20,
@@ -43,20 +48,19 @@ class NotificationContainer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                type,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-              ),
+              ZoneShow(zone: zone),
               Text(
                 time,
                 style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
+                ),
               ),
             ],
           ),
+          const Divider(),
+          const Gap(16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -66,7 +70,9 @@ class NotificationContainer extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                      fontSize: 32, fontWeight: FontWeight.w600),
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               // Spacer(),
@@ -84,22 +90,27 @@ class NotificationContainer extends StatelessWidget {
               ),
             ],
           ),
-          const Gap(8.0),
-          Divider(
-            color: Colors.grey.shade300,
-          ),
-          const Gap(8.0),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: color ?? AppColors.primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            onPressed: onTap,
-            child: Text(
-              status,
-              style: const TextStyle(fontSize: 18, color: Colors.white),
+          Visibility(
+            visible: isButton,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Gap(16.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: color ?? AppColors.primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: onTap,
+                  child: Text(
+                    status,
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                )
+              ],
             ),
           )
         ],

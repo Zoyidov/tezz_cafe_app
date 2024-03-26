@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
 class ToastService {
-  static const Duration defaultDuration = Duration(seconds: 5);
+  static const Duration defaultDuration = Duration(seconds: 3);
 
   static void showErrorToast(BuildContext context, String errorMessage,
       {Duration? duration}) {
@@ -12,7 +12,7 @@ class ToastService {
       style: ToastificationStyle.fillColored,
       title: const Text('Xatolik'),
       autoCloseDuration: duration ?? defaultDuration,
-      alignment: Alignment.bottomCenter,
+      alignment: Alignment.topCenter,
       description: Text(errorMessage),
     );
   }
@@ -25,7 +25,7 @@ class ToastService {
       style: ToastificationStyle.fillColored,
       title: const Text('Sizning buyurtmangiz qabul qilindi'),
       autoCloseDuration: duration ?? defaultDuration,
-      alignment: Alignment.bottomCenter,
+      alignment: Alignment.topCenter,
     );
   }
 }

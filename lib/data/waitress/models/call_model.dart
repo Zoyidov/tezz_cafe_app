@@ -26,4 +26,5 @@ class CallModel with _$CallModel {
 
   factory CallModel.fromJson(Map<String, dynamic> json) =>
       _$CallModelFromJson(json);
+  
 }

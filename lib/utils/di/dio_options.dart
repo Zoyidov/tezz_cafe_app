@@ -44,10 +44,10 @@ class DioSettings {
             return handler.next(e);
           },
         ),
-        LogInterceptor(
-          requestBody: true,
-          responseBody: true,
-        ),
+        // LogInterceptor(
+        //   requestBody: true,
+        //   responseBody: true,
+        // ),
       ],
     );
 
