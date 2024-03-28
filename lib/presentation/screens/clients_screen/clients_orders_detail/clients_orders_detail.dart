@@ -52,17 +52,19 @@ class _ClientsOrdersDetailScreenState extends State<ClientsOrdersDetailScreen> {
               if (state.status.isInProgress) {
                 return Skeletonizer(
                   child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(currencyFormat.format(1000000),
-                          style: AppFontStyle.description2)),
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      currencyFormat.format(1000000),
+                      style: AppFontStyle.description2,
+                    ),
+                  ),
                 );
               }
               return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  currencyFormat.format(
-                      (state.order?.totalOrders?.totalPrice ?? 0) +
-                          (state.order?.activeOrders?.totalPrice ?? 0)),
+                  currencyFormat
+                      .format(state.order?.totalOrders?.totalPrice ?? 0),
                   style: AppFontStyle.description2,
                 ),
               );
@@ -157,35 +159,39 @@ class _ClientsOrdersDetailScreenState extends State<ClientsOrdersDetailScreen> {
                 //   itemCount: state.order?.activeOrders?.products.length ?? 0,
                 // ),
                 const Gap(10),
-                SizedBox(
-                  width: context.width / 2,
-                  child: FilledButton(
-                    onPressed: () {
-                      AwesomeDialog(
-                        context: context,
-                        dialogType: DialogType.warning,
-                        animType: AnimType.bottomSlide,
-                        title: "Stolni yopish",
-                        desc: '${widget.table.name} ni yopmoqchimisiz?',
-                        btnCancelOnPress: () {
-                          // print(state.order?.totalOrders?.products.length);
-                        },
-                        btnOkOnPress: () {
-                          context.read<ApprovedBloc>().add(CloseApprovedOrder(
-                                widget.table.id,
-                              ));
-                        },
-                        btnOkText: 'Yopish',
-                        btnCancelText: 'Bekor qilish',
-                      ).show();
-                    },
-                    style: FilledButton.styleFrom(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                Visibility(
+                  visible: state.order?.activeOrders?.products.isEmpty ?? false,
+                  child: SizedBox(
+                    width: context.width / 2,
+                    child: FilledButton(
+                      onPressed: () {
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.warning,
+                          animType: AnimType.bottomSlide,
+                          title: "Stolni yopish",
+                          desc: '${widget.table.name} ni yopmoqchimisiz?',
+                          btnCancelOnPress: () {
+                            // print(state.order?.totalOrders?.products.length);
+                          },
+                          btnOkOnPress: () {
+                            context.read<ApprovedBloc>().add(CloseApprovedOrder(
+                                  widget.table.id,
+                                ));
+                            Navigator.pop(context);
+                          },
+                          btnOkText: 'Yopish',
+                          btnCancelText: 'Bekor qilish',
+                        ).show();
+                      },
+                      style: FilledButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        backgroundColor: AppColors.red,
                       ),
-                      backgroundColor: AppColors.red,
+                      child: const Text("Stolni yopish"),
                     ),
-                    child: const Text("Stolni yopish"),
                   ),
                 ),
                 const Gap(30),

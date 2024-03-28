@@ -61,12 +61,14 @@ class TabBoxState extends State<TabBox> {
 
     socket.on(
       'newActiveOrder',
-      (data) {
+      (data) async {
+        context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
+        print(
+            "${data['waiter']} == ${StorageRepository.getString(StorageKeys.waiter)}");
         if (data['waiter'] == StorageRepository.getString(StorageKeys.waiter)) {
           final soundManager = context.read<SoundManager>();
-          soundManager.play(audio: "new_order");
+          await soundManager.playNewOrder();
         }
-        context.read<NewOrdersBloc>().add(FetchNewOrdersEvent());
       },
     );
 
@@ -127,6 +129,7 @@ class TabBoxState extends State<TabBox> {
     socket.on(
       'callWaiter',
       (data) async {
+        print("callWaiter");
         final CallModel newCall = CallModel.fromJson(data);
         if (newCall.waiter != null &&
             newCall.waiter != StorageRepository.getString(StorageKeys.waiter)) {
@@ -137,17 +140,7 @@ class TabBoxState extends State<TabBox> {
             );
         try {
           final soundManager = context.read<SoundManager>();
-          Future.delayed(
-            await soundManager.play(audio: "new_call"),
-            () async {
-              Future.delayed(
-                await soundManager.play(audio: "sound"),
-                () async {
-                  await soundManager.play(audio: "sound");
-                },
-              );
-            },
-          );
+          await soundManager.playNewCall();
         } catch (e) {
           if (!context.mounted) return;
           ToastService.showErrorToast(

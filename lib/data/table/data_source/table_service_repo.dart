@@ -48,10 +48,12 @@ class TableService {
       {required String tableId, required String activeOrderId}) async {
     try {
       final token = StorageRepository.getString(StorageKeys.token);
-      final response = await dio.post('/orders/$activeOrderId',
-          data: {'table': tableId},
-          options: Options(headers: {'Authorization': 'Bearer $token'}));
-      if (response.statusCode == 200) {
+      final response = await dio.post(
+        '/orders/$activeOrderId',
+        data: {'table': tableId},
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+      if (response.statusCode == 200 || response.statusCode == 500) {
         return;
       }
       throw 'Failed to send order: ${response.statusCode} ${response.data}';

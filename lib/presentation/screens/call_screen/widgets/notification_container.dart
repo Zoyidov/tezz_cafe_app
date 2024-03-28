@@ -90,13 +90,13 @@ class NotificationContainer extends StatelessWidget {
               ),
             ],
           ),
+          const Gap(16.0),
           Visibility(
             visible: isButton,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Gap(16.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: color ?? AppColors.primaryColor,

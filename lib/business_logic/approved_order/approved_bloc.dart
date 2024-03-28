@@ -37,10 +37,23 @@ class ApprovedBloc extends Bloc<ApprovedEvent, ApprovedState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     final order = await _waitressRepository.deleteOrder(
         event.tableId, event.productId, event.quantity);
-    order.fold(
-      (l) => emit(
-          state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
-      (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
+    await order.fold(
+      (l) {
+        emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure));
+      },
+      (r) async {
+        final response = await _waitressRepository.getOrders(event.tableId);
+        response.fold(
+          (l) => emit(state.copyWith(
+              failure: l, status: FormzSubmissionStatus.failure)),
+          (r) => emit(
+            state.copyWith(
+              status: FormzSubmissionStatus.success,
+              order: r,
+            ),
+          ),
+        );
+      },
     );
   }
 

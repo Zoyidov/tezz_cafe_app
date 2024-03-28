@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:tezz_cafe_app/business_logic/approved_order/approved_bloc.dart';
 import 'package:tezz_cafe_app/business_logic/sent_order/sent_order_bloc.dart';
-import 'package:tezz_cafe_app/data/table/models/table_model.dart';
 import 'package:tezz_cafe_app/data/waitress/models/table_waitress/table_model_waitress.dart';
 import 'package:tezz_cafe_app/presentation/screens/widgets/order_container.dart';
 import 'package:tezz_cafe_app/utils/constants/colors.dart';
@@ -21,13 +20,17 @@ class OrderDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<SentOrderBloc, SentOrderState>(
+      listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         if (state.status.isFailure) {
           ToastService.showErrorToast(
               context, state.failure?.message ?? 'Xatolik');
         }
+
         if (state.status.isSuccess) {
-          Navigator.pop(context);
+          context
+              .read<ApprovedBloc>()
+              .add(FetchApprovedOrder(tableModelWaitress.id));
           ToastService.showSuccessToast(
               context, 'Sizning buyurtmangiz qabul qilindi');
         }
@@ -37,16 +40,21 @@ class OrderDetailScreen extends StatelessWidget {
           title: Text(tableModelWaitress.name),
           actions: const [PriceTextBlocBuilder()],
         ),
-        body: BlocBuilder<ApprovedBloc, ApprovedState>(
+        body: BlocConsumer<ApprovedBloc, ApprovedState>(
+          listener: (context, state) {
+            if (state.order?.activeOrders?.products.isEmpty ?? true) {
+              Navigator.pop(context);
+            }
+          },
           builder: (context, state) {
             if (state.status.isInProgress) {
               return const Center(child: CircularProgressIndicator.adaptive());
             }
             if (state.status.isFailure) {
               return Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     Text(state.failure?.message ?? 'Xatolik',
                         textAlign: TextAlign.center),
                     ElevatedButton(
@@ -54,21 +62,13 @@ class OrderDetailScreen extends StatelessWidget {
                             .read<ApprovedBloc>()
                             .add(FetchApprovedOrder(tableModelWaitress.id)),
                         child: const Text('Qayta yuklash'))
-                  ]));
+                  ],
+                ),
+              );
             }
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  // OrderListWidget(
-                  //     products: state.order?.totalOrders?.products ?? [],
-                  //     isActive: false,
-                  //     tableModelWaitress: tableModelWaitress),
-                  OrderListWidget(
-                      products: state.order?.activeOrders?.products ?? [],
-                      isActive: true,
-                      tableModelWaitress: tableModelWaitress),
-                ],
-              ),
+            return OrderListWidget(
+              isActive: true,
+              tableModelWaitress: tableModelWaitress,
             );
           },
         ),
@@ -97,52 +97,63 @@ class PriceText extends StatelessWidget {
 }
 
 class OrderListWidget extends StatelessWidget {
-  final List<ProductElement>? products;
   final bool isActive;
   final TableModelWaitress tableModelWaitress;
 
   const OrderListWidget({
     super.key,
-    required this.products,
     required this.isActive,
     required this.tableModelWaitress,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      itemBuilder: (context, index) {
-        final product = products?[index];
-        return OrderContainer(
-          onCardTap: () {},
-          time: formatDate(
-              product?.product.createdAt ?? DateTime.now(), [HH, ':', nn]),
-          foodName: product?.product.name ?? "",
-          price: currencyFormat.format(product?.product.price ?? 0),
-          count: "${product?.quantity.toString()} ta : ",
-          countPrice: currencyFormat.format(product?.price ?? 0),
-          image: product?.product.photo ?? "",
-          onTap: () {
-            context.read<ApprovedBloc>().add(DeleteApprovedOrder(
-                tableModelWaitress.id,
-                product?.product.id ?? "",
-                product?.quantity ?? 0));
-          },
-          isActive: isActive,
-          color: isActive ? AppColors.green : AppColors.red,
-        );
+    return BlocBuilder<ApprovedBloc, ApprovedState>(
+      builder: (context, state) {
+        if (state.status.isSuccess) {
+          final products = state.order?.activeOrders?.products ?? [];
+          return ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            itemBuilder: (context, index) {
+              final product = products[index];
+              return OrderContainer(
+                onCardTap: () {},
+                time: formatDate(product.product.createdAt, [HH, ':', nn]),
+                foodName: product.product.name,
+                price: currencyFormat.format(product.product.price),
+                count: "${product.quantity.toString()} ta : ",
+                countPrice: currencyFormat.format(product.price),
+                image: product.product.photo,
+                onTap: () {
+                  context.read<ApprovedBloc>().add(
+                        DeleteApprovedOrder(
+                          tableModelWaitress.id,
+                          product.product.id,
+                          product.quantity,
+                        ),
+                      );
+                },
+                isActive: isActive,
+                color: isActive ? AppColors.green : AppColors.red,
+              );
+            },
+            itemCount: products.length,
+            shrinkWrap: true,
+          );
+        } else {
+          return const SizedBox();
+        }
       },
-      itemCount: products?.length ?? 0,
-      shrinkWrap: true,
     );
   }
 }
 
 class BottomNavigationBarWidget extends StatelessWidget {
-  const BottomNavigationBarWidget(
-      {super.key, required this.tableModelWaitress});
+  const BottomNavigationBarWidget({
+    super.key,
+    required this.tableModelWaitress,
+  });
 
   final TableModelWaitress tableModelWaitress;
 
@@ -162,10 +173,12 @@ class BottomNavigationBarWidget extends StatelessWidget {
                       ? null
                       : () {
                           context.read<SentOrderBloc>().add(
-                              SentActiveOrdersEvent(
+                                SentActiveOrdersEvent(
                                   tableId: tableModelWaitress.id,
                                   activeOrderId:
-                                      state.order?.activeOrders?.id ?? ""));
+                                      state.order?.activeOrders?.id ?? "",
+                                ),
+                              );
                         },
                   child: stateSent.status.isInProgress
                       ? const SizedBox(
@@ -176,9 +189,10 @@ class BottomNavigationBarWidget extends StatelessWidget {
                       : const Text(
                           "Buyurtma berish",
                           style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
                         ),
                 ),
               );

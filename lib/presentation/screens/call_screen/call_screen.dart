@@ -66,95 +66,100 @@ class _CallScreenState extends State<CallScreen> {
                 color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
           ),
         ),
-        body: BlocBuilder<WaitersCallBloc, WaitersCallState>(
-          builder: (context, state) {
-            if (state.status.isInProgress) {
-              return const Center(
-                child: CircularProgressIndicator.adaptive(),
-              );
-            } else if (state.status.isFailure) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Failed to fetch calls: ${state.failure?.message}',
-                      textAlign: TextAlign.center,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<WaitersCallBloc>().add(
-                              FetchCallsEvent(),
-                            );
-                      },
-                      child: const Text('Retry'),
-                    )
-                  ],
-                ),
-              );
-            }
-            return ListView.builder(
-              itemCount: state.calls.length,
-              itemBuilder: (context, index) {
-                if (index < state.calls.length) {
-                  final call = state.calls[index];
-                  final zone = context
-                      .read<ZoneBloc>()
-                      .state
-                      .zones
-                      .firstWhere((e) => e.id == call.typeOfTable);
-                  return call.call == "accepted"
-                      ? RecievedContainer(
-                          zone: zone.name,
-                          place: call.name ?? "Xatolik yuz berdi",
-                          status: 'Boryapman',
-                          time: call.updatedAt.toString().substring(11, 16),
-                          onTap: () {
-                            setState(() {
-                              context
-                                  .read<WaitersCallBloc>()
-                                  .add(DeleteCallBack(tableId: call.id ?? ""));
-                            });
-                          },
-                        )
-                      : call.call == "calling"
-                          ? NotificationContainer(
-                              isButton: true,
-                              zone: zone.name,
-                              type: 'Chaqiruv',
-                              place: call.name ?? "Xatolik yuz berdi",
-                              time: call.callTime
-                                      ?.toUtc()
-                                      .toLocal()
-                                      .toString()
-                                      .substring(11, 16) ??
-                                  "00:00",
-                              status: 'Boryapman',
-                              onTap: () {
-                                context.read<WaitersCallBloc>().add(
-                                      UpdateCallBack(
-                                        tableId: call.id ?? "",
-                                        index: index,
+        body: BlocBuilder<ZoneBloc, ZoneState>(
+          builder: (context, zoneBloc) {
+            if (zoneBloc.status.isSuccess) {
+              return BlocBuilder<WaitersCallBloc, WaitersCallState>(
+                builder: (context, state) {
+                  if (state.status.isInProgress) {
+                    return const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    );
+                  } else if (state.status.isFailure) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Failed to fetch calls: ${state.failure?.message}',
+                            textAlign: TextAlign.center,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<WaitersCallBloc>().add(
+                                    FetchCallsEvent(),
+                                  );
+                            },
+                            child: const Text('Retry'),
+                          )
+                        ],
+                      ),
+                    );
+                  }
+                  return ListView.builder(
+                    itemCount: state.calls.length,
+                    itemBuilder: (context, index) {
+                      if (index < state.calls.length) {
+                        final call = state.calls[index];
+                        final zone = zoneBloc.zones
+                            .firstWhere((e) => e.id == call.typeOfTable);
+                        return call.call == "accepted"
+                            ? RecievedContainer(
+                                zone: zone.name,
+                                place: call.name ?? "Xatolik yuz berdi",
+                                status: 'Boryapman',
+                                time:
+                                    call.updatedAt.toString().substring(11, 16),
+                                onTap: () {
+                                  setState(() {
+                                    context.read<WaitersCallBloc>().add(
+                                        DeleteCallBack(tableId: call.id ?? ""));
+                                  });
+                                },
+                              )
+                            : call.call == "calling"
+                                ? NotificationContainer(
+                                    isButton: call.waiter != null,
+                                    zone: zone.name,
+                                    type: 'Chaqiruv',
+                                    place: call.name ?? "Xatolik yuz berdi",
+                                    time: call.callTime
+                                            ?.toUtc()
+                                            .toLocal()
+                                            .toString()
+                                            .substring(11, 16) ??
+                                        "00:00",
+                                    status: 'Boryapman',
+                                    onTap: () {
+                                      context.read<WaitersCallBloc>().add(
+                                            UpdateCallBack(
+                                              tableId: call.id ?? "",
+                                              index: index,
+                                            ),
+                                          );
+                                    },
+                                  )
+                                : const Center(
+                                    child: Text(
+                                      "Chaqiruv mavjud emas",
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    );
-                              },
-                            )
-                          : const Center(
-                              child: Text(
-                                "Chaqiruv mavjud emas",
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            );
-                } else {
-                  return const Center(
-                    child: Text("Not found"),
+                                    ),
+                                  );
+                      } else {
+                        return const Center(
+                          child: Text("Not found"),
+                        );
+                      }
+                    },
                   );
-                }
-              },
-            );
+                },
+              );
+            } else {
+              return const SizedBox();
+            }
           },
         ),
       ),

@@ -20,6 +20,7 @@ class _InActiveClientsPageViewState extends State<InActiveClientsPageView> {
     super.initState();
     _controller = context.read<NoActiveTableBloc>().pageController;
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NoActiveTableBloc, NoActiveTableState>(

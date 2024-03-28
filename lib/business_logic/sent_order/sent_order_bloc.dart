@@ -20,9 +20,12 @@ class SentOrderBloc extends Bloc<SentOrderEvent, SentOrderState> {
     final order = await _tableRepository.sendOrder(
         tableId: event.tableId, activeOrderId: event.activeOrderId);
     order.fold(
-      (l) => emit(
-          state.copyWith(failure: l, status: FormzSubmissionStatus.failure)),
-      (r) => emit(state.copyWith(status: FormzSubmissionStatus.success)),
+      (l) {
+        emit(state.copyWith(failure: l, status: FormzSubmissionStatus.failure));
+      },
+      (r) {
+        emit(state.copyWith(status: FormzSubmissionStatus.success));
+      },
     );
   }
 }
